@@ -56,24 +56,11 @@
     height: 24px;
 }
 .data-unit__header{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
     line-height: 13px;
-    /* identical to box height, or 100% */
-
-
     color: #1E1E1E;
 }
 .data-unit__text{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
     line-height: 13px;
-    /* identical to box height, or 100% */
-
     text-align: right;
 
     color: #999999;
@@ -97,13 +84,6 @@
     margin-right: 25px;
 }
 .action__action-text{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
     line-height: 16px;
-    /* identical to box height */
-
-
     color: #000000;
 }

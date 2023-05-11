@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chats</title>
-    <link rel="stylesheet" href="./../../styles/index.pcss">
     <link rel="stylesheet" href="./../../styles/reset.css">
+    <link rel="stylesheet" href="./../../styles/forms.css">
+    <link rel="stylesheet" href="./chats.pcss">
     <script src="./chats.js" type="module"></script>
 </head>
 <body>
@@ -14,7 +15,8 @@
         <aside class="main__sidebar">
             <div class="preferences">
                 <a class="preferences" href="">
-                    <div class="preferences__avatar circle">
+                    <div class="preferences__avatar avatar circle">
+                        <img  class="avatar__img" src="./../../../static/assets/img/avatar.png" alt="">
                     </div>
                     <p class="preferences__description">Edit my data</p>
                 </a>
@@ -44,27 +46,30 @@
             </div>
             
             <ul class="navbar__chat-list">
-                <div class="chat-list__container">
-                    <li class="chat-list__chat">
-                        <div class="chat__wrap3">
-                            <div class="chat__user-avatar circle">
-                                <img  class="user-avatar__img" src="./../../../static/assets/img/AmandaSekar.png" alt="">
+                <li class="chat-list__container chat-container">
+                    <a href="">
+                        <div class="chat-list__chat">
+                            <div class="chat__wrap3">
+                                <div class="chat__user-avatar user-avatar circle">
+                                    <img  class="user-avatar__img" src="./../../../static/assets/img/AmandaSekar.png" alt="">
+                                </div>
+                                <div class="chat__wrap1">
+                                    <span class="chat__name">Amanda Sekar</span>
+                                    <div class="chat__last-message-wrap">
+                                        <p class="chat__last-message">Пока всё. Остальное залью на диск и отправлю позже.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="chat__wrap1">
-                                <span class="chat__name">Amanda Sekar</span>
-                                <div class="chat__last-message-wrap">
-                                    <p class="chat__last-message">Пока всё. Остальное залью на диск и отправлю позже.</p>
+                            <div class="chat__wrap2">
+                                <span class="chat__last-message-time">18:49</span>
+                                <div class="chat__unread-messages-count">
+                                    <p class="unread-messages-count__text">128</p> 
                                 </div>
                             </div>
                         </div>
-                        <div class="chat__wrap2">
-                            <span class="chat__last-message-time">18:49</span>
-                            <div class="chat__unread-messages-count">
-                                <p class="unread-messages-count__text">128</p> 
-                            </div>
-                        </div>
-                    </li>
-                </div>
+                    </a>
+                    
+                </li>
             </ul>
         </nav>
             
