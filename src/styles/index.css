@@ -1,0 +1,179 @@
+* {
+    outline: none;
+}
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a{
+    text-decoration: none;
+    color: #71a6d7;
+    font-size: 14px;
+    font-weight: bold;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+}
+.circle{
+    border-radius: 50%;
+    background: /*url / #dfffdf*/#fcf9f9;
+    width: 47px;
+    width: 47px;
+}
+
+.main__sidebar{
+    width: 55px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: sticky;
+    background: #d9d9d9;
+}
+.preferences{
+    width: 51px;
+}
+.preferences__avatar{
+    background: url("./../../static/assets/img/avatar.png");
+    width: 43px;
+    height: 43px;
+    filter: drop-shadow(0 3px 4px rgb(86, 86, 86));
+}
+.preferences__description{
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    color:  #ffffff;
+    margin: 0;
+    filter: drop-shadow(0 3px 3px rgb(86, 86, 86));
+}
+.create-new-chat__icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 37px;
+    filter: drop-shadow(0 3px 3px rgb(86, 86, 86))
+}
+
+.main__navbar{
+    max-width: 468px;
+    width: auto;
+    border-right: 2px solid #eaeaea;
+    flex-direction: column;
+    flex: 3.6 1 468px;
+    padding: 0 15px 0 15px;
+    display: flex;
+}
+.navbar__search{
+    max-width: 436px;
+    height: 32px;
+    background: #efefef;
+    border-radius: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 0 10px;
+    display: flex;
+}
+.search__search-input{
+    max-width: 401px;
+    background: none;
+    border: none;
+    display: flex;
+    flex-basis: 401px;
+}
+.search__svg-icon{
+    flex-shrink: 0;
+}
+
+
+.main__messages{
+    display: flex;
+    flex: 6 1 757px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+.messages__none-chat{
+    font-size: 12px;
+    color: #999999;
+    font-weight: 500;
+}
