@@ -1,3 +1,88 @@
+---
+sublinks:
+  - href: '#'
+    firstname: 'Amanda'
+    lastname: 'Sekar'
+    sender: 
+    last-message: 'Пока всё. Остальное залью на диск и отправлю позже.'
+    time: '18:49'
+    new-messages: true
+    messages-count: '128'
+  - href: '#'
+    firstname: 'Marina'
+    lastname: 'Terekh'
+    sender: 
+    last-message: 'Image'
+    time: '16:08'
+    new-messages: true
+    messages-count: '2'
+  - href: '#'
+    firstname: 'Andrew'
+    lastname: 'Kirski'
+    sender: 'You:'
+    last-message:  'Sticker'
+    time: '12:00'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: 'Prog'
+    lastname: 'News'
+    sender: 
+    last-message:  'Друзья, у меня для вас особенный выпуск новостей! Сегодня хотелось бы рассказать...'
+    time: '10:12'
+    new-messages: true
+    messages-count: '4'
+  - href: '#'
+    firstname: 'Mike'
+    lastname: 'Kotov'
+    sender: 'You:'
+    last-message:  'Круто!'
+    time: 'Пт'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: 'Working '
+    lastname: 'chat(news)'
+    sender: 'Svetlana Ledova:'
+    last-message:  ': Создала опрос. Просьба до пятницы всех проголосовать!'
+    time: 'Ср'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: '1, 2, 3'
+    lastname: 
+    sender: 
+    last-message:  'Миллионы россиян ежедневно проводят десятки часов своего времени в соцсетях...'
+    time: 'Пн'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: 'Design'
+    lastname: 'Destroyer'
+    sender: 
+    last-message:  'В 2008 году художник начал собирать кадры из Google Street View. Мир, оказавшийся в сфере объектива Google, представляется правдивым и прозрачным. «С самого начала меня привлекла живая, любительская эстетика этих сырых кадров. Проект Google Street View отличался той непосредственностью, которая, как мне казалось, раньше присутствовала в фотографии, посвящённой повседневной городской жизни. Схватывая всё как бы нейтрально, снимки этого проекта имели спонтанный характер, независимый от чувств и конкретных установок живого фотографа».'
+    time: 'Пн'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: 'James'
+    lastname: 'Kavil'
+    sender: 
+    last-message:  'Так увлёкся работой по курсу, что совсем забыл его анонсировать...'
+    time: '1 Мая 2020'
+    new-messages: false
+    messages-count: '0'
+  - href: '#'
+    firstname: 'Stas'
+    lastname: 
+    sender: 
+    last-message:  'Можно или сегодня или завтра вечером.'
+    time: '12 Апр 2020'
+    new-messages: false
+    messages-count: '0'
+
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,33 +90,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chats</title>
-    <link rel="stylesheet" href="./../../styles/reset.css">
-    <link rel="stylesheet" href="./../../styles/forms.css">
+    <link rel="stylesheet" href="./../../styles/reset.pcss">
+    <!-- <link rel="stylesheet" href="./../../styles/forms.pcss">-->
     <link rel="stylesheet" href="./chats.pcss">
-    <script src="./chats.js" type="module"></script>
 </head>
 <body>
     <main class="main">
-        <aside class="main__sidebar">
-            <div class="preferences">
-                <a class="preferences" href="">
-                    <div class="preferences__avatar avatar circle">
-                        <img  class="avatar__img" src="./../../../static/assets/img/avatar.png" alt="">
-                    </div>
-                    <p class="preferences__description">Edit my data</p>
-                </a>
-            </div>
-                
-            <div class="create-new-chat">
-                <a  class="create-new-chat" href="">
-                    <div class="create-new-chat__icon circle">
-                        <svg class="create-new-chat__svg-icon" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.49992 2.375C13.8541 2.375 17.4166 5.20917 17.4166 8.70833C17.4166 9.1675 17.3533 9.61083 17.2424 10.0383C16.7753 9.80083 16.2687 9.62667 15.7383 9.5475C15.8016 9.27833 15.8333 8.99333 15.8333 8.70833C15.8333 6.08792 12.9991 3.95833 9.49992 3.95833C6.00075 3.95833 3.16659 6.08792 3.16659 8.70833C3.16659 11.3287 6.00075 13.4583 9.49992 13.4583L10.3628 13.4188L10.2916 14.25L10.3549 15.0021L9.49992 15.0417C8.55784 15.0417 7.61575 14.9071 6.70534 14.6458C5.25659 15.8333 3.4595 16.5379 1.58325 16.625C3.42784 14.7804 3.76034 13.5375 3.76034 13.0625C3.09922 12.5418 2.56127 11.8815 2.18493 11.1288C1.80858 10.3762 1.60313 9.54963 1.58325 8.70833C1.58325 5.20917 5.14575 2.375 9.49992 2.375ZM14.2499 11.0833H15.8333V13.4583H18.2083V15.0417H15.8333V17.4167H14.2499V15.0417H11.8749V13.4583H14.2499V11.0833Z" fill="black"/>
-                        </svg>
-                    </div>
-                </a>
-            </div>
-        </aside>
+        <div class="main__wrap-sidebar">
+            <aside class="main__sidebar">
+                <div class="preferences">
+                    <a class="preferences" href="./../profile/profile.hbs">
+                        <div class="preferences__avatar avatar circle">
+                            <img  class="avatar__img" src="./../../../static/assets/img/avatar.png" alt="">
+                        </div>
+                        <p class="preferences__description">Edit my data</p>
+                    </a>
+                </div>
+                    
+                <div class="create-new-chat">
+                    <a  class="create-new-chat" href="">
+                        <div class="create-new-chat__icon circle">
+                            <svg class="create-new-chat__svg-icon" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.49992 2.375C13.8541 2.375 17.4166 5.20917 17.4166 8.70833C17.4166 9.1675 17.3533 9.61083 17.2424 10.0383C16.7753 9.80083 16.2687 9.62667 15.7383 9.5475C15.8016 9.27833 15.8333 8.99333 15.8333 8.70833C15.8333 6.08792 12.9991 3.95833 9.49992 3.95833C6.00075 3.95833 3.16659 6.08792 3.16659 8.70833C3.16659 11.3287 6.00075 13.4583 9.49992 13.4583L10.3628 13.4188L10.2916 14.25L10.3549 15.0021L9.49992 15.0417C8.55784 15.0417 7.61575 14.9071 6.70534 14.6458C5.25659 15.8333 3.4595 16.5379 1.58325 16.625C3.42784 14.7804 3.76034 13.5375 3.76034 13.0625C3.09922 12.5418 2.56127 11.8815 2.18493 11.1288C1.80858 10.3762 1.60313 9.54963 1.58325 8.70833C1.58325 5.20917 5.14575 2.375 9.49992 2.375ZM14.2499 11.0833H15.8333V13.4583H18.2083V15.0417H15.8333V17.4167H14.2499V15.0417H11.8749V13.4583H14.2499V11.0833Z" fill="black"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+        </div>
                 
         <nav class="main__navbar">
             <div class="navbar__navbar-search">
@@ -46,30 +132,9 @@
             </div>
             
             <ul class="navbar__chat-list">
-                <li class="chat-list__container chat-container">
-                    <a href="">
-                        <div class="chat-list__chat">
-                            <div class="chat__wrap3">
-                                <div class="chat__user-avatar user-avatar circle">
-                                    <img  class="user-avatar__img" src="./../../../static/assets/img/AmandaSekar.png" alt="">
-                                </div>
-                                <div class="chat__wrap1">
-                                    <span class="chat__name">Amanda Sekar</span>
-                                    <div class="chat__last-message-wrap">
-                                        <p class="chat__last-message">Пока всё. Остальное залью на диск и отправлю позже.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat__wrap2">
-                                <span class="chat__last-message-time">18:49</span>
-                                <div class="chat__unread-messages-count">
-                                    <p class="unread-messages-count__text">128</p> 
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                </li>
+                {{#each sublinks}}
+                    {{> chat-li }}
+                {{/each}}
             </ul>
         </nav>
             

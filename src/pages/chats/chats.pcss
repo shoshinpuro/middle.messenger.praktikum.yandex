@@ -1,24 +1,19 @@
 .main{
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
-.circle{
-  border-radius: 50%;
-  background: #fcf9f9;
-  width: 47px;
-  height: 47px;
-  overflow: hidden;
-}
-
 .main__sidebar{
   width: 55px;
+  min-height: 170px;
   padding-top: 6px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  position: fixed;
+  position: sticky;
+  top: 0;
   background: #d9d9d9;
 }
 .preferences{
@@ -27,11 +22,11 @@
 .preferences__avatar{
   width: 43px;
   height: 43px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))/*var*/
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
 }
 .preferences__description{
   text-align: center;
-  color:  #ffffff;
+  color:  white;
   margin: 0;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
 }
@@ -50,7 +45,7 @@
 .main__navbar{
   max-width: 468px;
   width: auto;
-  border-right: 2px solid #eaeaea;/*var*/
+  border-right: 2px solid #eaeaea;
   flex-direction: column;
   flex: 3.6 1 468px;
   display: flex;
@@ -61,7 +56,7 @@
 .navbar-search__search-form{
   max-width: 436px;
   height: 32px;
-  background: #efefef;/*var*/
+  background: #efefef;
   border-radius: 5px;
   flex-direction: row;
   justify-content: space-between;
@@ -88,6 +83,7 @@
   padding: 0 15px;
 }
 .main__messages{
+  height: 100vh;
   display: flex;
   flex: 6 1 757px;
   width: auto;
@@ -96,7 +92,7 @@
 }
 .messages__none-chat{
   font-size: 12px;
-  color: #999999;/*var*/
+  color: #999999;
 }
 
 .chat-list__chat, .chat__wrap1, .chat__wrap2, .chat__wrap3{
@@ -121,19 +117,19 @@
 }
 .chat__wrap2{
   height: 47px;
-  margin-left: 10px;
+  justify-content: space-between;
+  padding: 4px 0px;
+  flex-shrink: 0;
 }
 .chat__wrap3{
   justify-content: start;
 }
 .chat__name{
   font-weight: 600;/*var?*/
-  line-height: 13px;
   color: #1E1E1E;
 }
 .chat__last-message-time{
   font-size: 9px;
-  line-height: 13px;/*var?*/
   text-align: right;
   color: #999999;
 }
@@ -153,7 +149,7 @@
   font-size: 11px;
   line-height: 12px;
   text-align: center;
-  color: #FFFFFF;/*var?*/
+  color: white;
 }
 .chat__last-message-wrap{
   max-width: 330px;
@@ -168,4 +164,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 3 1 150px;
+}
+.chat__sender{
+  color: #1e1e1e;
 }
