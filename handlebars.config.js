@@ -1,3 +1,3 @@
-module.exporsts = {
+module.exports = {
     partials: '.src/partials'
 }

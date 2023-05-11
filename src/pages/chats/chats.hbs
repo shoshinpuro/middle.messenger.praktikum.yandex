@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats</title>
+    <link rel="stylesheet" href="./../../styles/index.pcss">
+    <link rel="stylesheet" href="./../../styles/reset.css">
+    <script src="./chats.js" type="module"></script>
+</head>
+<body>
+    <main class="main">
+        <aside class="main__sidebar">
+            <div class="preferences">
+                <a class="preferences" href="">
+                    <div class="preferences__avatar circle">
+                    </div>
+                    <p class="preferences__description">Edit my data</p>
+                </a>
+            </div>
+                
+            <div class="create-new-chat">
+                <a  class="create-new-chat" href="">
+                    <div class="create-new-chat__icon circle">
+                        <svg class="create-new-chat__svg-icon" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.49992 2.375C13.8541 2.375 17.4166 5.20917 17.4166 8.70833C17.4166 9.1675 17.3533 9.61083 17.2424 10.0383C16.7753 9.80083 16.2687 9.62667 15.7383 9.5475C15.8016 9.27833 15.8333 8.99333 15.8333 8.70833C15.8333 6.08792 12.9991 3.95833 9.49992 3.95833C6.00075 3.95833 3.16659 6.08792 3.16659 8.70833C3.16659 11.3287 6.00075 13.4583 9.49992 13.4583L10.3628 13.4188L10.2916 14.25L10.3549 15.0021L9.49992 15.0417C8.55784 15.0417 7.61575 14.9071 6.70534 14.6458C5.25659 15.8333 3.4595 16.5379 1.58325 16.625C3.42784 14.7804 3.76034 13.5375 3.76034 13.0625C3.09922 12.5418 2.56127 11.8815 2.18493 11.1288C1.80858 10.3762 1.60313 9.54963 1.58325 8.70833C1.58325 5.20917 5.14575 2.375 9.49992 2.375ZM14.2499 11.0833H15.8333V13.4583H18.2083V15.0417H15.8333V17.4167H14.2499V15.0417H11.8749V13.4583H14.2499V11.0833Z" fill="black"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </aside>
+                
+        <nav class="main__navbar">
+            <div class="navbar__navbar-search">
+                <form class="navbar-search__search-form">
+                    <input class="search-form__search-input" placeholder="Search..." type="search" name="" id="" autosave>
+                    <button type="submit" class="search-form__submit">
+                        <svg class="search-form__svg-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5925 11.4138C10.1606 12.8457 7.83895 12.8457 6.40703 11.4138C4.97511 9.98187 4.97511 7.66027 6.40703 6.22834C7.83895 4.79642 10.1606 4.79642 11.5925 6.22834C13.0244 7.66027 13.0244 9.98187 11.5925 11.4138ZM12.0329 12.7968C10.0726 14.2961 7.25705 14.1494 5.46422 12.3566C3.5116 10.404 3.5116 7.23816 5.46422 5.28553C7.41684 3.33291 10.5827 3.33291 12.5353 5.28553C14.328 7.07828 14.4748 9.8937 12.9756 11.8539L16.5423 15.4206L15.5995 16.3634L12.0329 12.7968Z" fill="#999999"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+            
+            <ul class="navbar__chat-list">
+                <div class="chat-list__container">
+                    <li class="chat-list__chat">
+                        <div class="chat__wrap3">
+                            <div class="chat__user-avatar circle">
+                                <img  class="user-avatar__img" src="./../../../static/assets/img/AmandaSekar.png" alt="">
+                            </div>
+                            <div class="chat__wrap1">
+                                <span class="chat__name">Amanda Sekar</span>
+                                <div class="chat__last-message-wrap">
+                                    <p class="chat__last-message">Пока всё. Остальное залью на диск и отправлю позже.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat__wrap2">
+                            <span class="chat__last-message-time">18:49</span>
+                            <div class="chat__unread-messages-count">
+                                <p class="unread-messages-count__text">128</p> 
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+            
+        <div class="main__messages">
+            <p class="messages__none-chat">Select a chat to start</p>
+        </div>
+            
+    </main>
+            
+</body>
+</html>
