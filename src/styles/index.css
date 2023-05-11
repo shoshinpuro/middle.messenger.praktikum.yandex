@@ -70,6 +70,10 @@ select {
   font: inherit;
 }
 
+button{
+  cursor: pointer;
+}
+
 /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -142,7 +146,7 @@ a{
     padding: 0 15px 0 15px;
     display: flex;
 }
-.navbar__search{
+.navbar__search-form{
     max-width: 436px;
     height: 32px;
     background: #efefef;
@@ -153,15 +157,19 @@ a{
     padding: 0 5px 0 10px;
     display: flex;
 }
-.search__search-input{
+.search-form__search-input{
     max-width: 401px;
     background: none;
     border: none;
     display: flex;
     flex-basis: 401px;
 }
-.search__svg-icon{
+.search-form__submit{
     flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
 }
 
 
