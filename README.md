@@ -3,6 +3,8 @@
 
 Данный проект находится на стадии разработки.
 
+Ссылка на макет: https://www.figma.com/file/Py5bTbELUHZANun5wZXB16/MyChat?type=design&node-id=2%3A27&t=nLgn4P5l8NslG82Y-1
+
 ## **Установка**
 Для установки и запуска проекта:
 
