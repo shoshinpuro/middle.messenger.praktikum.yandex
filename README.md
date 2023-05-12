@@ -17,6 +17,4 @@
 `npm run dev`
 - Запустите в режиме отладки( опционально ) / express:
 
-`cd src`
-
 `npm run start`
