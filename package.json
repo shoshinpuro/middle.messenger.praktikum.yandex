@@ -10,10 +10,12 @@
     "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "express": "^4.18.2",
     "parcel": "^2.8.3",
+    "postcss": "^8.4.23",
     "postcss-nested": "^6.0.1"
   },
   "scripts": {
-    "dev": "parcel --no-cache ./src/index.hbs",
+    "build": "parcel build src/index.hbs",
+    "dev": "PORT=3000 parcel --no-cache ./src/index.hbs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
