@@ -1,0 +1,31 @@
+---
+sublinks:
+  - header: 'Phone number'
+    text-value: '+7-(977)-777-77-77'
+  - header: 'Email'
+    text-value: 'ivanivanov@ya.ru'
+  - header: 'Login'
+    text-value: 'ivanivanov'
+  - header: 'Firstname'
+    text-value: 'Ivan'
+  - header: 'Lastname'
+    text-value: 'Ivanov'
+  - header: 'Name in chats'
+    text-value: 'Ivan'
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="./../../styles/reset.pcss">
+    <link rel="stylesheet" href="./../../styles/forms.pcss">
+    <link rel="stylesheet" href="./../../styles/profile.pcss">
+</head>
+<body>
+    {{> profile sublinks=sublinks isEdit=true }}
+            
+</body>
+</html>
