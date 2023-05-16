@@ -1,0 +1,8 @@
+<li class="data-list__data-unit data-unit">
+    <h4 class="data-unit__header">{{header}}</h4>
+    {{#if isEdit}}
+    <input type="text" name="{{name}}" value="{{text-value}}" placeholder="{{header}}" class="profile-data-form__input  form-input">
+    {{else}}
+    <p class="data-unit__text">{{text-value}}</p>
+    {{/if}}
+</li>

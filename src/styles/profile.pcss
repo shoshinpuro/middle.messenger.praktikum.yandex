@@ -1,0 +1,106 @@
+@import './variables.pcss';
+.main{
+    height: 100%;
+    display: flex;
+}
+.main__go-back-btn{
+    width: 65px;
+    background: #fbfbfb;
+    min-height: 100vh;
+    border-right: var(--border-lines);
+}
+.go-back-btn__a{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.main__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 1800px;
+}
+
+.user-info{
+    margin: 59px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.user-info__change-avatar{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.profile-data{
+    margin-bottom: 75px;
+}
+.profile-data__data-list, .actions__action-list{
+    max-width: 540px;
+    width: 100vw;
+}
+.data-list__data-unit{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    border-bottom: var(--border-lines);
+    margin-bottom: 10px;
+    height: 24px;
+}
+.data-unit__text{
+    text-align: right;
+    color: var(--gray-text-color);
+}
+
+.actions{
+    margin-bottom: 90px;
+}
+.action-list__action{
+    height: 32px;
+    border-bottom: var(--border-lines);
+}
+.action__a{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+}
+.action__icon{
+    height: 20px;
+    margin-right: 25px;
+}
+.action__action-text{
+    line-height: 16px;
+    color: black;
+}
+
+.profile-data-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-data-form__input{
+  color: var(--gray-text-color);
+  opacity: 1; /* Firefox */
+}
+.profile-data-form__input{
+    margin: 0;
+    border: none;
+}
+.profile-data-form__submit{
+    margin-top: 50px;
+}
+.data-unit__a-wrap{
+    color: var(--default-text-color);
+    display: inherit;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}

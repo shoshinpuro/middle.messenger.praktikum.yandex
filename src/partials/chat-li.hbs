@@ -1,0 +1,25 @@
+<li class="chat-list__container chat-container">
+    <a href="{{link}}">
+        <div class="chat-list__chat">
+            <div class="chat__wrap3">
+                <div class="chat__user-avatar user-avatar circle">
+                    <img  class="user-avatar__img" src="./../../../static/assets/img/{{firstname}}{{lastname}}.png" alt="{{firstname}}{{lastname}}">
+                </div>
+                <div class="chat__wrap1">
+                    <span class="chat__name">{{firstname}} {{lastname}}</span>
+                    <div class="chat__last-message-wrap">
+                        <p class="chat__last-message"><span class="chat__sender">{{sender}}</span> {{last-message}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat__wrap2">
+                <span class="chat__last-message-time">{{time}}</span>
+                {{#if new-messages}}
+                <div class="chat__unread-messages-count">
+                    <p class="unread-messages-count__text">{{messages-count}}</p> 
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </a>
+</li>
