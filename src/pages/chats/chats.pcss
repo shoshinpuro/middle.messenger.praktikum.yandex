@@ -50,6 +50,9 @@
   flex-direction: column;
   flex: 3.6 1 468px;
   display: flex;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 100vh;
 }
 .navbar__navbar-search{
   padding: 17px 15px 14px 15px;
@@ -88,6 +91,7 @@
   flex: 6 1 757px;
   width: auto;
   justify-content: center;
+  background: #f9f9f9;
 }
 .messages__none-chat-wrapper{
     height: 100vh;
@@ -143,7 +147,7 @@
 
 .chat__unread-messages-count{
   max-width: 48px;
-  background: var(--light-blue-colos);
+  background: var(--light-blue-color);
   border-radius: var(--modals-and-unread-msgs-brdr-rds);
   padding: 3px 6px;
 }

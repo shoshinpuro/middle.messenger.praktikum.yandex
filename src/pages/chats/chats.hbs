@@ -93,6 +93,7 @@ sublinks:
     <link rel="stylesheet" href="./../../styles/reset.pcss">
     <!-- <link rel="stylesheet" href="./../../styles/forms.pcss">-->
     <link rel="stylesheet" href="./chats.pcss">
+    <link rel="stylesheet" href="./../../styles/conversation-messages.pcss">
 </head>
 <body>
     <main class="main">
@@ -139,9 +140,10 @@ sublinks:
         </nav>
             
         <div class="main__messages">
-            <div class="messages__none-chat-wrapper">
+           <!-- <div class="messages__none-chat-wrapper">
                 <p class="messages__none-chat">Select a chat to start</p>
-            </div>
+            </div> -->
+            {{> conversation-messages }}
         </div>
             
     </main>
