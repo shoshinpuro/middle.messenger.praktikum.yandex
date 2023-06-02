@@ -13,9 +13,8 @@ class Block {
   private _element: HTMLElement | null = null;
   protected props: any;
   public children: Record<string, Block>;
-  private _meta: { tagName: string; props: any; };
+  private _meta: {props: any; };
   private eventBus: () => EventBus;
-  protected state: any;
 
   /** JSDoc
    * @param {string} tagName
@@ -23,20 +22,17 @@ class Block {
    *
    * @returns {void}
    */
-  constructor(tagName = "div", propsWithChildren: any = {}) {
+  constructor(propsWithChildren: any = {}) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
     this._meta = {
-      tagName,
       props
     };
 
     this.children = children;
     this.props = this._makePropsProxy(props);
-    this.state = {};
-    this.state = this._makePropsProxy(this.state);
 
     this.eventBus = () => eventBus;
 
@@ -76,7 +72,7 @@ class Block {
   }
 
   _createResources() {
-    const { tagName } = this._meta;
+    const tagName = 'div';
     this._element = this._createDocumentElement(tagName);
   }
 
@@ -126,14 +122,9 @@ class Block {
 
   private _render() {
     const fragment = this.render();
-
-    //this._element!.innerHTML = '';//30min
     const newElement = fragment.firstElementChild as HTMLElement;
     this._element!.replaceWith(newElement);
     this._element = newElement;
-
-    //this._element!.append(fragment);
-
     this._addEvents();
   }
 

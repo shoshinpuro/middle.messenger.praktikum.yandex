@@ -10,7 +10,7 @@ interface ButtonProps {
 
 export class FormButton extends Block {
   constructor(props: ButtonProps) {
-    super('button', props);
+    super(props);
   }
 
   render() {

@@ -7,19 +7,17 @@ interface InputProps {
     value: string;
     type: string;
     error?: string;
-    events: {
-        change: (e:any) => void
+    events?: {
+        
     }
 }
 
 export class Input extends Block {
     constructor(props: InputProps) {
-        console.log(props);
-        super('div',props);
+        super(props);
     }
 
     render() {
-        console.log(this.props);
         return this.compile(template, this.props);
     }
 }
