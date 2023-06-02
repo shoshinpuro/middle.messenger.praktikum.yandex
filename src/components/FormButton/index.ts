@@ -3,6 +3,8 @@ import template from './formButton.hbs';
 
 interface ButtonProps {
   label: string;
+  class: string;
+  type: string;
   events: {
     click: (e:PointerEvent) => void;
   };

@@ -2,7 +2,7 @@ import { Input } from "../../components/Input/index";
 import { FormButton } from "../../components/FormButton/index"
 import Block from "../../core/Block";
 import template from "./login.hbs";
-import { validationLogin} from "../../utils/validation";
+import { validationLogin, validationPassword} from "../../utils/validation";
 
 export class Login extends Block {
     constructor() {
@@ -14,23 +14,38 @@ export class Login extends Block {
             type: 'text', 
             name:'login', 
             label: 'Login', 
-            value: this.props.login
+            value: this.props.login,
+            events: {
+                change: () => {
+                    validationLogin(this.children.inputLogin)
+                }
+            }
         });
         this.children.inputPassword = new Input({
             type: 'password',
             name:'password', 
             label: 'Password', 
-            value: this.props.password 
+            value: this.props.password,
+            events: {
+                change: () => {
+                    validationPassword(this.children.inputPassword)
+                }
+            }
         })
         this.children.formButton = new FormButton({
+            class: 'sign-in-form__submit submit',
+            label: 'Sign in',
+            type: 'submit',
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
                     const login = this.children.inputLogin;
-                    validationLogin(login);
+                    const password = this.children.inputPassword;
+                    const validationsResults = [];
+                    validationsResults.push(validationLogin(login));
+                    validationPassword(password);
                 },
             }, 
-            label: 'Sign in' 
         })
     }
 
