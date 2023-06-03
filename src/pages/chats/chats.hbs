@@ -1,88 +1,3 @@
----
-sublinks:
-  - href: '#'
-    firstname: 'Amanda'
-    lastname: 'Sekar'
-    sender: 
-    last-message: 'Пока всё. Остальное залью на диск и отправлю позже.'
-    time: '18:49'
-    new-messages: true
-    messages-count: '128'
-  - href: '#'
-    firstname: 'Marina'
-    lastname: 'Terekh'
-    sender: 
-    last-message: 'Image'
-    time: '16:08'
-    new-messages: true
-    messages-count: '2'
-  - href: '#'
-    firstname: 'Andrew'
-    lastname: 'Kirski'
-    sender: 'You:'
-    last-message:  'Sticker'
-    time: '12:00'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: 'Prog'
-    lastname: 'News'
-    sender: 
-    last-message:  'Друзья, у меня для вас особенный выпуск новостей! Сегодня хотелось бы рассказать...'
-    time: '10:12'
-    new-messages: true
-    messages-count: '4'
-  - href: '#'
-    firstname: 'Mike'
-    lastname: 'Kotov'
-    sender: 'You:'
-    last-message:  'Круто!'
-    time: 'Пт'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: 'Working '
-    lastname: 'chat(news)'
-    sender: 'Svetlana Ledova:'
-    last-message:  ': Создала опрос. Просьба до пятницы всех проголосовать!'
-    time: 'Ср'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: '1, 2, 3'
-    lastname: 
-    sender: 
-    last-message:  'Миллионы россиян ежедневно проводят десятки часов своего времени в соцсетях...'
-    time: 'Пн'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: 'Design'
-    lastname: 'Destroyer'
-    sender: 
-    last-message:  'В 2008 году художник начал собирать кадры из Google Street View. Мир, оказавшийся в сфере объектива Google, представляется правдивым и прозрачным. «С самого начала меня привлекла живая, любительская эстетика этих сырых кадров. Проект Google Street View отличался той непосредственностью, которая, как мне казалось, раньше присутствовала в фотографии, посвящённой повседневной городской жизни. Схватывая всё как бы нейтрально, снимки этого проекта имели спонтанный характер, независимый от чувств и конкретных установок живого фотографа».'
-    time: 'Пн'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: 'James'
-    lastname: 'Kavil'
-    sender: 
-    last-message:  'Так увлёкся работой по курсу, что совсем забыл его анонсировать...'
-    time: '1 Мая 2020'
-    new-messages: false
-    messages-count: '0'
-  - href: '#'
-    firstname: 'Stas'
-    lastname: 
-    sender: 
-    last-message:  'Можно или сегодня или завтра вечером.'
-    time: '12 Апр 2020'
-    new-messages: false
-    messages-count: '0'
-
----
-
 <main class="main-chats">
     <div class="main__wrap-sidebar">
         <aside class="main__sidebar">
@@ -120,9 +35,6 @@ sublinks:
         </div>
         
         <ul class="navbar__chat-list">
-           <!-- {{#each sublinks}}
-                {{> chat-li }}
-            {{/each}}-->
             {{{chatLi1}}}
             {{{chatLi2}}}
             {{{chatLi3}}}
@@ -130,9 +42,6 @@ sublinks:
     </nav>
         
     <div class="main__messages">
-        <!-- <div class="messages__none-chat-wrapper">
-            <p class="messages__none-chat">Select a chat to start</p>
-        </div> -->
         {{{ conversationMessages }}}
     </div>
         
