@@ -55,7 +55,7 @@ export function validationPhone(elem: Block, childNum: number) {
     if(result) {
         elem.setProps({error: '', value: inputValue});
     } else {
-        elem.setProps({error: 'введите коррекный номер телефона', value: inputValue});
+        elem.setProps({error: 'введите корректный номер телефона', value: inputValue});
     }
     return result;
 }
