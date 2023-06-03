@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from "./profile-preferences.hbs";
+import template from "./profilePreferences.hbs";
 import { DataUnitLi } from "../../components/DataUnitLi";
 
 export class ProfilePreferences extends Block {

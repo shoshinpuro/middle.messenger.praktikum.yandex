@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from "./edit-profile.hbs";
+import template from "./editProfile.hbs";
 import { DataUnitLi } from "../../components/DataUnitLi";
 import { FormButton } from "../../components/FormButton";
 import { validationEmail, validationLogin, validationName, validationPhone } from "../../utils/validation";
@@ -60,22 +60,20 @@ export class EditProfile extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const phone = this.children.dataUnitLi6;
-                    const email = this.children.dataUnitLi6;
-                    const login = this.children.dataUnitLi6;
-                    const firstname = this.children.dataUnitLi6;
-                    const lastname = this.children.dataUnitLi6;
+                    const phone = this.children.dataUnitLi1;
+                    const email = this.children.dataUnitLi2;
+                    const login = this.children.dataUnitLi3;
+                    const firstname = this.children.dataUnitLi4;
+                    const lastname = this.children.dataUnitLi5;
                     const chatName = this.children.dataUnitLi6;
                     //const validationsResults = [];
-                    console.log('!!!!EMAIL!!!');
-                    console.log(email);
                     validationEmail(email, 1);
-                    /*validationPhone(phone, 0);
-                    validationEmail(email, 0);
-                    validationLogin(login, 0);
-                    validationName(firstname, 0);
-                    validationName(lastname, 0);
-                    validationName(chatName, 0);*/
+                    validationPhone(phone, 1);
+                    validationEmail(email, 1);
+                    validationLogin(login, 1);
+                    validationName(firstname, 1);
+                    validationName(lastname, 1);
+                    validationName(chatName, 1);
                 },
             }, 
         });
