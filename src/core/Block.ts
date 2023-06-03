@@ -13,7 +13,7 @@ class Block {
   private _element: HTMLElement | null = null;
   protected props: any;
   public children: Record<string, Block>;
-  private _meta: {props: any; };
+  _meta: { props: object };
   private eventBus: () => EventBus;
 
   /** JSDoc
