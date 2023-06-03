@@ -3,12 +3,11 @@ import template from './input.hbs'
 
 interface InputProps {
     name: string;
-    label: string;
     value: string;
     type: string;
-    error?: string;
     events?: {
-        
+        focus?: () => void;
+        blur?: () => void;
     }
 }
 

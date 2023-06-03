@@ -1,4 +1,4 @@
-import { Input } from "../../components/Input/index";
+import { FormInput } from "../../components/FormInput/index";
 import { FormButton } from "../../components/FormButton/index"
 import Block from "../../core/Block";
 import template from "./signUp.hbs";
@@ -10,82 +10,55 @@ export class SignUp extends Block {
     }
 
     protected init():void {
-        this.children.inputPhone = new Input({
+        this.children.inputPhone = new FormInput({
             type: 'tel',
             name:'phone', 
             label: 'Phone number', 
             value: this.props.phone,
-            events: {
-                change: () => {
-                    validationPhone(this.children.inputPhone)
-                }
-            }
+            validationHandler: validationPhone
         });
-        this.children.inputEmail = new Input({
+        this.children.inputEmail = new FormInput({
             type: 'email',
             name:'email', 
             label: 'Email', 
             value: this.props.email,
-            events: {
-                change: () => {
-                    validationEmail(this.children.inputEmail)
-                }
-            }
+            validationHandler: validationEmail
         });
-        this.children.inputLogin = new Input({
+        this.children.inputLogin = new FormInput({
             type: 'text', 
             name:'login', 
             label: 'Login', 
             value: this.props.login,
-            events: {
-                change: () => {
-                    validationLogin(this.children.inputLogin)
-                }
-            }
+            validationHandler: validationLogin
         });
-        this.children.inputFirstname = new Input({
+        this.children.inputFirstname = new FormInput({
             type: 'text',
             name:'firstname', 
             label: 'Firstname', 
             value: this.props.firstname,
-            events: {
-                change: () => {
-                    validationName(this.children.inputFirstname)
-                }
-            }
+            validationHandler: validationName
         });
-        this.children.inputLastname = new Input({
+        this.children.inputLastname = new FormInput({
             type: 'text',
             name:'lastname', 
             label: 'Lastname', 
             value: this.props.lastname,
-            events: {
-                change: () => {
-                    validationName(this.children.inputLastname)
-                }
-            }
+            validationHandler: validationName
+            
         });
-        this.children.inputPassword = new Input({
+        this.children.inputPassword = new FormInput({
             type: 'password',
             name:'password', 
             label: 'Password', 
             value: this.props.password,
-            events: {
-                change: () => {
-                    validationPassword(this.children.inputPassword)
-                }
-            }
+            validationHandler: validationLogin
         });
-        this.children.inputPassword2 = new Input({
+        this.children.inputPassword2 = new FormInput({
             type: 'password',
             name:'password2', 
             label: 'Password (again)', 
             value: this.props.password2,
-            events: {
-                change: () => {
-                    validationPassword(this.children.inputPassword2)
-                }
-            }
+            validationHandler: validationLogin
         });
         this.children.formButton = new FormButton({
             class: 'sign-up-form__submit submit',

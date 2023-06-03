@@ -1,4 +1,4 @@
-import { Input } from "../../components/Input/index";
+import { FormInput } from "../../components/FormInput/index";
 import { FormButton } from "../../components/FormButton/index"
 import Block from "../../core/Block";
 import template from "./login.hbs";
@@ -10,27 +10,19 @@ export class Login extends Block {
     }
 
     protected init():void {
-        this.children.inputLogin = new Input({
+        this.children.inputLogin = new FormInput({
             type: 'text', 
             name:'login', 
             label: 'Login', 
             value: this.props.login,
-            events: {
-                change: () => {
-                    validationLogin(this.children.inputLogin)
-                }
-            }
+            validationHandler: validationLogin
         });
-        this.children.inputPassword = new Input({
+        this.children.inputPassword = new FormInput({
             type: 'password',
             name:'password', 
             label: 'Password', 
             value: this.props.password,
-            events: {
-                change: () => {
-                    validationPassword(this.children.inputPassword)
-                }
-            }
+            validationHandler: validationPassword
         })
         this.children.formButton = new FormButton({
             class: 'sign-in-form__submit submit',
