@@ -1,4 +1,4 @@
-/*import { Chats } from './pages/Chats';
+import { Chats } from './pages/Chats';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
 import { ProfilePreferences } from './pages/ProfilePreferences'; 
@@ -29,13 +29,42 @@ window.addEventListener('DOMContentLoaded', () => {
   const editProfilePage = new EditProfile();
   const error404Page = new Error404();
   const error500Page = new Error500();
-  const allPages = new AllPages({
+  
+  const allPages = new AllPages ({pages});
+  renderDOM(allPages, '#nav');
+  switch (window.location.pathname) {
+    case "/chats":
+      renderDOM(chatsPage);
+      break;
+    case "/login":
+      renderDOM(loginPage);
+      break;
+    case "/signUp":
+      renderDOM(signUpPage);
+      break;
+    case "/profilePreferences":
+      renderDOM(profilePreferencesPage);
+      break;
+        case '/editProfile':
+      renderDOM(editProfilePage);
+      break;
+    case '/404':
+      renderDOM(error404Page);
+      break;
+    case '/500':
+      renderDOM(error500Page);
+      break;
+    default: 
+      break;
+  }
+  
+  /*const allPages = new AllPages({
     pages,
     events: {
       click: (evt) => {
         evt.preventDefault();
         const path = (evt.target! as HTMLElement).getAttribute('href');
-        switch (/*window.location.pathname//path) {
+        switch (path) {
           case "/chats":
             renderDOM(chatsPage);
             break;
@@ -63,9 +92,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  });
+  });*/
 
 
-  root.append(allPages.getContent()!);
+ // root.append(allPages.getContent()!);
 });
-*/

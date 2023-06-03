@@ -9,7 +9,7 @@ interface dataUnitLiProps {
     name?: string;
     type?: string;
     error?: string;
-    events?: {};
+    events?: object;
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 

@@ -31,8 +31,6 @@ export class FormInput extends Block {
                     console.log('focus');
                 },
                 blur: () => {
-                    console.log("this")
-                    console.log(this)
                     this.props.validationHandler(this, 0)
                 }
             },

@@ -5,7 +5,7 @@ interface ImageProps {
     class: string;
     src: string;
     alt: string;
-    events?: {};
+    events?: object;
 }
 
 export class Image extends Block {

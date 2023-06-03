@@ -4,7 +4,7 @@ import { Image } from "../Image";
 import imgPhotocamera from "../../assets/img/photocamera.png";
 
 interface conversationMessagesProps {
-    events?: {};
+    events?: object;
 }
 
 export class ConversationMessages extends Block {
