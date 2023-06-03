@@ -5,7 +5,7 @@ interface InputProps {
     name: string;
     value: string;
     type: string;
-    class: string;
+    class?: string;
     events?: {
         focus?: () => void;
         blur?: () => void;

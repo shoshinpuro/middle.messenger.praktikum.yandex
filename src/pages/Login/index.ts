@@ -14,7 +14,7 @@ export class Login extends Block {
             type: 'text', 
             name:'login', 
             label: 'Login',
-            classInput: 'sign-in-form__login-input  form-input',
+            classInput: 'sign-in-form__login-input  form-input',//&&&
             value: this.props.login,
             validationHandler: validationLogin
         });
@@ -36,7 +36,7 @@ export class Login extends Block {
                     const login = this.children.inputLogin;
                     const password = this.children.inputPassword;
                     const validationsResults = [];
-                    validationsResults.push(validationLogin(login));
+                    validationsResults.push(validationLogin(login, 0));
                     validationPassword(password);
                 },
             }, 

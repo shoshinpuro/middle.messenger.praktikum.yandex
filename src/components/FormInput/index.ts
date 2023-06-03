@@ -7,12 +7,12 @@ interface InputProps {
     label: string;
     value: string;
     type: string;
-    classInput: string;
+    classInput?: string;
     error?: string;
     events?: {
         
     };
-    validationHandler?: (elem: Block) => (string | undefined);
+    validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
 export class FormInput extends Block {

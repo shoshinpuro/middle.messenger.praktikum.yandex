@@ -31,7 +31,8 @@ export function validationPassword(elem: Block, childNum: number = 0) {
 }
 export function validationEmail(elem: Block, childNum: number = 0) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
-    const result = inputValue.match(regexObj.email)?.[0]
+    const result = inputValue.match(regexObj.email)?.[0];
+    console.log(`!!!!!inputValue ${inputValue}`)
     if(result) {
         elem.setProps({error: '', value: inputValue});
     } else {
