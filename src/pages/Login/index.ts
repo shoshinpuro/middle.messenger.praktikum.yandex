@@ -3,6 +3,7 @@ import { FormButton } from "../../components/FormButton/index"
 import Block from "../../core/Block";
 import template from "./login.hbs";
 import { validationLogin, validationPassword} from "../../utils/validation";
+import { formDataOutput } from "../../utils/formDataOutput";
 
 export class Login extends Block {
     constructor() {
@@ -33,11 +34,14 @@ export class Login extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
+                    const names = ['login', 'password'];
+                    const formElem = document.querySelector('form') as HTMLFormElement;
+                    formDataOutput(formElem, names);
                     const login = this.children.inputLogin;
                     const password = this.children.inputPassword;
-                    const validationsResults = [];
-                    validationsResults.push(validationLogin(login, 0));
-                    validationPassword(password);
+                    //const validationsResults = [];
+                    validationLogin(login, 0);
+                    validationPassword(password, 0);
                 },
             }, 
         })

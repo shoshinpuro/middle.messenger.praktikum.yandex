@@ -3,7 +3,7 @@ import { FormButton } from "../../components/FormButton/index"
 import Block from "../../core/Block";
 import template from "./signUp.hbs";
 import { validationEmail, validationLogin, validationName, validationPassword, validationPhone} from "../../utils/validation";
-
+import { formDataOutput } from "../../utils/formDataOutput";
 export class SignUp extends Block {
     constructor() {
         super()
@@ -36,7 +36,7 @@ export class SignUp extends Block {
         });
         this.children.inputFirstname = new FormInput({
             type: 'text',
-            name:'firstname', 
+            name:'first_name', 
             label: 'Firstname', 
             classInput: 'sign-up-form__firstname-input  form-input',
             value: this.props.firstname,
@@ -44,7 +44,7 @@ export class SignUp extends Block {
         });
         this.children.inputLastname = new FormInput({
             type: 'text',
-            name:'lastname', 
+            name:'second_name', 
             label: 'Lastname', 
             classInput: 'sign-up-form__lastname-input  form-input',
             value: this.props.lastname,
@@ -74,6 +74,10 @@ export class SignUp extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
+                    const names = ['phone', 'email', 'login', 'first_name', 'second_name', 'password', 'password2'];
+                    const formElem = document.querySelector('form') as HTMLFormElement;
+                    formDataOutput(formElem, names);
+
                     const phone = this.children.inputPhone;
                     const email = this.children.inputEmail;
                     const login = this.children.inputLogin;

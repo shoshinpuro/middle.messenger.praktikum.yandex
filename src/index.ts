@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
       click: (evt) => {
         evt.preventDefault();
         const path = (evt.target! as HTMLElement).getAttribute('href');
-        switch (/*window.location.pathname*/path) {
+        switch (/*window.location.pathname//path) {
           case "/chats":
             renderDOM(chatsPage);
             break;
@@ -67,4 +67,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   root.append(allPages.getContent()!);
-});*/
+});
+*/

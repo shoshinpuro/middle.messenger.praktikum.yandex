@@ -19,7 +19,7 @@ export function validationLogin(elem: Block, childNum: number) {
     }
     return result;
 }
-export function validationPassword(elem: Block, childNum: number = 0) {
+export function validationPassword(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.password)?.[0]
     if(result) {
@@ -29,10 +29,9 @@ export function validationPassword(elem: Block, childNum: number = 0) {
     }
     return result;
 }
-export function validationEmail(elem: Block, childNum: number = 0) {
+export function validationEmail(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.email)?.[0];
-    console.log(`!!!!!inputValue ${inputValue}`)
     if(result) {
         elem.setProps({error: '', value: inputValue});
     } else {
@@ -40,7 +39,7 @@ export function validationEmail(elem: Block, childNum: number = 0) {
     }
     return result;
 }
-export function validationName(elem: Block, childNum: number = 0) {
+export function validationName(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.name)?.[0]
     if(result) {
@@ -50,7 +49,7 @@ export function validationName(elem: Block, childNum: number = 0) {
     }
     return result;
 }
-export function validationPhone(elem: Block, childNum: number = 0) {
+export function validationPhone(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.phone)?.[0]
     if(result) {
@@ -60,7 +59,7 @@ export function validationPhone(elem: Block, childNum: number = 0) {
     }
     return result;
 }
-export function validationMessage(elem: Block, childNum: number = 0) {
+export function validationMessage(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.message)?.[0]
     if(result) {

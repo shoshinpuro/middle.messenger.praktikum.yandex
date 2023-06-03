@@ -3,6 +3,7 @@ import template from "./editProfile.hbs";
 import { DataUnitLi } from "../../components/DataUnitLi";
 import { FormButton } from "../../components/FormButton";
 import { validationEmail, validationLogin, validationName, validationPhone } from "../../utils/validation";
+import { formDataOutput } from "../../utils/formDataOutput";
 
 export class EditProfile extends Block {
     constructor() {
@@ -60,6 +61,10 @@ export class EditProfile extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
+                    const names = ['phone', 'email', 'login', 'first_name', 'second_name', 'display_name'];
+                    const formElem = document.querySelector('form') as HTMLFormElement;
+                    formDataOutput(formElem, names);
+                    
                     const phone = this.children.dataUnitLi1;
                     const email = this.children.dataUnitLi2;
                     const login = this.children.dataUnitLi3;
