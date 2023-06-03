@@ -1,5 +1,7 @@
 import { ConversationMessages } from "../../components/ConversationMessages";
 import { ChatLi } from "../../components/ChatLi";
+import { Image } from "../../components/Image";
+import imgAvatar from "../../assets/img/avatar.png"
 import Block from "../../core/Block";
 import template from "./chatsPage.hbs";
 
@@ -11,7 +13,8 @@ export class Chats extends Block {
     protected init():void {
         this.children.conversationMessages = new ConversationMessages({
 
-        })
+        });
+        this.children.image = new Image({ src: imgAvatar, alt: "user photo", class: "user-avatar__img"});
         this.children.chatLi1 = new ChatLi({
             link: '#',
             firstname: 'Amanda',
