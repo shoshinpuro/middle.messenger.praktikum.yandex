@@ -120,9 +120,12 @@ sublinks:
         </div>
         
         <ul class="navbar__chat-list">
-            {{#each sublinks}}
+           <!-- {{#each sublinks}}
                 {{> chat-li }}
-            {{/each}}
+            {{/each}}-->
+            {{{chatLi1}}}
+            {{{chatLi2}}}
+            {{{chatLi3}}}
         </ul>
     </nav>
         
@@ -130,7 +133,7 @@ sublinks:
         <!-- <div class="messages__none-chat-wrapper">
             <p class="messages__none-chat">Select a chat to start</p>
         </div> -->
-        {{> conversation-messages }}
+        {{{ conversationMessages }}}
     </div>
         
 </main>

@@ -1,4 +1,4 @@
-import { Login } from './../Login'
+import { Login } from '../../pages/Login'
 
 window.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#root')!;

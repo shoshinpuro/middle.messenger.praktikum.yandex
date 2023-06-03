@@ -1,18 +1,3 @@
----
-sublinks:
-  - header: 'Phone number'
-    text-value: '+7-(977)-777-77-77'
-  - header: 'Email'
-    text-value: 'ivanivanov@ya.ru'
-  - header: 'Login'
-    text-value: 'ivanivanov'
-  - header: 'Firstname'
-    text-value: 'Ivan'
-  - header: 'Lastname'
-    text-value: 'Ivanov'
-  - header: 'Name in chats'
-    text-value: 'Ivan'
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +8,8 @@ sublinks:
     <link rel="stylesheet" href="./../../styles/reset.pcss">
     <link rel="stylesheet" href="./../../styles/forms.pcss">
     <link rel="stylesheet" href="./../../styles/profile.pcss">
+    <script type="module" src="index.ts"></script>
 </head>
-<body>
-  
-    {{> profile sublinks=sublinks isEdit=false }}
+<body id="root"> 
 </body>
 </html>
