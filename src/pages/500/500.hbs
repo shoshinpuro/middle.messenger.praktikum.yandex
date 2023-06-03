@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>500</title>
-    <link rel="stylesheet" href="./../../styles/reset.pcss">
-    <link rel="stylesheet" href="./../../styles/error.pcss">
-</head>
-<body>
-    {{> error status="500" message="Sorry, server error" }}
-</body>
-</html>
+<main class="main-error">
+    {{{error}}}
+    <div class="go-back">
+        <p class="go-back__text"><a href="/login">To main page</a></p>
+    </div>
+</main>
