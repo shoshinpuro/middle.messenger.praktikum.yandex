@@ -1,8 +1,12 @@
 <li class="data-list__data-unit data-unit">
     <h4 class="data-unit__header">{{header}}</h4>
     {{#if isEdit}}
-    <input type="text" name="{{name}}" value="{{text-value}}" placeholder="{{header}}" class="profile-data-form__input  form-input">
+        {{{input}}}
+        {{#if error}}
+            <p class="sign-in-form__text-error profile-error">{{error}}</p>
+        {{/if}}
+    <!--<input type="text" name="{{name}}" value="{{text-value}}" placeholder="{{header}}" class="profile-data-form__input  form-input">-->
     {{else}}
-    <p class="data-unit__text">{{text-value}}</p>
+        <p class="data-unit__text">{{text-value}}</p>
     {{/if}}
 </li>

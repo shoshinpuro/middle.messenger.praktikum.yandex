@@ -13,14 +13,16 @@ export class Login extends Block {
         this.children.inputLogin = new FormInput({
             type: 'text', 
             name:'login', 
-            label: 'Login', 
+            label: 'Login',
+            classInput: 'sign-in-form__login-input  form-input',
             value: this.props.login,
             validationHandler: validationLogin
         });
         this.children.inputPassword = new FormInput({
             type: 'password',
             name:'password', 
-            label: 'Password', 
+            label: 'Password',
+            classInput: 'sign-in-form__password-input  form-input', 
             value: this.props.password,
             validationHandler: validationPassword
         })

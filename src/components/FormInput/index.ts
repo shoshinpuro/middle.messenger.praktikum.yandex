@@ -7,6 +7,7 @@ interface InputProps {
     label: string;
     value: string;
     type: string;
+    classInput: string;
     error?: string;
     events?: {
         
@@ -24,12 +25,15 @@ export class FormInput extends Block {
             type: this.props.type,
             name: this.props.name,
             value: this.props.value,
+            class: this.props.classInput,
             events: {
                 focus: () => {
                     console.log('focus');
                 },
                 blur: () => {
-                    this.props.validationHandler(this)
+                    console.log("this")
+                    console.log(this)
+                    this.props.validationHandler(this, 0)
                 }
             },
             

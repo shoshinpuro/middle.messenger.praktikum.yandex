@@ -9,18 +9,18 @@ const regexObj = {
     login: /(?=.*[a-z])^[a-z-z0-9-_]{3,20}$/i 
 };
 
-export function validationLogin(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationLogin(elem: Block, childNum: number) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.login)?.[0]
     if(result) {
         elem.setProps({error: '', value: inputValue});
     } else {
-        elem.setProps({error: 'от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)', value: inputValue});
+        elem.setProps({error: '3-20 символов, латиница, допустимы -_ и цифры', value: inputValue});
     }
     return result;
 }
-export function validationPassword(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationPassword(elem: Block, childNum: number = 0) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.password)?.[0]
     if(result) {
         elem.setProps({error: '', value: inputValue});
@@ -29,8 +29,8 @@ export function validationPassword(elem: Block) {
     }
     return result;
 }
-export function validationEmail(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationEmail(elem: Block, childNum: number = 0) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.email)?.[0]
     if(result) {
         elem.setProps({error: '', value: inputValue});
@@ -39,18 +39,18 @@ export function validationEmail(elem: Block) {
     }
     return result;
 }
-export function validationName(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationName(elem: Block, childNum: number = 0) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.name)?.[0]
     if(result) {
         elem.setProps({error: '', value: inputValue});
     } else {
-        elem.setProps({error: 'первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (только дефис)', value: inputValue});
+        elem.setProps({error: 'С заглавной буквы, допустим только дефис', value: inputValue});
     }
     return result;
 }
-export function validationPhone(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationPhone(elem: Block, childNum: number = 0) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.phone)?.[0]
     if(result) {
         elem.setProps({error: '', value: inputValue});
@@ -59,8 +59,8 @@ export function validationPhone(elem: Block) {
     }
     return result;
 }
-export function validationMessage(elem: Block) {
-    const inputValue = (elem.element?.firstElementChild as HTMLInputElement).value;
+export function validationMessage(elem: Block, childNum: number = 0) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const result = inputValue.match(regexObj.message)?.[0]
     if(result) {
         console.log('ok');

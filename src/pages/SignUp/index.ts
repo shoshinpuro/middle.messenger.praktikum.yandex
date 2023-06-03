@@ -14,6 +14,7 @@ export class SignUp extends Block {
             type: 'tel',
             name:'phone', 
             label: 'Phone number', 
+            classInput: 'sign-in-form__phone-input  form-input',
             value: this.props.phone,
             validationHandler: validationPhone
         });
@@ -21,6 +22,7 @@ export class SignUp extends Block {
             type: 'email',
             name:'email', 
             label: 'Email', 
+            classInput: 'sign-in-form__email-input  form-input',
             value: this.props.email,
             validationHandler: validationEmail
         });
@@ -28,6 +30,7 @@ export class SignUp extends Block {
             type: 'text', 
             name:'login', 
             label: 'Login', 
+            classInput: 'sign-in-form__login-input  form-input',
             value: this.props.login,
             validationHandler: validationLogin
         });
@@ -35,6 +38,7 @@ export class SignUp extends Block {
             type: 'text',
             name:'firstname', 
             label: 'Firstname', 
+            classInput: 'sign-in-form__firstname-input  form-input',
             value: this.props.firstname,
             validationHandler: validationName
         });
@@ -42,6 +46,7 @@ export class SignUp extends Block {
             type: 'text',
             name:'lastname', 
             label: 'Lastname', 
+            classInput: 'sign-in-form__lastname-input  form-input',
             value: this.props.lastname,
             validationHandler: validationName
             
@@ -50,6 +55,7 @@ export class SignUp extends Block {
             type: 'password',
             name:'password', 
             label: 'Password', 
+            classInput: 'sign-in-form__password-input  form-input',
             value: this.props.password,
             validationHandler: validationLogin
         });
@@ -57,6 +63,7 @@ export class SignUp extends Block {
             type: 'password',
             name:'password2', 
             label: 'Password (again)', 
+            classInput: 'sign-in-form__password2-input  form-input',
             value: this.props.password2,
             validationHandler: validationLogin
         });
