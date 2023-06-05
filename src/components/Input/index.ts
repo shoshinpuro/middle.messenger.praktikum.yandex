@@ -1,5 +1,5 @@
-import Block from '../../core/Block'
-import template from './input.hbs'
+import Block from '../../core/Block';
+import template from './input.hbs';
 
 interface InputProps {
     name: string;
@@ -12,7 +12,7 @@ interface InputProps {
     }
 }
 
-export class Input extends Block {
+class Input extends Block {
     constructor(props: InputProps) {
         super(props);
     }
@@ -21,3 +21,5 @@ export class Input extends Block {
         return this.compile(template, this.props);
     }
 }
+
+export default Input;

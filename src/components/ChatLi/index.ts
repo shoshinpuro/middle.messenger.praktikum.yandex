@@ -1,6 +1,6 @@
-import Block from "../../core/Block";
-import template from "./chatLi.hbs";
-import { Image } from "../Image";
+import Block from '../../core/Block';
+import template from './chatLi.hbs';
+import Image from '../Image';
 import img from '../../assets/img/AmandaSekar.png';
 
 interface ChatLiProps {
@@ -14,23 +14,18 @@ interface ChatLiProps {
     events?: {};
 }
 
-export class ChatLi extends Block {
+class ChatLi extends Block {
     constructor(props: ChatLiProps) {
         super(props);
     }
-    
+
     init() {
-        /*const path = `../../assets/img/${this.props.firstname}${this.props.lastname}.png`;
-        import(path)
-            .then(img =>{
-                console.log(img);
-                this.children.image = new Image({ src: img, alt: "user photo", class: "user-avatar__img"});
-            })
-            .catch(err => console.log(`Ошибка получения изображения: ${err}`))*/
-        this.children.image = new Image({ src: img, alt: "user photo", class: "user-avatar__img"});
+        this.children.image = new Image({ src: img, alt: 'user photo', class: 'user-avatar__img' });
     }
 
     render() {
-        return this.compile(template, {...this.props})
+        return this.compile(template, { ...this.props });
     }
 }
+
+export default ChatLi;

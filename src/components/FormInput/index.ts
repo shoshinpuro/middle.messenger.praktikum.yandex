@@ -1,6 +1,6 @@
-import Block from '../../core/Block'
-import template from './formInput.hbs'
-import { Input } from '../Input';
+import Block from '../../core/Block';
+import template from './formInput.hbs';
+import Input from '../Input';
 
 interface InputProps {
     name: string;
@@ -10,35 +10,37 @@ interface InputProps {
     classInput?: string;
     error?: string;
     events?: {
-        
+
     };
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
-export class FormInput extends Block {
+class FormInput extends Block {
     constructor(props: InputProps) {
         super(props);
     }
 
     init() {
-        this.children.input = new Input ({
+        this.children.input = new Input({
             type: this.props.type,
             name: this.props.name,
             value: this.props.value,
             class: this.props.classInput,
             events: {
                 focus: () => {
-                    console.log('focus');
+                    console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
-                    this.props.validationHandler(this, 0)
-                }
+                    this.props.validationHandler(this, 0);
+                },
             },
-            
-        })
+
+        });
     }
 
     render() {
         return this.compile(template, this.props);
     }
 }
+
+export default FormInput;

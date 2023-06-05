@@ -1,24 +1,24 @@
-import Block from "../../core/Block";
-import template from "./profilePreferences.hbs";
-import { DataUnitLi } from "../../components/DataUnitLi";
+import Block from '../../core/Block';
+import template from './profilePreferences.hbs';
+import DataUnitLi from '../../components/DataUnitLi';
 
-export class ProfilePreferences extends Block {
+class ProfilePreferences extends Block {
     constructor() {
-        super()
+        super();
     }
 
     protected init():void {
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
-            textValue: '+7-(977)-777-77-77'
+            textValue: '+7-(977)-777-77-77',
         });
         this.children.dataUnitLi2 = new DataUnitLi({
             header: 'Email',
-            textValue: 'ivanivanov@ya.ru'
+            textValue: 'ivanivanov@ya.ru',
         });
         this.children.dataUnitLi3 = new DataUnitLi({
             header: 'Login',
-            textValue: 'ivanivanov'
+            textValue: 'ivanivanov',
         });
         this.children.dataUnitLi4 = new DataUnitLi({
             header: 'Firstname',
@@ -32,12 +32,12 @@ export class ProfilePreferences extends Block {
             header: 'Name in chats',
             textValue: 'Ivan',
         });
-
     }
 
-    protected render(): DocumentFragment{
+    protected render(): DocumentFragment {
         this.init();
-        return this.compile(template, this.props)
+        return this.compile(template, this.props);
     }
 }
 
+export default ProfilePreferences;

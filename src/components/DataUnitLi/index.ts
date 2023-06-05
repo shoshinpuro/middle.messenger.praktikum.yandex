@@ -1,8 +1,8 @@
-import Block from "../../core/Block";
-import template from "./dataUnitLi.hbs"
-import { Input } from "../Input";
+import Block from '../../core/Block';
+import template from './dataUnitLi.hbs';
+import Input from '../Input';
 
-interface dataUnitLiProps {
+interface DataUnitLiProps {
     header: string;
     textValue: string;
     isEdit?: boolean;
@@ -13,13 +13,14 @@ interface dataUnitLiProps {
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
-export class DataUnitLi extends Block {
-    constructor(props: dataUnitLiProps) {
+class DataUnitLi extends Block {
+    constructor(props: DataUnitLiProps) {
         super(props);
     }
-    init(){
-        if(this.props.isEdit){
-            const dataUnitLiInputClass = 'profile-data-form__input  form-input'
+
+    init() {
+        if (this.props.isEdit) {
+            const dataUnitLiInputClass = 'profile-data-form__input  form-input';
             this.children.input = new Input({
                 name: this.props.name,
                 value: this.props.textValue,
@@ -27,19 +28,19 @@ export class DataUnitLi extends Block {
                 class: dataUnitLiInputClass,
                 events: {
                     focus: () => {
-                        console.log('focus');
+                        console.log('focus'); // eslint-disable-line no-console
                     },
                     blur: () => {
-                        console.log("this: ");
-                        console.log(this);
-                        this.props.validationHandler(this, 1)
-                    }
+                        this.props.validationHandler(this, 1);
+                    },
                 },
-            })
-        }   
+            });
+        }
     }
 
     render() {
-        return this.compile(template, {...this.props});
+        return this.compile(template, { ...this.props });
     }
 }
+
+export default DataUnitLi;

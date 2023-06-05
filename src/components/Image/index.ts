@@ -1,5 +1,5 @@
-import Block from "../../core/Block";
-import template from "./image.hbs";
+import Block from '../../core/Block';
+import template from './image.hbs';
 
 interface ImageProps {
     class: string;
@@ -8,12 +8,13 @@ interface ImageProps {
     events?: object;
 }
 
-export class Image extends Block {
+class Image extends Block {
     constructor(props: ImageProps) {
         super(props);
     }
-    
+
     render() {
-        return this.compile(template, {...this.props})
+        return this.compile(template, { ...this.props });
     }
 }
+export default Image;
