@@ -1,15 +1,14 @@
-import { Chats } from './pages/Chats';
-import { Login } from './pages/Login';
-import { SignUp } from './pages/SignUp';
-import { ProfilePreferences } from './pages/ProfilePreferences'; 
-import { EditProfile } from './pages/EditProfile'; 
-import { Error404 } from './pages/404'; 
-import { Error500 } from './pages/500'; 
-import { AllPages } from './components/AllPages';
+import { Chats } from './pages/Chats/index';
+import { Login } from './pages/Login/index';
+import { SignUp } from './pages/SignUp/index';
+import { ProfilePreferences } from './pages/ProfilePreferences/index'; 
+import { EditProfile } from './pages/EditProfile/index'; 
+import { Error404 } from './pages/404/index'; 
+import { Error500 } from './pages/500/index'; 
+import { AllPages } from './components/AllPages/index';
 import renderDOM from './utils/renderDOM';
 
 window.addEventListener('DOMContentLoaded', () => {
-  const root = document.querySelector('#app')!;
 
   const pages = [
     { link: '/chats', label: "Chats" },
