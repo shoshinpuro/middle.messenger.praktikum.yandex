@@ -1,9 +1,11 @@
-@import './variables.pcss';
+@import url('./variables.pcss');
+
 input{
     border: none;
     border-bottom: var(--input-border-bottom);
     background: none;
 }
+
 .submit{
     width: 175px;
     height: 35px;
@@ -14,16 +16,19 @@ input{
     color: white;
     line-height: 9px;
 }
+
 .submit:disabled{
   background: var(--disabled-button-color);
   cursor: default;
 }
+
 .form-actions{
     flex-direction: column;
     align-items: center;
     display: flex;
     margin-bottom: 35px;
 }
+
 .form{
     display: flex;
     flex-direction: column;
@@ -31,17 +36,20 @@ input{
     align-items: center;
     width: 400px;
     background: #F6F6F6;
-    box-shadow: 5px 4px 25px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 4px 25px 1px rgb(0 0 0 / 25%);
     border-radius: 15px;
     min-height: 450px;
 }
+
 .input-wrap{
     display: flex;
     flex-direction: column;
 }
+
 .form-input{
     font: 14px "Fira Sans", sans-serif;
 }
+
 .form-header{
     margin: 25px 0 15px;
     font-weight: 700;
@@ -49,6 +57,7 @@ input{
     line-height: 24px;
     filter: var(--default-drop-shadow);
 }
+
 .label{
     display: flex;
     flex-direction: column;
@@ -58,6 +67,7 @@ input{
     margin-bottom: 25px;
     width: 180px;
 }
+
 .form__text-error{
     color: var(--error-color);
 }
