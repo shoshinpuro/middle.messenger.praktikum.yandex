@@ -3,7 +3,7 @@ import { ChatLi } from "../../components/ChatLi";
 import { Image } from "../../components/Image";
 import imgAvatar from "../../assets/img/avatar.png"
 import Block from "../../core/Block";
-import template from "./chats.hbs";
+import template from "./myChats.hbs";
 
 export class Chats extends Block {
     constructor() {

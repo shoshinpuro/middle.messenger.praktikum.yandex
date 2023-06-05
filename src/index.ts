@@ -1,4 +1,4 @@
-import { Chats } from './pages/Chats/index';
+import { Chats } from './pages/MyChats/index';
 import { Login } from './pages/Login/index';
 import { SignUp } from './pages/SignUp/index';
 import { ProfilePreferences } from './pages/ProfilePreferences/index'; 
