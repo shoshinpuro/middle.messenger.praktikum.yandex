@@ -18,7 +18,7 @@ class SignUp extends Block {
             name: 'phone',
             label: 'Phone number',
             classInput: 'sign-up-form__phone-input  form-input',
-            value: this.props.phone,
+            value: this.props.phone as string,
             validationHandler: validationPhone,
         });
         this.children.inputEmail = new FormInput({
@@ -26,7 +26,7 @@ class SignUp extends Block {
             name: 'email',
             label: 'Email',
             classInput: 'sign-up-form__email-input  form-input',
-            value: this.props.email,
+            value: this.props.email as string,
             validationHandler: validationEmail,
         });
         this.children.inputLogin = new FormInput({
@@ -34,7 +34,7 @@ class SignUp extends Block {
             name: 'login',
             label: 'Login',
             classInput: 'sign-up-form__login-input  form-input',
-            value: this.props.login,
+            value: this.props.login as string,
             validationHandler: validationLogin,
         });
         this.children.inputFirstname = new FormInput({
@@ -42,7 +42,7 @@ class SignUp extends Block {
             name: 'first_name',
             label: 'Firstname',
             classInput: 'sign-up-form__firstname-input  form-input',
-            value: this.props.firstname,
+            value: this.props.firstname as string,
             validationHandler: validationName,
         });
         this.children.inputLastname = new FormInput({
@@ -50,7 +50,7 @@ class SignUp extends Block {
             name: 'second_name',
             label: 'Lastname',
             classInput: 'sign-up-form__lastname-input  form-input',
-            value: this.props.lastname,
+            value: this.props.lastname as string,
             validationHandler: validationName,
 
         });
@@ -59,7 +59,7 @@ class SignUp extends Block {
             name: 'password',
             label: 'Password',
             classInput: 'sign-up-form__password-input  form-input',
-            value: this.props.password,
+            value: this.props.password as string,
             validationHandler: validationPassword,
         });
         this.children.inputPassword2 = new FormInput({
@@ -67,7 +67,7 @@ class SignUp extends Block {
             name: 'password2',
             label: 'Password (again)',
             classInput: 'sign-up-form__password2-input  form-input',
-            value: this.props.password2,
+            value: this.props.password2 as string,
             validationHandler: validationPassword,
         });
         this.children.formButton = new FormButton({

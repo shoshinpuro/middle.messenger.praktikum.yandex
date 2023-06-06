@@ -13,6 +13,8 @@ interface DataUnitLiProps {
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
+type ValidationHandler = (elem: Block, childNum: number) => string;
+
 class DataUnitLi extends Block {
     constructor(props: DataUnitLiProps) {
         super(props);
@@ -22,16 +24,17 @@ class DataUnitLi extends Block {
         if (this.props.isEdit) {
             const dataUnitLiInputClass = 'profile-data-form__input  form-input';
             this.children.input = new Input({
-                name: this.props.name,
-                value: this.props.textValue,
-                type: this.props.type,
+                name: this.props.name as string,
+                value: this.props.textValue as string,
+                type: this.props.type as string,
                 class: dataUnitLiInputClass,
                 events: {
                     focus: () => {
                         console.log('focus'); // eslint-disable-line no-console
                     },
                     blur: () => {
-                        this.props.validationHandler(this, 1);
+                        const validationFunc = this.props.validationHandler as ValidationHandler;
+                        validationFunc(this, 1);
                     },
                 },
             });

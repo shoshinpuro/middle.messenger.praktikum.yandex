@@ -15,6 +15,8 @@ interface InputProps {
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
+type ValidationHandler = (elem: Block, childNum: number) => string;
+
 class FormInput extends Block {
     constructor(props: InputProps) {
         super(props);
@@ -22,16 +24,17 @@ class FormInput extends Block {
 
     init() {
         this.children.input = new Input({
-            type: this.props.type,
-            name: this.props.name,
-            value: this.props.value,
-            class: this.props.classInput,
+            type: this.props.type as string,
+            name: this.props.name as string,
+            value: this.props.value as string,
+            class: this.props.classInput as string,
             events: {
                 focus: () => {
                     console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
-                    this.props.validationHandler(this, 0);
+                    const validationFunc = this.props.validationHandler as ValidationHandler;
+                    validationFunc(this, 0);
                 },
             },
 

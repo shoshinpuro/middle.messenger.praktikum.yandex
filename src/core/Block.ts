@@ -9,7 +9,12 @@ import EventBus from './EventBus';
     "componentDidUpdate",
     "render"
 ] }] */
-class Block {
+
+type ValidationHandler = (elem: Block, childNum: number) => (string | undefined);
+type Prop = object | string | ValidationHandler;
+type Props = { [x:string]: Prop };
+
+abstract class Block {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -21,7 +26,8 @@ class Block {
 
     private _element: HTMLElement | null = null;
 
-    protected props: any;
+    // eslint-disable-next-line max-len
+    protected props: Props;
 
     public children: Record<string, Block>;
 
@@ -35,7 +41,7 @@ class Block {
    *
    * @returns {void}
    */
-    constructor(propsWithChildren: any = {}) {
+    constructor(propsWithChildren = {}) {
         const eventBus = new EventBus();
 
         const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -54,8 +60,8 @@ class Block {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _getChildrenAndProps(childrenAndProps: any) {
-        const props: Record<string, any> = {};
+    _getChildrenAndProps(childrenAndProps: object) {
+        const props: Record<string, Prop> = {};
         const children: Record<string, Block> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
@@ -119,18 +125,18 @@ class Block {
         Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
     }
 
-    private _componentDidUpdate(oldProps: any, newProps: any) {
+    private _componentDidUpdate(oldProps: object, newProps: object) {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
     }
 
     // eslint-disable-next-line max-len
-    protected componentDidUpdate(oldProps: any, newProps: any) { // eslint-disable-line @typescript-eslint/no-unused-vars
+    protected componentDidUpdate(oldProps: object, newProps: object) { // eslint-disable-line @typescript-eslint/no-unused-vars
         return true;
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: object) => {
         if (!nextProps) {
             return;
         }
@@ -145,12 +151,13 @@ class Block {
     private _render() {
         const fragment = this.render();
         const newElement = fragment.firstElementChild as HTMLElement;
+        this._removeEvents();
         this._element!.replaceWith(newElement);
         this._element = newElement;
         this._addEvents();
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected compile(template: (context: Props) => string, context: Props) {
         const contextAndStubs = { ...context };
         Object.entries(this.children).forEach(([name, component]) => {
             contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
@@ -186,15 +193,15 @@ class Block {
         return this.element!;
     }
 
-    _makePropsProxy(props: any) {
+    _makePropsProxy(props: Props) {
         const self = this;
 
         return new Proxy(props, {
-            get(target, prop) {
+            get(target: Props, prop: string) {
                 const value = target[prop];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target, prop, value) {
+            set(target: Props, prop: string, value: string) {
                 const oldTarget = { ...target };
 
                 target[prop] = value; // eslint-disable-line no-param-reassign
