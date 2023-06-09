@@ -1,7 +1,9 @@
-@import './variables.pcss';
+@import url('./variables.pcss');
+
 * {
     outline: none;
 }
+
 /* Указываем box sizing */
 *,
 *::before,
@@ -9,10 +11,18 @@
   box-sizing: border-box;
 }
 
-/* Убираем внутренние отступы */
+a{
+  text-decoration: none;
+  color: var(--link-and-buttons-color);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Убираем внутренние отступы и удаляем стандартную стилизацию */
 ul[class],
 ol[class] {
   padding: 0;
+  list-style: none;
 }
 
 /* Убираем внешние отступы */
@@ -37,15 +47,9 @@ dd {
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
   line-height: var(--default-line-height);
   color: var(--default-text-color);
-}
-
-/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
-ul[class],
-ol[class] {
-  list-style: none;
 }
 
 /* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
@@ -59,7 +63,7 @@ img {
   display: block;
 }
 
-/* Указываем понятную периодичность в потоке данных у article*/
+/* Указываем понятную периодичность в потоке данных у article */
 article > * + * {
   margin-top: 1em;
 }
@@ -85,16 +89,11 @@ button{
     scroll-behavior: auto !important;
   }
 }
+
 .main{
   height: 100vh;
 }
 
-a{
-  text-decoration: none;
-  color: var(--link-and-buttons-color);
-  font-size: 14px;
-  font-weight: bold;
-}
 .circle{
   border-radius: var(--circle-border-radius);
   background: var(--circle-and-search-color);
