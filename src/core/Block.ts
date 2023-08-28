@@ -14,7 +14,7 @@ type ValidationHandler = (elem: Block, childNum: number) => (string | undefined)
 type Prop = object | string | ValidationHandler;
 type Props = { [x:string]: Prop };
 
-abstract class Block {
+class Block {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',

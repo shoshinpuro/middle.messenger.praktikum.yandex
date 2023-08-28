@@ -1,3 +1,5 @@
+import queryStringify from "../utils/queryStringify";
+
 const METHODS = {
     GET: 'GET',
     POST: 'POST',
@@ -11,18 +13,8 @@ interface Options {
     timeout: number;
 }
 type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
-function queryStringify(data: any) {
-    if (typeof data !== 'object') {
-        throw new Error('Data must be object');
-    }
-    const keys = Object.keys(data);
-    return keys.reduce(
-        (res, key, i) => `${res}${key}=${data[key]}${i < keys.length - 1 ? '&' : ''}`,
-        '?',
-    );
-}
 
-class HTTPTransport { // eslint-disable-line @typescript-eslint/no-unused-vars
+export default class HTTPTransport { // eslint-disable-line @typescript-eslint/no-unused-vars
     get: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
