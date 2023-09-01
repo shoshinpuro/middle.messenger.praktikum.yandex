@@ -1,8 +1,8 @@
-type PlainObject<T = any> = {
+type TPlainObject<T = any> = {
     [k in string]: T;
 };
 
-function isPlainObject(value: unknown): value is PlainObject {
+function isPlainObject(value: unknown): value is TPlainObject {
     return typeof value === 'object'
         && value !== null
         && value.constructor === Object
@@ -13,11 +13,11 @@ function isArray(value: unknown): value is [] {
     return Array.isArray(value);
 }
 
-function isArrayOrObject(value: unknown): value is [] | PlainObject {
+function isArrayOrObject(value: unknown): value is [] | TPlainObject {
     return isPlainObject(value) || isArray(value);
 }
 
-function isEqual(lhs: PlainObject, rhs: PlainObject) {
+function isEqual(lhs: TPlainObject, rhs: TPlainObject) {
     if (Object.keys(lhs).length !== Object.keys(rhs).length) {
         return false;
     }

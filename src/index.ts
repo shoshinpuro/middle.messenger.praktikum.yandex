@@ -5,10 +5,37 @@ import ProfilePreferences from './pages/ProfilePreferences/index';
 import EditProfile from './pages/EditProfile/index';
 import Error404 from './pages/404/index';
 import Error500 from './pages/500/index';
-import AllPages from './components/AllPages/index';
-import renderDOM from './utils/renderDOM';
+//import AllPages from './components/AllPages/index';
+//import renderDOM from './utils/renderDOM';
+import Router from './utils/router';
 
-window.addEventListener('DOMContentLoaded', () => {
+
+enum Routes {
+  Login = '/',
+  Chats = 'messenger',
+  SignUp = 'sign-up',
+  ProfilePreferences = 'settings',
+  EditProfile = 'edit-settings',
+  Error404 = '404',
+  Error500 = '500',
+}
+
+const router = new Router('#app');
+
+document.addEventListener('DOMContentLoaded',  () => {
+  router
+      .use(Routes.Login, Login)
+      .use(Routes.Chats, Chats)
+      .use(Routes.SignUp, SignUp)
+      .use(Routes.ProfilePreferences, ProfilePreferences)
+      .use(Routes.EditProfile, EditProfile)
+      .use(Routes.Error404, Error404)
+      .use(Routes.Error500, Error500)
+      .start();
+});
+
+export default router;
+/*window.addEventListener('DOMContentLoaded', () => {
     const pages = [
         { link: '/chats', label: 'Chats' },
         { link: '/login', label: 'Login' },
@@ -54,42 +81,4 @@ window.addEventListener('DOMContentLoaded', () => {
         default:
             break;
     }
-
-    /* const allPages = new AllPages({
-    pages,
-    events: {
-      click: (evt) => {
-        evt.preventDefault();
-        const path = (evt.target! as HTMLElement).getAttribute('href');
-        switch (path) {
-          case '/chats':
-            renderDOM(chatsPage);
-            break;
-          case '/login':
-            renderDOM(loginPage);
-            break;
-          case '/signUp':
-            renderDOM(signUpPage);
-            break;
-          case '/profilePreferences':
-            renderDOM(profilePreferencesPage);
-            break;
-              case '/editProfile':
-            renderDOM(editProfilePage);
-            break;
-          case '/404':
-            renderDOM(error404Page);
-            break;
-          case '/500':
-            renderDOM(error500Page);
-            break;
-          default:
-            renderDOM(allPages);
-            break;
-        }
-      }
-    }
-  }); */
-
-    // root.append(allPages.getContent()!);
-});
+});*/

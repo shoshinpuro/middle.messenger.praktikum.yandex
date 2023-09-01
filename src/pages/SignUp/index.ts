@@ -3,9 +3,14 @@ import FormButton from '../../components/FormButton/index';
 import Block from '../../core/Block';
 import template from './signUp.hbs';
 import {
-    validationEmail, validationLogin, validationName, validationPassword, validationPhone,
+    validationEmail, validationLogin, validationName,
+    validationPassword, validationPassword2, validationPhone,
 } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
+import Link from '../../components/Link';
+import router from '../../index';
+import AuthController from '../../controllers/authController';
+import { TUser } from '../../API/baseAPI';
 
 class SignUp extends Block {
     constructor() {
@@ -70,6 +75,17 @@ class SignUp extends Block {
             value: this.props.password2 as string,
             validationHandler: validationPassword,
         });
+        this.children.loginLink = new Link({
+            title: 'Sign in',
+            href: '/',
+            class: 'sign-up-form__sign-in',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('/');
+                },
+            },
+        });
         this.children.formButton = new FormButton({
             class: 'sign-up-form__submit submit',
             label: 'Register',
@@ -86,7 +102,7 @@ class SignUp extends Block {
                         'password',
                         'password2',
                     ];
-                    const formElem = document.querySelector('form') as HTMLFormElement;
+                    const formElem = document.querySelector('.sign-up-form') as HTMLFormElement;
                     formDataOutput(formElem, names);
 
                     const phone = this.children.inputPhone;
@@ -96,14 +112,19 @@ class SignUp extends Block {
                     const firstname = this.children.inputFirstname;
                     const lastname = this.children.inputLastname;
                     const password2 = this.children.inputPassword2;
-                    // const validationsResults = [];
-                    validationPhone(phone, 0);
-                    validationEmail(email, 0);
-                    validationLogin(login, 0);
-                    validationName(firstname, 0);
-                    validationName(lastname, 0);
-                    validationPassword(password, 0);
-                    validationPassword(password2, 0);
+                    let validationsResults: TUser = {};
+                    validationsResults.phone = validationPhone(phone, 0);
+                    validationsResults.email = validationEmail(email, 0);
+                    validationsResults.login = validationLogin(login, 0);
+                    validationsResults.first_name = validationName(firstname, 0);
+                    validationsResults.second_name = validationName(lastname, 0);
+                    validationsResults.password = validationPassword2(password, 0, password2);
+
+                    if(validationsResults) {
+                        AuthController.signUp(validationsResults)
+                            .then(res =>console.log(res));
+                        router.go("/settings");
+                    }
                 },
             },
         });

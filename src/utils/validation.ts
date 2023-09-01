@@ -23,6 +23,7 @@ export function validationLogin(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
+    console.log(result);
     return result;
 }
 export function validationPassword(elem: Block, childNum: number) {
@@ -39,7 +40,31 @@ export function validationPassword(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
+    console.log(result);
     return result;
+}
+export function validationPassword2(elem: Block, childNum: number, elem2: Block) {
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
+    const inputValue2 = (elem2.element?.children[childNum] as HTMLInputElement).value;
+    let result = inputValue === inputValue2;
+    if (result && validationPassword(elem, childNum)) {
+        elem2.setProps({
+            error: '',
+            value: inputValue2,
+        });
+        return inputValue2;
+    } else if(validationPassword(elem, childNum)){
+        elem2.setProps({
+            error: 'Пароли не совпадают',
+            value: inputValue2,
+        });
+    } else {
+        elem.setProps({
+            error: '8-40 символов, обязательно хотя бы одна заглавная буква и цифра',
+            value: inputValue,
+        });
+    }
+    console.log(result);
 }
 export function validationEmail(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
@@ -55,6 +80,7 @@ export function validationEmail(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
+    console.log(result);
     return result;
 }
 export function validationName(elem: Block, childNum: number) {
@@ -71,6 +97,7 @@ export function validationName(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
+    console.log(result);
     return result;
 }
 export function validationPhone(elem: Block, childNum: number) {
@@ -87,6 +114,7 @@ export function validationPhone(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
+    console.log(result);
     return result;
 }
 export function validationMessage(elem: Block, childNum: number) {

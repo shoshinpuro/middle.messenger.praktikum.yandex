@@ -1,4 +1,4 @@
-export type Indexed<T = any> = {
+export type TIndexed<T = any> = {
     [key in string]: T;
 };
 
@@ -24,7 +24,7 @@ export function queryStringify(data: any) {
     );
 }
 
-export function merge(lhs: Indexed, rhs: Indexed): Indexed {
+export function merge(lhs: TIndexed, rhs: TIndexed): TIndexed {
     for (let p in rhs) {
         if (!rhs.hasOwnProperty(p)) {
             continue;
@@ -32,7 +32,7 @@ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
         
         try {
             if (rhs[p].constructor === Object) {
-                rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
+                rhs[p] = merge(lhs[p] as TIndexed, rhs[p] as TIndexed);
             } else {
                 lhs[p] = rhs[p];
             }
@@ -44,7 +44,7 @@ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
     return lhs;
 }
 
-export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+export function set(object: TIndexed | unknown, path: string, value: unknown): TIndexed | unknown {
     if (typeof object !== 'object' || object === null) {
         return object;
     }
@@ -53,8 +53,8 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
         throw new Error('path must be string');
     }
 
-    const result = path.split('.').reduceRight<Indexed>((acc, key) => ({
+    const result = path.split('.').reduceRight<TIndexed>((acc, key) => ({
         [key]: acc,
     }), value as any);
-    return merge(object as Indexed, result);
+    return merge(object as TIndexed, result);
 }

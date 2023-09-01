@@ -17,48 +17,51 @@ export default class Router {
 
     public use(pathname: string, block: typeof Block) {
         const route = new Route(pathname, block, this._rootQuery);
+        console.log(this._rootQuery);
         this.routes.push(route);
         return this;
     }
 
     start() {
-      // Реагируем на изменения в адресной строке и вызываем перерисовку
-      window.onpopstate = (event: PopStateEvent) => {
-        const target = event.currentTarget as Window;
-        this._onRoute(target.location.pathname);
-      };
-      this._onRoute(window.location.pathname);
+        window.onpopstate = (event: PopStateEvent) => {
+            const target = event.currentTarget as Window;
+            this._onRoute(target.location.pathname);
+        };
+        this._onRoute(window.location.pathname);
     }
 
     _onRoute(pathname: string) {
-      const route = this.getRoute(pathname);
-      if (!route) {
-        console.log("ERROR")
-        return;
-      }
+        const route = this.getRoute(pathname);
+        console.log(pathname);
+        console.log(route);
+        console.log(this.routes);
+        if (!route) {
+            console.log("ERROR")
+            return;
+        }
 
-      if (this._currentRoute) {
-        this._currentRoute.leave();
-      }
-      this._currentRoute = route;
-      route.render();
+        if (this._currentRoute) {
+            this._currentRoute.leave();
+        }
+        this._currentRoute = route;
+        route.render();
     }
 
-  go(pathname: string) {
-    this._history.pushState({}, '', pathname);
-    
-    this._onRoute(pathname);
-  }
+    go(pathname: string) {
+        this._history.pushState({}, '', pathname);
 
-  back() {
-    this._history.back();
-  }
+        this._onRoute(pathname);
+    }
 
-  forward() {
-    this._history.forward();
-  }
+    back() {
+        this._history.back();
+    }
+
+    forward() {
+        this._history.forward();
+    }
 
     getRoute(pathname: string) {
-      return this.routes.find(route => route.match(pathname));
+        return this.routes.find(route => route.match(pathname) || route.match(pathname.slice(1)));
     }
 }

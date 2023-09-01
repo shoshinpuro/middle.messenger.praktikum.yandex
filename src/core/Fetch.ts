@@ -8,9 +8,9 @@ const METHODS = {
 };
 interface Options {
     data: any;
-    method: string;
-    headers?: object;
-    timeout: number;
+    method?: string;
+    headers?: { [key: string]: string };
+    timeout?: number;
 }
 type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
 
@@ -21,26 +21,26 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
         method: METHODS.GET,
     }) => {
         options.data = queryStringify(options.data);// eslint-disable-line no-param-reassign
-        return this.request(url + queryStringify(options.data), { ...options }, options.timeout);
+        return this.request(url + queryStringify(options.data), { ...options , method: METHODS.GET});
     };
 
     post: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.POST,
-    }) => this.request(url, { ...options }, options.timeout);
+    }) => this.request(url, {...options, method: METHODS.POST});
 
     put: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.PUT,
-    }) => this.request(url, { ...options }, options.timeout);
+    }) => this.request(url, {...options, method: METHODS.PUT});
 
     delete: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.DELETE,
-    }) => this.request(url, { ...options }, options.timeout);
+    }) => this.request(url, {...options, method: METHODS.DELETE});
 
     request = ( // eslint-disable-line class-methods-use-this
         url: string,
@@ -63,9 +63,19 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
                     ? `${url}${queryStringify(data)}`
                     : url,
             );
+            
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status < 400) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
 
             Object.keys(headers).forEach((key) => {
-                xhr.setRequestHeader(key, (headers as any)[(key as any)]);
+                xhr.setRequestHeader(key, headers[key]);
             });
 
             xhr.onload = function () { //  eslint-disable-line func-names
@@ -77,11 +87,16 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
 
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
+            xhr.withCredentials = true;
+            xhr.responseType = 'json';
 
             if (isGet || !data) {
                 xhr.send();
-            } else {
+            } else if (data instanceof FormData){
                 xhr.send(data);
+            } else {
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(data));
             }
         });
     };
