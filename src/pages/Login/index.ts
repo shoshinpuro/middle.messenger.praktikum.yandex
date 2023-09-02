@@ -60,7 +60,7 @@ class Login extends Block {
                     validationsResults.login = validationLogin(login, 0);
                     validationsResults.password = validationPassword(password, 0);
                     
-                    if (validationsResults) {
+                    if (!Object.values(validationsResults).includes(undefined!)) {
                         AuthController.signIn(validationsResults)
                             .then(() => ChatController.getChats());
                     }

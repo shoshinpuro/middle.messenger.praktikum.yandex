@@ -30,7 +30,7 @@ class FormInput extends Block {
             class: this.props.classInput as string,
             events: {
                 focus: () => {
-                    console.log('focus'); // eslint-disable-line no-console
+                    //console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
                     const validationFunc = this.props.validationHandler as ValidationHandler;

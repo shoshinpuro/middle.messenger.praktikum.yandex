@@ -1,21 +1,17 @@
 import Block from '../../core/Block';
-import template from './chatLi.hbs';
+import template from './avatar.hbs';
 import Image from '../Image';
 import img from '../../assets/img/AmandaSekar.png';
 
-interface ChatLiProps {
-    link: string;
+interface AvatarProps {
     first_name: string;
     second_name: string;
-    sender: string;
-    lastMessage: string;
-    time: string;
-    messagesCount?: string;
+    link?: string;
     events?: {};
 }
 
 class ChatLi extends Block {
-    constructor(props: ChatLiProps) {
+    constructor(props: AvatarProps) {
         super(props);
     }
 

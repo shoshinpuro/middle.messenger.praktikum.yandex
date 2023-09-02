@@ -20,7 +20,6 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
         timeout: 5000,
         method: METHODS.GET,
     }) => {
-        options.data = queryStringify(options.data);// eslint-disable-line no-param-reassign
         return this.request(url + queryStringify(options.data), { ...options , method: METHODS.GET});
     };
 

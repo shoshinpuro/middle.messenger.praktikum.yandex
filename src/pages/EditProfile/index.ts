@@ -6,6 +6,10 @@ import {
     validationEmail, validationLogin, validationName, validationPhone,
 } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
+import Link from '../../components/Link';
+import router from '../../index';
+import { TUser } from '../../API/baseAPI';
+import UserController from '../../controllers/userController';
 
 class EditProfile extends Block {
     constructor() {
@@ -56,6 +60,17 @@ class EditProfile extends Block {
             isEdit,
             validationHandler: validationName,
         });
+        this.children.goBackLink = new Link({
+            href: '/settings',
+            goBack: true,
+            class: 'go-back-btn__a',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.back();
+                },
+            },
+        });
         this.children.formButton = new FormButton({
             class: 'profile-data-form__submit submit',
             label: 'Save changes',
@@ -77,17 +92,25 @@ class EditProfile extends Block {
                     const phone = this.children.dataUnitLi1;
                     const email = this.children.dataUnitLi2;
                     const login = this.children.dataUnitLi3;
-                    const firstname = this.children.dataUnitLi4;
-                    const lastname = this.children.dataUnitLi5;
+                    const first_name = this.children.dataUnitLi4;
+                    const second_name = this.children.dataUnitLi5;
                     const chatName = this.children.dataUnitLi6;
-                    // const validationsResults = [];
-                    validationEmail(email, 1);
-                    validationPhone(phone, 1);
-                    validationEmail(email, 1);
-                    validationLogin(login, 1);
-                    validationName(firstname, 1);
-                    validationName(lastname, 1);
-                    validationName(chatName, 1);
+                    let validationsResults: TUser = {};
+                    
+                    validationsResults.phone = validationPhone(phone, 1);
+                    validationsResults.email = validationEmail(email, 1);
+                    validationsResults.login = validationLogin(login, 1);
+                    validationsResults.first_name = validationName(first_name, 1);
+                    validationsResults.second_name = validationName(second_name, 1);
+                    validationsResults.display_name = validationName(chatName, 1);
+                    
+                    if(!Object.values(validationsResults).includes(undefined!)) {
+                        UserController.updateProfile(validationsResults)
+                            .then(res => {
+                                console.log(res);
+                            });
+                        router.go("/settings");
+                    }
                 },
             },
         });

@@ -47,7 +47,7 @@ class SignUp extends Block {
             name: 'first_name',
             label: 'Firstname',
             classInput: 'sign-up-form__firstname-input  form-input',
-            value: this.props.firstname as string,
+            value: this.props.first_name as string,
             validationHandler: validationName,
         });
         this.children.inputLastname = new FormInput({
@@ -55,7 +55,7 @@ class SignUp extends Block {
             name: 'second_name',
             label: 'Lastname',
             classInput: 'sign-up-form__lastname-input  form-input',
-            value: this.props.lastname as string,
+            value: this.props.second_name as string,
             validationHandler: validationName,
 
         });
@@ -109,20 +109,22 @@ class SignUp extends Block {
                     const email = this.children.inputEmail;
                     const login = this.children.inputLogin;
                     const password = this.children.inputPassword;
-                    const firstname = this.children.inputFirstname;
-                    const lastname = this.children.inputLastname;
+                    const first_name = this.children.inputFirstname;
+                    const second_name = this.children.inputLastname;
                     const password2 = this.children.inputPassword2;
                     let validationsResults: TUser = {};
                     validationsResults.phone = validationPhone(phone, 0);
                     validationsResults.email = validationEmail(email, 0);
                     validationsResults.login = validationLogin(login, 0);
-                    validationsResults.first_name = validationName(firstname, 0);
-                    validationsResults.second_name = validationName(lastname, 0);
+                    validationsResults.first_name = validationName(first_name, 0);
+                    validationsResults.second_name = validationName(second_name, 0);
                     validationsResults.password = validationPassword2(password, 0, password2);
-
-                    if(validationsResults) {
+            
+                    if(!Object.values(validationsResults).includes(undefined!)) {
                         AuthController.signUp(validationsResults)
-                            .then(res =>console.log(res));
+                            .then(res => {
+                                console.log(res);   
+                            });
                         router.go("/settings");
                     }
                 },

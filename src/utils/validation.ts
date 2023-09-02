@@ -76,7 +76,7 @@ export function validationEmail(elem: Block, childNum: number) {
         });
     } else {
         elem.setProps({
-            error: 'введите корректный email',
+            error: 'Введите корректный email',
             value: inputValue,
         });
     }
@@ -110,7 +110,7 @@ export function validationPhone(elem: Block, childNum: number) {
         });
     } else {
         elem.setProps({
-            error: 'введите корректный номер телефона',
+            error: 'Введите корректный номер телефона',
             value: inputValue,
         });
     }
@@ -127,3 +127,73 @@ export function validationMessage(elem: Block, childNum: number) {
     }
     return result;
 }
+
+/*export function validationForm(elems: Array<Block>, childNum: number, className: string) {
+    const resultObject = {};
+    //const inputs = document.querySelectorAll("."+className);
+    elems.forEach(input => {
+        const inputValue = (input.element?.children[childNum] as HTMLInputElement).value;
+        const inputName = (input.element?.children[childNum] as HTMLInputElement).name;
+        
+        switch (inputName) {
+            case "first_name":
+            case "second_name":
+            case "display_name":
+                const result = inputValue.match(regexObj.name)?.[0];
+                resultObject[inputName] = result;
+                currentValidation = validationObj.name;
+                break;
+            case "password2":
+            
+                break;
+            default:
+                currentValidation = (validationObj as any)[key];
+                break;
+        }
+        const result = inputValue.match(regexObj.phone)?.[0];
+    });
+    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
+    const result = inputValue.match(regexObj.phone)?.[0];
+    if (result) {
+        elem.setProps({
+            error: '',
+            value: inputValue,
+        });
+    } else {
+        elem.setProps({
+            error: 'Введите корректный номер телефона',
+            value: inputValue,
+        });
+    }
+    console.log(result);
+    return result;
+    for (const key in formData) {
+        let currentValidation;
+        switch (key) {
+            case "first_name":
+            case "second_name":
+            case "display_name":
+                currentValidation = validationObj.name;
+                break;
+            case "password2":
+            
+                break;
+            default:
+                currentValidation = (validationObj as any)[key];
+                break;
+        }
+        const result = formData[key].match(currentValidation[0])?.[0];
+        (resultObject as any)[key] = result;
+        if (result) {
+            elem.setProps({
+                error: '',
+                value: formData[key],
+            });
+        } else {
+            elem.setProps({
+                error: '3-20 символов, латиница, допустимы -_ и цифры',
+                value: inputValue,
+            });
+        }
+    }
+}*/

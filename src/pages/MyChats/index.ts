@@ -4,6 +4,8 @@ import Image from '../../components/Image';
 import imgAvatar from '../../assets/img/avatar.png';
 import Block from '../../core/Block';
 import template from './myChats.hbs';
+import Link from '../../components/Link';
+import router from '../..';
 
 class Chats extends Block {
     constructor() {
@@ -14,15 +16,23 @@ class Chats extends Block {
         this.children.conversationMessages = new ConversationMessages({
 
         });
-        this.children.image = new Image({
+        this.children.profileLink = new Link({
+            href: '/settings',
+            class: 'preferences',
             src: imgAvatar,
             alt: 'user photo',
-            class: 'user-avatar__img',
+            classImg: 'user-avatar__img',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('/settings');
+                }
+            }
         });
         this.children.chatLi1 = new ChatLi({
             link: '#',
-            firstname: 'Amanda',
-            lastname: 'Sekar',
+            first_name: 'Amanda',
+            second_name: 'Sekar',
             sender: '',
             lastMessage: 'Пока всё. Остальное залью на диск и отправлю позже.',
             time: '18:49',
@@ -30,8 +40,8 @@ class Chats extends Block {
         });
         this.children.chatLi2 = new ChatLi({
             link: '#',
-            firstname: 'Marina',
-            lastname: 'Terekh',
+            first_name: 'Marina',
+            second_name: 'Terekh',
             sender: '',
             lastMessage: 'Image',
             time: '16:08',
@@ -39,8 +49,8 @@ class Chats extends Block {
         });
         this.children.chatLi3 = new ChatLi({
             link: '#',
-            firstname: 'Andrew',
-            lastname: 'Kirski',
+            first_name: 'Andrew',
+            second_name: 'Kirski',
             sender: 'You:',
             lastMessage: 'Sticker',
             time: '12:00',

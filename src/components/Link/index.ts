@@ -2,9 +2,16 @@ import Block from '../../core/Block';
 import template from './link.hbs';
 
 interface LinkProps {
-    title: string;
     href: string;
     class?: string;
+    title?: string;
+    src?: string;
+    alt?: string;
+    classImg?: string;
+    path?: string;
+    path2?: string;
+    fill?: string;
+    goBack?: boolean;
     events?: {
       click?: (evt: PointerEvent) => void;
   }
