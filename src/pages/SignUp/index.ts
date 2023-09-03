@@ -93,7 +93,7 @@ class SignUp extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const names = [
+                   /* const names = [
                         'phone',
                         'email',
                         'login',
@@ -103,7 +103,7 @@ class SignUp extends Block {
                         'password2',
                     ];
                     const formElem = document.querySelector('.sign-up-form') as HTMLFormElement;
-                    formDataOutput(formElem, names);
+                    formDataOutput(formElem, names);*/
 
                     const phone = this.children.inputPhone;
                     const email = this.children.inputEmail;

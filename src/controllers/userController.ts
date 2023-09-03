@@ -20,7 +20,10 @@ class UserController {
         }
 
     }
-    async changePassword(data: TUser) {
+    async changePassword(data: {
+        oldPassword: string,
+        newPassword: string
+      }) {
         try {
             await this.UserAPI.changePassword(data)
                 .then(() => router.go("/settings"));

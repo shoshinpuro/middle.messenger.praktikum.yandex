@@ -2,14 +2,17 @@ import Block from '../../core/Block';
 import template from './editProfile.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import FormButton from '../../components/FormButton';
+import Link from '../../components/Link';
+import Avatar from '../../components/Avatar';
+import Popup from '../../components/Popup';
 import {
     validationEmail, validationLogin, validationName, validationPhone,
 } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
-import Link from '../../components/Link';
 import router from '../../index';
 import { TUser } from '../../API/baseAPI';
 import UserController from '../../controllers/userController';
+import AuthController from '../../controllers/authController';
 
 class EditProfile extends Block {
     constructor() {
@@ -17,6 +20,24 @@ class EditProfile extends Block {
     }
 
     protected init():void {
+
+        this.children.changeAvatar = new Avatar({
+            first_name: 'ivan',
+            second_name: 'ivanov',
+            srcImg: '',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    this.children.popupAvatar.show();
+                },
+            },
+        });
+
+        this.children.popupAvatar = new Popup({
+            header: 'Set a new avatar',
+            isAvatar: true,
+        });
+
         const isEdit = true;
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
@@ -60,6 +81,7 @@ class EditProfile extends Block {
             isEdit,
             validationHandler: validationName,
         });
+
         this.children.goBackLink = new Link({
             href: '/settings',
             goBack: true,
@@ -71,6 +93,7 @@ class EditProfile extends Block {
                 },
             },
         });
+        
         this.children.formButton = new FormButton({
             class: 'profile-data-form__submit submit',
             label: 'Save changes',

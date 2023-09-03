@@ -5,6 +5,7 @@ interface InputProps {
     name: string;
     value: string;
     type: string;
+    accept?: string;
     class?: string;
     events?: {
         focus?: () => void;

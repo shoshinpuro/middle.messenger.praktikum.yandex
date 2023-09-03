@@ -2,8 +2,11 @@ import Block from '../../core/Block';
 import template from './profilePreferences.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import Link from '../../components/Link';
+import Avatar from '../../components/Avatar';
+import Popup from '../../components/Popup';
 import router from '../../index';
 import AuthController from '../../controllers/authController';
+import UserController from '../../controllers/userController';
 
 class ProfilePreferences extends Block {
     constructor() {
@@ -12,12 +15,29 @@ class ProfilePreferences extends Block {
     }
 
     protected init():void {
-        const user = this.props.user;
+        /*const user = this.props.user;
         console.log(user);
         if (!user) {
             return;
-        }
+        }*/
         //AuthController.updateProfile
+        
+        this.children.popupPassword = new Popup({
+            header: 'Change password',
+            isAvatar: false
+        });
+
+        this.children.avatar = new Avatar({
+            first_name: 'ivan',
+            second_name: 'ivanov',
+            srcImg: '',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
 
         this.children.goBackLink = new Link({
             href: '/messages',
@@ -112,7 +132,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    //open modalka
+                    this.children.popupPassword.show();
                 },
             },
         });

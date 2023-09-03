@@ -5,8 +5,9 @@ import Input from '../Input';
 interface InputProps {
     name: string;
     label: string;
-    value: string;
+    value?: string;
     type: string;
+    accept?: string;
     classInput?: string;
     error?: string;
     events?: {
@@ -28,6 +29,7 @@ class FormInput extends Block {
             name: this.props.name as string,
             value: this.props.value as string,
             class: this.props.classInput as string,
+            accept: this.props?.accept as string,
             events: {
                 focus: () => {
                     //console.log('focus'); // eslint-disable-line no-console

@@ -8,6 +8,7 @@ import Error500 from './pages/500/index';
 //import AllPages from './components/AllPages/index';
 //import renderDOM from './utils/renderDOM';
 import Router from './utils/router';
+//import AuthController from './controllers/authController';
 
 
 enum Routes {

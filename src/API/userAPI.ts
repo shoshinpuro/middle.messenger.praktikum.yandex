@@ -9,7 +9,10 @@ class UserAPI {
     updateProfile(data: TUser) {
         return this.http.put(url + '/user/profile', { data });
     }
-    changePassword(data: TUser) {
+    changePassword(data: {
+        oldPassword: string,
+        newPassword: string
+      }) {
         return this.http.put(url + '/user/password', { data });
     }
     setAvatar(data: any) {

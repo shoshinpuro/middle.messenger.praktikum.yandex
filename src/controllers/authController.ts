@@ -12,10 +12,19 @@ class AuthController {
         try {
             await this.AuthAPI.signIn(data)
                 .then(() => this.getUser())
-                .finally(() => router.go("/messenger"));
+                .then(() => router.go("/messenger"))
+                .catch(function (err) {
+                    throw err;
+                    console.log(err); 
+                });
         }
         catch (error) {
             console.log(error);
+            if ((error as any)?.reason === 'User already in system') {
+                console.log('catch user in system error')
+                await this.getUser()
+                .then(() => router.go("/messenger"))
+            }
         }
     }
     async signUp(data: TUser) {

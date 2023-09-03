@@ -6,17 +6,17 @@ import img from '../../assets/img/AmandaSekar.png';
 interface AvatarProps {
     first_name: string;
     second_name: string;
-    link?: string;
+    srcImg?: string;
     events?: {};
 }
 
-class ChatLi extends Block {
+class Avatar extends Block {
     constructor(props: AvatarProps) {
         super(props);
     }
 
     init() {
-        this.children.image = new Image({ src: img, alt: 'user photo', class: 'user-avatar__img' });
+        this.children.image = new Image({ src: this.props?.srcImg as string || img, alt: 'user photo', class: 'user-info__avatar-img' });
     }
 
     render() {
@@ -24,4 +24,4 @@ class ChatLi extends Block {
     }
 }
 
-export default ChatLi;
+export default Avatar;
