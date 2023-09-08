@@ -41,7 +41,7 @@ export default class Router {
             return;
         }
 
-        if (this._currentRoute) {
+        if (this._currentRoute && this._currentRoute !== route) {
             this._currentRoute.leave();
         }
         this._currentRoute = route;

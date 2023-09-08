@@ -12,7 +12,7 @@ import { TUser } from '../../API/baseAPI';
 
 class Login extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {
@@ -53,8 +53,8 @@ class Login extends Block {
                     const names = ['login', 'password'];
                     const formElem = document.querySelector('form') as HTMLFormElement;
                     formDataOutput(formElem, names);
-                    const login = this.children.inputLogin;
-                    const password = this.children.inputPassword;
+                    const login = this.children.inputLogin as Block;
+                    const password = this.children.inputPassword as Block;
 
                     let validationsResults: TUser = {};
                     validationsResults.login = validationLogin(login, 0);

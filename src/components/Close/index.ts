@@ -7,7 +7,7 @@ interface CloseProps {
   }
 }
 
-export default class Close extends Block {
+export default class Close extends Block<CloseProps> {
     constructor(props: CloseProps) {
         super(props);
     }

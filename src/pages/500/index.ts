@@ -4,7 +4,7 @@ import template from './500.hbs';
 
 class Error500 extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {

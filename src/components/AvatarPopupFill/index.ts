@@ -10,7 +10,7 @@ interface AvatarPopupFillProps {
     events?: {};
 }
 
-class AvatarPopupFill extends Block {
+class AvatarPopupFill extends Block<AvatarPopupFillProps> {
     constructor(props: AvatarPopupFillProps) {
         super(props);
     }

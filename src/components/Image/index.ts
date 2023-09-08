@@ -8,7 +8,7 @@ interface ImageProps {
     events?: object;
 }
 
-class Image extends Block {
+class Image extends Block<ImageProps> {
     constructor(props: ImageProps) {
         super(props);
     }

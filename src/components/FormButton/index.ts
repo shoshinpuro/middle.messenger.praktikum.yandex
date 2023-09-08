@@ -10,7 +10,7 @@ interface ButtonProps {
     };
 }
 
-class FormButton extends Block {
+class FormButton extends Block<ButtonProps> {
     constructor(props: ButtonProps) {
         super(props);
     }

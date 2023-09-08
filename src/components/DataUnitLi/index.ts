@@ -15,12 +15,12 @@ interface DataUnitLiProps {
 
 type ValidationHandler = (elem: Block, childNum: number) => string;
 
-class DataUnitLi extends Block {
+class DataUnitLi extends Block<DataUnitLiProps> {
     constructor(props: DataUnitLiProps) {
         super(props);
     }
-
     init() {
+       // console.log(this.props);
         if (this.props.isEdit) {
             const dataUnitLiInputClass = 'profile-data-form__input  form-input';
             this.children.input = new Input({

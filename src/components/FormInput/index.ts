@@ -18,7 +18,7 @@ interface InputProps {
 
 type ValidationHandler = (elem: Block, childNum: number) => string;
 
-class FormInput extends Block {
+class FormInput extends Block<InputProps> {
     constructor(props: InputProps) {
         super(props);
     }

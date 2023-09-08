@@ -11,7 +11,7 @@ interface PasswordPopupFillProps {
     events?: {};
 }
 
-class PasswordPopupFill extends Block {
+class PasswordPopupFill extends Block<PasswordPopupFillProps> {
     constructor(props: PasswordPopupFillProps) {
         super(props);
     }
@@ -21,14 +21,12 @@ class PasswordPopupFill extends Block {
             name: 'old-password',
             label: 'Old password',
             classInput: 'password-form__password-input change-password__input form-input',
-            value: this.props.password as string,
         });
         this.children.newPasswordInput = new FormInput({ 
             type: 'password',
             name: 'password',
             label: 'New password',
             classInput: 'sign-up-form__password-input change-password__input form-input',
-            value: this.props.password as string,
             validationHandler: validationPassword,
         });
         this.children.newPassword2Input = new FormInput({ 
@@ -36,7 +34,6 @@ class PasswordPopupFill extends Block {
             name: 'password2',
             label: 'New password (again)',
             classInput: 'sign-up-form__password-input change-password__input form-input',
-            value: this.props.password as string,
             validationHandler: validationPassword,
         });
         this.children.confirmButton = new FormButton({
@@ -47,8 +44,8 @@ class PasswordPopupFill extends Block {
                 click : (evt: PointerEvent) => {
                     evt.preventDefault();
                     const data = {oldPassword: '', newPassword: ''};
-                    const oldPassword = validationPassword( this.children.oldPasswordInput, 0);
-                    const newPassword = validationPassword2( this.children.newPasswordInput, 0,  this.children.newPassword2Input);
+                    const oldPassword = validationPassword( this.children.oldPasswordInput as Block, 0);
+                    const newPassword = validationPassword2( this.children.newPasswordInput as Block, 0,  this.children.newPassword2Input as Block);
                     if(newPassword && oldPassword) {
                         console.log(newPassword);
                         data.oldPassword = oldPassword;

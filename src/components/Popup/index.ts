@@ -2,6 +2,7 @@ import Block from '../../core/Block';
 import template from './popup.hbs';
 import AvatarPopupFill from '../AvatarPopupFill';
 import PasswordPopupFill from '../PasswordPopupFill';
+import ChatPopupFill from '../ChatPopupFill';
 import Close from '../Close';
 
 interface PopupProps {
@@ -15,7 +16,7 @@ interface PopupProps {
     }
 }
 
-export default class Popup extends Block {
+export default class Popup extends Block<PopupProps> {
     constructor(props: PopupProps) {
         super(props);
         this.hide();
@@ -36,7 +37,14 @@ export default class Popup extends Block {
                 error: this.props?.error as string
             });
         } else if (this.props?.isChats){
-            
+            this.children.ChatPopupFill = new ChatPopupFill({
+                events: {
+                    click: (evt: PointerEvent) => {
+                        evt.preventDefault();
+                        this.hide()                    
+                    }
+                  }
+            })
         } else {
             this.children.PasswordPopupFill = new PasswordPopupFill({
                 error: this.props?.error as string

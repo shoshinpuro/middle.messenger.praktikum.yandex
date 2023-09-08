@@ -13,7 +13,7 @@ interface InputProps {
     }
 }
 
-class Input extends Block {
+class Input extends Block<InputProps> {
     constructor(props: InputProps) {
         super(props);
     }

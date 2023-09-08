@@ -9,15 +9,16 @@ interface LinkProps {
     alt?: string;
     classImg?: string;
     path?: string;
+    classWrap?: string;
     path2?: string;
     fill?: string;
     goBack?: boolean;
     events?: {
       click?: (evt: PointerEvent) => void;
-  }
+    }
 }
 
-export default class Link extends Block {
+export default class Link extends Block<LinkProps> {
     constructor(props: LinkProps) {
         super(props);
     }

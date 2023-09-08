@@ -2,6 +2,7 @@
 import EventBus from "../core/EventBus";
 import { TIndexed, set } from "./utilFunctions";
 import isEqual from "./isEqual";
+import Block from "../core/Block";
 
 export enum StoreEvents {
     Updated = 'updated',
@@ -24,17 +25,21 @@ export class Store extends EventBus {
 const store = new Store();
 console.log(store.getState());
 
-export  function connect(mapStateToProps: (state: TIndexed) => TIndexed) {
-    return function(Component: any) {
-        return class extends Component {
-            constructor(tag: string, props: any) {
+export  function connect(mapStateToProps: (state: TIndexed) => any) {
+    return function(Component: typeof Block) {
+        return class NewComponent  extends Component {
+            constructor(props: any) {
                 let state = mapStateToProps(store.getState());
-                super(tag,{ ...props, ...state });
-                store.on('updated', () => {
+                console.log(store);
+                console.log(state);
+                super({ ...props, ...state });
+                store.on(StoreEvents.Updated, () => {
                     const newState = mapStateToProps(store.getState());
-                    if (!isEqual(state, newState)) {
-                        this.setProps(store.getState());
-                    }
+                    console.log(state);
+                    console.log(newState);
+                    //if (isEqual(state, newState)) {
+                        this.setProps({...newState});
+                    //}
                     state = newState;
                 });
             }

@@ -7,30 +7,22 @@ import Popup from '../../components/Popup';
 import router from '../../index';
 import AuthController from '../../controllers/authController';
 import UserController from '../../controllers/userController';
+import { connect } from '../../utils/store';
+import url from '../../API/baseAPI';
 
 class ProfilePreferences extends Block {
-    constructor() {
-        super();
+    constructor(props: any) {
+        super({...props});
         AuthController.getUser();
     }
 
-    protected init():void {
-        /*const user = this.props.user;
-        console.log(user);
-        if (!user) {
-            return;
-        }*/
+    init():void {
         //AuthController.updateProfile
-        
-        this.children.popupPassword = new Popup({
-            header: 'Change password',
-            isAvatar: false
-        });
-
+        const avaSrc = this.props.avatar?`${url}/resources${this.props.avatar}`:''
         this.children.avatar = new Avatar({
-            first_name: 'ivan',
-            second_name: 'ivanov',
-            srcImg: '',
+            first_name: this.props.first_name as string,
+            second_name:  this.props.second_name as string,
+            srcImg: avaSrc,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -39,10 +31,30 @@ class ProfilePreferences extends Block {
             },
         });
 
+        this.children.popupPassword = new Popup({
+            header: 'Change password',
+            isAvatar: false
+        });
+
+        console.log(this.props);
+        console.log(this.props.first_name);
+        /*this.children.avatar = new Avatar({
+            first_name: this.props.user?.first_name || "",
+            second_name: this.props.user?.first_name || "",
+            srcImg: `https://ya-praktikum.tech/api/v2/resources/${this.props.user?.avatar}`,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });*/
+
         this.children.goBackLink = new Link({
             href: '/messages',
             goBack: true,
             class: 'go-back-btn__a',
+            classWrap: 'action__icon',
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -52,7 +64,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
-            textValue: '',
+            textValue: this.props.phone as string,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -62,7 +74,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi2 = new DataUnitLi({
             header: 'Email',
-            textValue: 'ivanivanov@ya.ru',
+            textValue: this.props.email as string,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -72,7 +84,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi3 = new DataUnitLi({
             header: 'Login',
-            textValue: 'ivanivanov',
+            textValue: this.props.login as string,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -82,7 +94,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi4 = new DataUnitLi({
             header: 'Firstname',
-            textValue: 'Ivan',
+            textValue: this.props.first_name as string,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -92,7 +104,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi5 = new DataUnitLi({
             header: 'Lastname',
-            textValue: 'Ivanov',
+            textValue: this.props.second_name as string,
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -102,7 +114,7 @@ class ProfilePreferences extends Block {
         });
         this.children.dataUnitLi6 = new DataUnitLi({
             header: 'Name in chats',
-            textValue: 'Ivan',
+            textValue: this.props.display_name as string || '',
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
@@ -163,13 +175,92 @@ class ProfilePreferences extends Block {
                 },
             }
         });
-        
     }
 
+    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+        /*(this.children.avatar as Avatar).setProps({
+          photo:
+            newProps.avatar === null
+              ? '../../static/images/default-ava.svg'
+              : `https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}`,
+        });*/
+
+        this.children.dataUnitLi1 = new DataUnitLi({
+            header: 'Phone number',
+            textValue: newProps.phone as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        this.children.dataUnitLi2 = new DataUnitLi({
+            header: 'Email',
+            textValue: newProps.email as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        this.children.dataUnitLi3 = new DataUnitLi({
+            header: 'Login',
+            textValue: newProps.login as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        this.children.dataUnitLi4 = new DataUnitLi({
+            header: 'Firstname',
+            textValue: newProps.firstname as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        this.children.dataUnitLi5 = new DataUnitLi({
+            header: 'Lastname',
+            textValue: newProps.lastname as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        this.children.dataUnitLi6 = new DataUnitLi({
+            header: 'Name in chats',
+            textValue: newProps.displayname as string,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go('edit-settings');
+                },
+            },
+        });
+        return true;
+    }
     protected render(): DocumentFragment {
+        console.log(this.props);
+        console.log(this.props.avatar);
         this.init();
         return this.compile(template, this.props);
     }
+
 }
 
-export default ProfilePreferences;
+
+function mapStateToProps(state: any) {
+    return state.user ?? [];
+}
+
+const withUser = connect(mapStateToProps);
+const ProfilePage = withUser(ProfilePreferences as typeof Block);
+export default ProfilePage;

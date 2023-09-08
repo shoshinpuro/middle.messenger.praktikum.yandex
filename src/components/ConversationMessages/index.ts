@@ -7,7 +7,7 @@ interface ConversationMessagesProps {
     events?: object;
 }
 
-class ConversationMessages extends Block {
+class ConversationMessages extends Block<ConversationMessagesProps> {
     constructor(props: ConversationMessagesProps) {
         super(props);
     }

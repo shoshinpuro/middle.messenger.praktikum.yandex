@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
+import { TIndexed } from '../utils/utilFunctions';
+import { ChatLiProps } from '../components/ChatLi';
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": [
     "_getChildrenAndProps",
@@ -10,11 +12,9 @@ import EventBus from './EventBus';
     "render"
 ] }] */
 
-type ValidationHandler = (elem: Block, childNum: number) => (string | undefined);
-type Prop = object | string | ValidationHandler;
-type Props = { [x:string]: Prop };
 
-class Block {
+
+class Block<P extends Record<string, any> = any> {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -27,11 +27,11 @@ class Block {
     private _element: HTMLElement | null = null;
 
     // eslint-disable-next-line max-len
-    protected props: Props;
+    protected props: P;
 
-    public children: Record<string, Block>;
+    public children: Record<string, Block> | Record<string, Block[]>;
 
-    _meta: { props: object };
+    
 
     private eventBus: () => EventBus;
 
@@ -41,14 +41,12 @@ class Block {
    *
    * @returns {void}
    */
-    constructor(propsWithChildren = {}) {
+    constructor(propsWithChildren: P) {
         const eventBus = new EventBus();
 
         const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
-        this._meta = {
-            props,
-        };
+        
 
         this.children = children;
         this.props = this._makePropsProxy(props);
@@ -60,9 +58,12 @@ class Block {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _getChildrenAndProps(childrenAndProps: object) {
-        const props: Record<string, Prop> = {};
-        const children: Record<string, Block> = {};
+    _getChildrenAndProps(childrenAndProps: P): {
+        props: P;
+        children: Record<string, Block> | Record<string, Block[]>;
+      } {
+        const props: Record<string, unknown> = {};
+        const children: Record<string, Block> | Record<string, Block[]> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
             if (value instanceof Block) {
@@ -72,11 +73,11 @@ class Block {
             }
         });
 
-        return { props, children };
+        return { props: props as P, children };
     }
 
     _addEvents() {
-        const { events = {} } = this.props as { events: Record<string, () =>void> };
+        const { events = {} } = this.props as P & { events: Record<string, () =>void> };
 
         Object.keys(events).forEach((eventName) => {
             this._element?.addEventListener(eventName, events[eventName]);
@@ -84,7 +85,7 @@ class Block {
     }
 
     _removeEvents() {
-        const { events = {} } = this.props as { events: Record<string, () =>void> };
+        const { events = {} } = this.props as P & { events: Record<string, () =>void> };
 
         Object.keys(events).forEach((eventName) => {
             this._element?.removeEventListener(eventName, events[eventName]);
@@ -125,14 +126,14 @@ class Block {
         Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
     }
 
-    private _componentDidUpdate(oldProps: object, newProps: object) {
+    private _componentDidUpdate(oldProps: P, newProps: P) {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
     }
 
     // eslint-disable-next-line max-len
-    protected componentDidUpdate(oldProps: object, newProps: object) { // eslint-disable-line @typescript-eslint/no-unused-vars
+    protected componentDidUpdate(oldProps: P, newProps: P) { // eslint-disable-line @typescript-eslint/no-unused-vars
         return true;
     }
 
@@ -157,31 +158,46 @@ class Block {
         this._addEvents();
     }
 
-    protected compile(template: (context: Props) => string, context: Props) {
+    protected compile(template: (context: any) => string, context: any) {
         const contextAndStubs = { ...context };
+    
         Object.entries(this.children).forEach(([name, component]) => {
-            contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+          contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
+          if (Array.isArray(component)) {
+            contextAndStubs[name] = component.map(
+              (child) => `<div data-id='${child.id}'></div>`
+            );
+          } else {
+            contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
+          }
         });
-
+    
         const html = template(contextAndStubs);
-
+    
         const temp = document.createElement('template');
-
+    
         temp.innerHTML = html;
-
-        Object.entries(this.children)
-            .forEach(([_, component]) => { // eslint-disable-line @typescript-eslint/no-unused-vars
-                const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-                if (!stub) {
-                    return;
-                }
-
-                component.getContent()?.append(...Array.from(stub.childNodes));
-
-                stub.replaceWith(component.getContent()!);
-            });
-
+    
+        const replaceStub = (component: Block) => {
+          const stub = temp.content.querySelector(`[data-id='${component.id}']`);
+    
+          if (!stub) {
+            return;
+          }
+    
+          component.getContent()?.append(...Array.from(stub.childNodes));
+    
+          stub.replaceWith(component.getContent()!);
+        };
+    
+        Object.entries(this.children).forEach(([_, component]) => {
+          if (Array.isArray(component)) {
+            component.forEach(replaceStub);
+          } else {
+            replaceStub(component);
+          }
+        });
+    
         return temp.content;
     }
 
@@ -193,18 +209,18 @@ class Block {
         return this.element!;
     }
 
-    _makePropsProxy(props: Props) {
+    _makePropsProxy(props: P) {
         const self = this;
 
         return new Proxy(props, {
-            get(target: Props, prop: string) {
+            get(target, prop: string) {
                 const value = target[prop];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target: Props, prop: string, value: string) {
+            set(target, prop: string, value) {
                 const oldTarget = { ...target };
 
-                target[prop] = value; // eslint-disable-line no-param-reassign
+                target[prop as keyof P] = value; // eslint-disable-line no-param-reassign
 
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;

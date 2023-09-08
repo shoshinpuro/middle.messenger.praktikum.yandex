@@ -20,9 +20,10 @@ class Route {
     }
 
     leave() {
-        if (this._block) {
+        /*if (this._block) {
             this._block.hide();
-        }
+        }*/
+        this._block = null;
     }
 
     match(pathname: string) {
@@ -31,7 +32,7 @@ class Route {
 
     render() {
         if (!this._block) {
-            this._block = new this._blockClass();
+            this._block = new this._blockClass({});
             renderDOM(this._block, this.rootQuery);
             return;
         }

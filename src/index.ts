@@ -1,14 +1,16 @@
+import Block from './core/Block';
 import Chats from './pages/MyChats/index';
 import Login from './pages/Login/index';
 import SignUp from './pages/SignUp/index';
-import ProfilePreferences from './pages/ProfilePreferences/index';
+import ProfilePage from './pages/ProfilePreferences/index';
 import EditProfile from './pages/EditProfile/index';
 import Error404 from './pages/404/index';
 import Error500 from './pages/500/index';
 //import AllPages from './components/AllPages/index';
 //import renderDOM from './utils/renderDOM';
 import Router from './utils/router';
-//import AuthController from './controllers/authController';
+import AuthController from './controllers/authController';
+import chatController from './controllers/chatController';
 
 
 enum Routes {
@@ -23,16 +25,42 @@ enum Routes {
 
 const router = new Router('#app');
 
-document.addEventListener('DOMContentLoaded',  () => {
-  router
-      .use(Routes.Login, Login)
-      .use(Routes.Chats, Chats)
-      .use(Routes.SignUp, SignUp)
-      .use(Routes.ProfilePreferences, ProfilePreferences)
-      .use(Routes.EditProfile, EditProfile)
-      .use(Routes.Error404, Error404)
-      .use(Routes.Error500, Error500)
-      .start();
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    router
+        .use(Routes.Login, Login)
+        .use(Routes.Chats, Chats as typeof Block)
+        .use(Routes.SignUp, SignUp)
+        .use(Routes.ProfilePreferences,ProfilePage as typeof Block )
+        .use(Routes.EditProfile, EditProfile as typeof Block)
+        .use(Routes.Error404, Error404)
+        .use(Routes.Error500, Error500);
+    
+    let isProtectedRoute = true;
+
+    switch (window.location.pathname) {
+        case Routes.Login:
+        case Routes.SignUp:
+        isProtectedRoute = false;
+        break;
+    }
+    
+    try {
+        await AuthController.getUser();
+        await chatController.getChats();
+        router.start();
+    
+        if (!isProtectedRoute) {
+            router.go(Routes.Chats);
+        }
+    } catch (e) {
+        router.start();
+    
+        if (isProtectedRoute) {
+            router.go(Routes.Login);
+        }
+    }
 });
 
 export default router;
