@@ -1,13 +1,15 @@
 import HTTPTransport from "../core/Fetch";
 
 export type TUser = {
-    phone?: string,
-    email?: string,
-    login?: string,
+    id?: number,
     first_name?:string,
     second_name?: string,
-    password?: string,
     display_name?: string,
+    phone?: string,
+    login?: string,
+    avatar?: string,
+    email?: string,
+    password?: string,
 }
 
 export class BaseAPI {

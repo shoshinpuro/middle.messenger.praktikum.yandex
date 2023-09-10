@@ -21,8 +21,7 @@ export default class Chats extends Block {
         ChatController.getChats();
         AuthController.getUser();
         this.children.createChatPopup = new Popup({
-            header: 'Create a new chat',
-            isChats: true,
+            header: 'Create a new chat'
         });
         this.children.createChatLink = new Link({
             href: '',
@@ -84,7 +83,6 @@ export default class Chats extends Block {
     }
 
     protected render(): DocumentFragment {
-        //this.init();
         return this.compile(template, this.props);
     }
 }

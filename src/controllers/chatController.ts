@@ -1,21 +1,23 @@
 import ChatAPI from "../API/chatAPI";
 import UserAPI from "../API/userAPI";
-import { ICreateChat, IAddUsersInChat } from "../API/chatAPI";
+import { ICreateChat } from "../API/chatAPI";
 import store from "../utils/store";
 import chatWS from '../API/chatWS';
 import router from "..";
+import { TUser } from "../API/baseAPI";
+import { IUserData } from "../utils/interfaces";
 
 class ChatController {
-    ChatsAPI:ChatAPI;
+    ChatAPI:ChatAPI;
     UserAPI:UserAPI;
     constructor() {
-        this.ChatsAPI = new ChatAPI;
+        this.ChatAPI = new ChatAPI;
         this.UserAPI = new UserAPI;
     }
 
     async getChats() {
         try {
-            const chats = await this.ChatsAPI.getChats() as Array<any>;
+            const chats = await this.ChatAPI.getChats() as Array<any>;
             chats.sort();
             console.log(chats);
             store.set('chats', chats);
@@ -29,7 +31,7 @@ class ChatController {
     }
     async createChat(data: ICreateChat) {
         try {
-            await this.ChatsAPI.createChat(data)
+            await this.ChatAPI.createChat(data)
                 .then((res) => console.log(res))
                 .then(() => this.getChats())
                 .then(() => router.go('/messenger'));
@@ -41,7 +43,7 @@ class ChatController {
     async deleteChat(data: ICreateChat) {
         try {
             data = {chatId: data};
-            await this.ChatsAPI.deleteChat(data)
+            await this.ChatAPI.deleteChat(data)
                 .then(() => this.getChats());
         }
         catch (error) {
@@ -49,17 +51,16 @@ class ChatController {
         }
 
     }
-    async addUsersToChat(data: any) {
+    async addUsersToChat(data: IUserData) {
         try {
-            const { login, chatId } = data;
-            const dataUser = await this.UserAPI.getUserByLogin({login: login}) as Array<any>;
+            const { logins, chatId } = data;
+            const dataUser =  await logins.map((login) => this.UserAPI.getUserByLogin({login: login}));
+            const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!);
             const requestDataUser = {
-                "users": [
-                    dataUser[0].id
-                ],
+                "users": userIds,
                 chatId
             };
-            await this.ChatsAPI.addUsers(requestDataUser)
+            await this.ChatAPI.addUsers(requestDataUser)
                 .then((res) => console.log(res));
             this.getChats();
         }
@@ -68,25 +69,27 @@ class ChatController {
         }
 
     }
-    async deleteUsers(data: IAddUsersInChat) {
+    async deleteUsers(data: IUserData) {
         try {
-            const { users, chatId } = data;
-            const dataUser = await this.UserAPI.getUserByLogin({login: users}) as Array<any>;
+            const { logins, chatId } = data;
+            const dataUser =  await logins.map((login) => this.UserAPI.getUserByLogin({login: login}));
+            const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!);
             const requestDataUser = {
-                "users": [
-                    dataUser[0].id
-                ],
+                "users": userIds,
                 chatId
             };
-            await this.ChatsAPI.deleteUsers(requestDataUser)
+            await this.ChatAPI.deleteUsers(requestDataUser)
                 .then((res) => console.log(res));
             this.getChats();
         }
         catch (error) {
             console.log(error);
         }
-
     }
+    selectChat(id: number | string) {
+        store.set('selectedChat', id);
+        this.getChats();
+      }
 
 }
 

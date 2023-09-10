@@ -3,6 +3,7 @@ import template from './chatList.hbs';
 import ChatLi from '../ChatLi';
 import { ChatLiProps } from '../ChatLi';
 import { connect } from '../../utils/store';
+import ChatController from '../../controllers/chatController';
 
 interface ChatListProps {
   chats?: Block[];
@@ -25,7 +26,7 @@ export class ChatsListBase extends Block<ChatListProps> {
         events: {
           click: (evt: PointerEvent) => {
             evt.preventDefault();
-            //anything
+            ChatController.selectChat(data.id!)
           },
         },
       });

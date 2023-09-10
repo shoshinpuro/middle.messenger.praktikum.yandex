@@ -1,21 +1,30 @@
-<div class="mesagges-wrap">
+<div class="messages-wrap">
+    <div class="messages-header">
+        <h1 class="messages-header__chat-name">{{title}}</h1>
+        <div class="messages-header__chat-options">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024">
+                <path fill="black" d="M160 448a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32H160zm448 0a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32H608zM160 896a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32H160zm448 0a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32H608z"/>
+            </svg>
+        </div>
+    </div>
+    <ul class="chat-options-menu">
+        {{{addUserOption}}}
+        {{{deleteUserOption}}}
+        {{{deleteChatOption}}}
+        <!--<li class="add-user chat-options-menu__li">Add user</li>
+        <li class="delete-user chat-options-menu__li">Delete user</li>
+        <li class="delete-chat chat-options-menu__li">Delete chat</li>-->
+    </ul>
+        {{{addUserPopup}}}
+        {{{deleteUserPopup}}}
+        {{{deleteChatPopup}}}
     <div class="date">
         <p>April 9</p>
     </div>
     <ul class="conversation-messages">
-        <li class="conversation-message">
-            <div class="conversation-message__wrap">
-                <div class="conversation-message__sender"><p>Mike Kotov</p></div>
-                <div class="conversation-message__message-content">
-                    <p class="conversation-message__message-content-p">Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
-
-        Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.</p>
-                </div>
-                <div class="conversation-message__time">
-                    <p>11:56</p>   
-                </div>
-            </div>
-        </li>
+        {{#each messages}}
+            {{{this}}}
+        {{/each}}
         <li class="conversation-message">
             <div class="conversation-message__wrap">
                 <div class="conversation-message__sender"><p>Mike Kotov</p></div>

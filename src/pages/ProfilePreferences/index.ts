@@ -32,8 +32,7 @@ class ProfilePreferences extends Block {
         });
 
         this.children.popupPassword = new Popup({
-            header: 'Change password',
-            isAvatar: false
+            header: 'Change password'
         });
 
         console.log(this.props);

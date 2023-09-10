@@ -1,6 +1,7 @@
 import Block from '../../core/Block';
 import template from './dataUnitLi.hbs';
 import Input from '../Input';
+import { TIndexed } from '../../utils/utilFunctions';
 
 interface DataUnitLiProps {
     header: string;
@@ -9,7 +10,7 @@ interface DataUnitLiProps {
     name?: string;
     type?: string;
     error?: string;
-    events?: object;
+    events?: TIndexed;
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 

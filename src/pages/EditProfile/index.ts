@@ -36,8 +36,7 @@ class EditProfile extends Block {
         });
 
         this.children.popupAvatar = new Popup({
-            header: 'Set a new avatar',
-            isAvatar: true,
+            header: 'Set a new avatar'
         });
         console.log(this.props);
         const isEdit = true;
@@ -147,7 +146,6 @@ class EditProfile extends Block {
     }
 }
 
-//export default EditProfile;
 
 function mapStateToProps(state: any) {
     return state.user ?? [];

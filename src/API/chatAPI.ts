@@ -4,11 +4,11 @@ import url from './baseAPI';
 
 export interface ICreateChat {
     title?: string,
-    chatId?: string | ICreateChat
+    chatId?: string | number | ICreateChat
 }
 export interface IAddUsersInChat {
-    users: any[],
-    chatId: number | undefined,
+    users: Array<string | number>,
+    chatId: number
 }
 
 class ChatAPI {

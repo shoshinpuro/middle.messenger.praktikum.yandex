@@ -1,16 +1,12 @@
-import Block from '../../core/Block';
-import template from './chatPopupFill.hbs';
-import FormInput from '../FormInput';
-import FormButton from '../FormButton';
-import ChatController from '../../controllers/chatController';
+import Block from '../../../core/Block';
+import template from './addChatPopupFill.hbs';
+import FormInput from '../../FormInput'; 
+import FormButton from '../../FormButton';
+import ChatController from '../../../controllers/chatController';
+import { PopupFillProps } from '../../../utils/interfaces';
 
-interface ChatPopupFillProps {
-    error?: string;
-    events?: {};
-}
-
-class ChatPopupFill extends Block<ChatPopupFillProps> {
-    constructor(props: ChatPopupFillProps) {
+class AddChatPopupFill extends Block<PopupFillProps> {
+    constructor(props: PopupFillProps) {
         super(props);
     }
     init() {
@@ -43,4 +39,4 @@ class ChatPopupFill extends Block<ChatPopupFillProps> {
     }
 }
 
-export default ChatPopupFill;
+export default AddChatPopupFill;
