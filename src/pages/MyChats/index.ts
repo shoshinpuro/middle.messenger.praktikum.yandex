@@ -18,7 +18,6 @@ export default class Chats extends Block {
     }
 
     protected init():void {
-        ChatController.getChats();
         AuthController.getUser();
         this.children.createChatPopup = new Popup({
             header: 'Create a new chat'
@@ -80,6 +79,10 @@ export default class Chats extends Block {
             time: '12:00',
         });*/
         console.log(this.props);
+    }
+
+    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+        return true;
     }
 
     protected render(): DocumentFragment {

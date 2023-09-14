@@ -143,7 +143,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    this.children.popupPassword.show();
+                    (this.children.popupPassword as Block).show();
                 },
             },
         });
@@ -247,8 +247,6 @@ class ProfilePreferences extends Block {
         return true;
     }
     protected render(): DocumentFragment {
-        console.log(this.props);
-        console.log(this.props.avatar);
         this.init();
         return this.compile(template, this.props);
     }

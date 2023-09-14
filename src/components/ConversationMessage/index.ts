@@ -1,10 +1,11 @@
 import Block from '../../core/Block';
 import template from './conversationMessage.hbs';
 import { TIndexed } from '../../utils/utilFunctions';
-import Image from '../Image';
-import imgPhotocamera from '../../assets/img/photocamera.png';
+import { IMessage } from '../../utils/interfaces';
 
-interface ConversationMessageProps {
+interface ConversationMessageProps extends IMessage {
+    isMine: boolean;
+    message_time: string;
     events?: TIndexed
 }
 
@@ -15,7 +16,9 @@ class ConversationMessage extends Block<ConversationMessageProps> {
 
     protected init(): void {
     }
+    protected convertToObject() {
 
+    }
     render() {
         return this.compile(template, { ...this.props });
     }

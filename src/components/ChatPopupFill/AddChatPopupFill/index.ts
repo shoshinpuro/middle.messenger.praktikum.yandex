@@ -26,9 +26,10 @@ class AddChatPopupFill extends Block<PopupFillProps> {
                     const chatName = (document.querySelector('.chat-name__input')as HTMLInputElement).value;
                     const data = {title: chatName};
                     if(chatName.trim()) {
-                        console.log(chatName);
                         ChatController.createChat(data);
                     }
+                    const hidePopup = this.props.popupHandler!;
+                    hidePopup();
                 },
             },
         });

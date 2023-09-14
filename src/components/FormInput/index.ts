@@ -36,7 +36,7 @@ class FormInput extends Block<InputProps> {
                 },
                 blur: () => {
                     const validationFunc = this.props.validationHandler as ValidationHandler;
-                    validationFunc(this, 0);
+                    this.props.validationHandler? validationFunc(this, 0) : false;
                 },
             },
 

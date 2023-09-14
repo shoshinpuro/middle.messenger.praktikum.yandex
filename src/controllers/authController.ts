@@ -39,9 +39,9 @@ class AuthController {
     }
     async getUser() {
         try {
+            store.on('updated', () => {console.log('update');});
             await this.AuthAPI.getUser()
                 .then((res) => store.set('user', res));
-            store.on('updated', () => {console.log('update');});
         }
         catch (error) {
             console.log(error);

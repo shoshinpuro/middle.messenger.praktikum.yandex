@@ -2,10 +2,16 @@ import ChatAPI from "../API/chatAPI";
 import UserAPI from "../API/userAPI";
 import { ICreateChat } from "../API/chatAPI";
 import store from "../utils/store";
-import chatWS from '../API/chatWS';
+import MessageController from "./messageController";
 import router from "..";
 import { TUser } from "../API/baseAPI";
+import { IUser } from "../utils/interfaces";
 import { IUserData } from "../utils/interfaces";
+import { loginsToIds } from "../utils/utilFunctions";
+
+export interface IUserWithId extends IUser {
+    id: number;
+}
 
 class ChatController {
     ChatAPI:ChatAPI;
@@ -18,8 +24,13 @@ class ChatController {
     async getChats() {
         try {
             const chats = await this.ChatAPI.getChats() as Array<any>;
-            chats.sort();
-            console.log(chats);
+            console.log(chats)
+            //await chats.sort();
+            chats.map(async (chat) => {
+                console.log(chat.id);
+                const token = await this.getToken(chat.id);
+                await MessageController.connect(chat.id, token);
+            });
             store.set('chats', chats);
             store.on('updated', () => {
                 console.log('updated');
@@ -40,9 +51,9 @@ class ChatController {
             console.log(error);
         }
     }
-    async deleteChat(data: ICreateChat) {
+    async deleteChat(id: number) {
         try {
-            data = {chatId: data};
+            const data = {chatId: id};
             await this.ChatAPI.deleteChat(data)
                 .then(() => this.getChats());
         }
@@ -54,33 +65,84 @@ class ChatController {
     async addUsersToChat(data: IUserData) {
         try {
             const { logins, chatId } = data;
-            const dataUser =  await logins.map((login) => this.UserAPI.getUserByLogin({login: login}));
-            const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!);
+            const dataUsers =  await logins.map(async (login) =>  await  this.UserAPI.getUserByLogin({login: login}));
+            /*let userDataArr: Array<IUserWithId> = [];
+
+            dataUsers.forEach( async (dataUser, i) =>{
+                const foundUsers = (await dataUser) as Array<IUserWithId>;
+                const expectedUser = foundUsers.find((user: IUserWithId) => user.login === logins[i])!;
+                userDataArr.push(expectedUser);
+            });
+
+            const storeDataUsers = store.getState()?.contactedUsers || [];
+            store.set('contactedUsers', storeDataUsers.concat(userDataArr));
+
             const requestDataUser = {
-                "users": userIds,
+                "users": loginsToIds(logins),
                 chatId
-            };
-            await this.ChatAPI.addUsers(requestDataUser)
+            };*/
+            
+            
+            /*await this.ChatAPI.addUsers(requestDataUser)
                 .then((res) => console.log(res));
-            this.getChats();
+            this.getChats();*/
         }
         catch (error) {
             console.log(error);
         }
 
     }
-    async deleteUsers(data: IUserData) {
+    async deleteUsersFromChat(data: IUserData) {
         try {
             const { logins, chatId } = data;
-            const dataUser =  await logins.map((login) => this.UserAPI.getUserByLogin({login: login}));
-            const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!);
+            const dataUser: Array<IUserWithId> = await this.UserAPI.getUserByLogin({login: logins[0]})  as Array<IUserWithId>;
+            console.log(dataUser);
             const requestDataUser = {
-                "users": userIds,
+                "users": [
+                    dataUser.slice(-1)[0].id
+                ],
                 chatId
             };
-            await this.ChatAPI.deleteUsers(requestDataUser)
+            console.log(requestDataUser);
+            await this.ChatAPI.addUsers(requestDataUser)
                 .then((res) => console.log(res));
             this.getChats();
+            /*let userIdArr: Array<number> = [];
+            const dataUsers =  await logins.map(async (login) => {
+                let result = await this.UserAPI.getUserByLogin({login: login});
+                console.log(result);
+                //alert(result);
+                return result;
+            })
+            console.log(dataUsers[0]);
+            alert(dataUsers[0]);
+            await dataUsers.forEach( async (dataUser, i) =>{
+                const foundUsers = (await dataUser) as Array<IUserWithId>;
+                const expectedUser = foundUsers.find((user: IUserWithId) => user.login === logins[i])!.id;
+                userIdArr.push(expectedUser);
+            }); 
+            const requestDataUser = {
+                "users": userIdArr,
+                chatId
+            };
+            console.log(requestDataUser);
+            await this.ChatAPI.deleteUsers(requestDataUser)
+                .then((res) => console.log(res));
+            this.getChats();*/
+            
+            /*const storeDataUsers: Array<IUserWithId> = store.getState()?.contactedUsers || [];
+            const indexes: number[] = [];
+            const ids: number[] = [];
+            logins.forEach((login) =>{
+                const i = storeDataUsers.findIndex((user: IUserWithId) => user.login === login);
+                indexes.push(i);
+                ids.push(storeDataUsers[i].id)
+            });
+            indexes.forEach(index => delete storeDataUsers[index]);
+            const newStoreDataUsers = indexes.filter(Boolean);
+            store.set('contactedUsers', newStoreDataUsers);*/
+            /*const dataUser =  await logins.map((login) => this.UserAPI.getUserByLogin({login: login}));
+            const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!);*/
         }
         catch (error) {
             console.log(error);
@@ -89,7 +151,11 @@ class ChatController {
     selectChat(id: number | string) {
         store.set('selectedChat', id);
         this.getChats();
-      }
+    }
+    getToken(id: number) {
+        console.log(this.ChatAPI.getChatToken(id));
+        return this.ChatAPI.getChatToken(id);
+    }
 
 }
 

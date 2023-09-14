@@ -10,7 +10,7 @@ import Error500 from './pages/500/index';
 //import renderDOM from './utils/renderDOM';
 import Router from './utils/router';
 import AuthController from './controllers/authController';
-import chatController from './controllers/chatController';
+import ChatController from './controllers/chatController';
 
 
 enum Routes {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     try {
         await AuthController.getUser();
-        await chatController.getChats();
+        await ChatController.getChats();
         router.start();
     
         if (!isProtectedRoute) {

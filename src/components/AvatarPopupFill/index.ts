@@ -34,7 +34,6 @@ class AvatarPopupFill extends Block<AvatarPopupFillProps> {
                     const formData = new FormData();
                     const data = input.files![0];
                     if(data) {
-                        console.log(data);
                         formData.append("avatar", data);
                         UserController.setAvatar(formData);
                         AuthController.getUser();

@@ -96,7 +96,7 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
             } else {
                 xhr.setRequestHeader("Content-Type", "application/json");
                 const req = xhr.send(JSON.stringify(data));
-                console.log(req);
+                //console.log(req);
             }
         });
     };

@@ -1,7 +1,7 @@
 import Block from '../core/Block';
 
 const regexObj = {
-    message: /^\s*$/,
+    message: /(.|\s)*\S(.|\s)*$/,
     name: /^[А-ЯЁA-Z][а-яёa-z-]+$/,
     email: /^[a-z0-9][a-z0-9-_.]+@[a-z]+\.[a-z]+$/i,
     password: /(?=.*[A-Z])(?=.*[0-9])^[0-9a-zA-Z!@#$%^&*]{8,40}$/,
@@ -117,13 +117,13 @@ export function validationPhone(elem: Block, childNum: number) {
     console.log(result);
     return result;
 }
-export function validationMessage(elem: Block, childNum: number) {
-    const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
-    const result = inputValue.match(regexObj.message)?.[0];
+export function validationMessage(value: string) {
+    console.log(value.match(regexObj.message));
+    const result = value.match(regexObj.message)?.[0];
     if (result) {
         console.log('ok'); // eslint-disable-line no-console
     } else {
-        console.log(elem); // eslint-disable-line no-console
+        console.log('elem'); // eslint-disable-line no-console
     }
     return result;
 }

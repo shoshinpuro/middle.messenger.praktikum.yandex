@@ -1,9 +1,9 @@
 import Block from '../../core/Block';
 import template from './chatLi.hbs';
-import Image from '../Image';
-import img from '../../assets/img/AmandaSekar.png';
+//import Image from '../Image';
 import { TUser } from '../../API/baseAPI';
 import { connect } from '../../utils/store';
+import { remakeDate } from '../../utils/utilFunctions';
 
 type TlastMessage = {
     content: string,
@@ -35,14 +35,14 @@ class Chat extends Block<ChatLiProps> {
     render() {
         const lastMessage = {...this.props.last_message}
         const lastMessageUser = {...lastMessage?.user}
-        let time = lastMessage?new Date(lastMessage.time as string).toString().substring(4, 10): undefined;
+        let time = lastMessage?remakeDate(lastMessage.time as string): undefined;
         //console.log({...this.props, ...this.props.last_message, ...this.props.last_message});
         const newProps = { 
             ...this.props,
             ...lastMessage,
             ...lastMessageUser
         }
-        newProps.time = time
+        newProps.time = time;
         return this.compile(template, newProps); 
     }
 }

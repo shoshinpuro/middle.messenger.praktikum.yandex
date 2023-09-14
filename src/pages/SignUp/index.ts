@@ -14,7 +14,7 @@ import { TUser } from '../../API/baseAPI';
 
 class SignUp extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {
@@ -93,25 +93,14 @@ class SignUp extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                   /* const names = [
-                        'phone',
-                        'email',
-                        'login',
-                        'first_name',
-                        'second_name',
-                        'password',
-                        'password2',
-                    ];
-                    const formElem = document.querySelector('.sign-up-form') as HTMLFormElement;
-                    formDataOutput(formElem, names);*/
 
-                    const phone = this.children.inputPhone;
-                    const email = this.children.inputEmail;
-                    const login = this.children.inputLogin;
-                    const password = this.children.inputPassword;
-                    const first_name = this.children.inputFirstname;
-                    const second_name = this.children.inputLastname;
-                    const password2 = this.children.inputPassword2;
+                    const phone = this.children.inputPhone as Block;
+                    const email = this.children.inputEmail as Block;
+                    const login = this.children.inputLogin as Block;
+                    const password = this.children.inputPassword as Block;
+                    const first_name = this.children.inputFirstname as Block;
+                    const second_name = this.children.inputLastname as Block;
+                    const password2 = this.children.inputPassword2 as Block;
                     let validationsResults: TUser = {};
                     validationsResults.phone = validationPhone(phone, 0);
                     validationsResults.email = validationEmail(email, 0);

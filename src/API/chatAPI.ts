@@ -18,23 +18,24 @@ class ChatAPI {
         this.http = new HTTPTransport();
     }
 
-    getChats() {
-        return this.http.get(url + '/chats');
+    async getChats() {
+        return await this.http.get(url + '/chats');
     }
-    createChat(data:ICreateChat){
+    async createChat(data:ICreateChat){
         return this.http.post(url + '/chats', {data});
     }
-    deleteChat(data:ICreateChat){
+    async deleteChat(data:ICreateChat){
         return this.http.delete(url + '/chats', {data});
     }
     addUsers(data: IAddUsersInChat) {
         return this.http.put(url + '/chats/users',{data});
     }
-    deleteUsers(data: IAddUsersInChat){
+    async deleteUsers(data: IAddUsersInChat){
+        console.log(data);
         return this.http.delete(url + '/chats/users', {data});
     }
-    getChatToken(data: number) {
-        return this.http.post(url + `/chats/token/${data}`);
+    async getChatToken(data: number) {
+        return (await this.http.post(url + `/chats/token/${data}`) as any).token;
     }
 }
 export default ChatAPI;

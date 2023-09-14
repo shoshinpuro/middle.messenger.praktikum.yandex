@@ -4,18 +4,19 @@ import FormInput from '../../FormInput';
 import FormButton from '../../FormButton';
 import ChatController from '../../../controllers/chatController';
 import { PopupFillProps } from '../../../utils/interfaces';
+import { connect } from '../../../utils/store';
 
-class DeleteChatPopupFill extends Block<PopupFillProps> {
+class DeleteChatPopupFillBase extends Block<PopupFillProps> {
     constructor(props: PopupFillProps) {
         super(props);
     }
     init() {
-        this.children.chatNameInput = new FormInput({ 
+        /*this.children.chatNameInput = new FormInput({ 
             type: 'text',
             name: 'chat-name',
             label: 'Chat name',
             classInput: 'chat-delete__input form-input',
-        });
+        });*/
         this.children.confirmButton = new FormButton({
             label: 'Confirm',
             class: 'popup__confirm',
@@ -23,12 +24,12 @@ class DeleteChatPopupFill extends Block<PopupFillProps> {
             events: {
                 click : (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const chatId = (document.querySelector('.chat-delete__input') as HTMLInputElement).value;
-                    const data = {chatId: Number(chatId)};
-                    if(chatId.trim()) {
-                        console.log(chatId);
-                        ChatController.deleteChat(data);
+                    const chatId = this.props.selectedChat;
+                    if(chatId) {
+                        ChatController.deleteChat(chatId);
                     }
+                    const hidePopup = this.props.popupHandler!;
+                    hidePopup();
                 },
             },
         });
@@ -38,5 +39,11 @@ class DeleteChatPopupFill extends Block<PopupFillProps> {
         return this.compile(template, { ...this.props });
     }
 }
+
+const withSelectedChat = connect((state) => ({
+    selectedChat: state.selectedChat || undefined,
+}));
+  
+const DeleteChatPopupFill = withSelectedChat(DeleteChatPopupFillBase as any);
 
 export default DeleteChatPopupFill;

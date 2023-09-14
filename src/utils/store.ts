@@ -35,11 +35,11 @@ export  function connect(mapStateToProps: (state: TIndexed) => any) {
                 super({ ...props, ...state });
                 store.on(StoreEvents.Updated, () => {
                     const newState = mapStateToProps(store.getState());
-                    console.log(state);
-                    console.log(newState);
-                    //if (isEqual(state, newState)) {
+                    //console.log(state);
+                    //console.log(newState);
+                    if (!isEqual(state, newState)) {
                         this.setProps({...newState});
-                    //}
+                    }
                     state = newState;
                 });
             }

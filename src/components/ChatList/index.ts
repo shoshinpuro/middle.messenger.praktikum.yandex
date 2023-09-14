@@ -33,6 +33,11 @@ export class ChatsListBase extends Block<ChatListProps> {
     });
   }
 
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    this.children.chats = this.createChats(newProps);
+    return true;
+  }
+
   render(): DocumentFragment {
     return this.compile(template, {
       ...this.props,

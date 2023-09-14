@@ -11,8 +11,6 @@ class AuthAPI {
         return this.http.post(url + '/auth/signin', { data });
     }
     signUp(data: TUser) {
-        console.log(url);
-        
         return this.http.post(url + '/auth/signup', { data });
     }
     getUser() {

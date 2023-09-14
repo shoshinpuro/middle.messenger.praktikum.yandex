@@ -4,12 +4,14 @@ import FormInput from '../FormInput';
 import FormButton from '../FormButton';
 //import ChatController from '../../controllers/chatController';
 import { PopupFillProps } from '../../utils/interfaces';
+import { connect } from '../../utils/store';
 
 interface userPopupFillProps extends PopupFillProps {
-    userHandler: (userLoginsArr: Array<string>) => void
+    selectedChat?: number;
+    userHandler: (userLoginsArr: Array<string>, chatId: number) => void
 }
 
-class UserInChatPopupFill extends Block<userPopupFillProps> {
+class UserInChatPopupFillBase extends Block<userPopupFillProps> {
     constructor(props: userPopupFillProps) {
         super(props);
     }
@@ -27,14 +29,17 @@ class UserInChatPopupFill extends Block<userPopupFillProps> {
             events: {
                 click : (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const userLogins = (document.querySelector('.user-login__input')as HTMLInputElement).value;
+                    const userLogins = ((this.children.userLoginsInput as Block)
+                        .element?.children[0] as HTMLInputElement).value;
                     const userLoginsArr = userLogins.split(',');
-                    this.props.userHandler(userLoginsArr);
+                    this.props.userHandler(userLoginsArr, this.props.selectedChat!);
                     /*const data = {title: chatName};
                     if(chatName.trim()) {
                         console.log(chatName);
                         ChatController.createChat(data);
                     }*/
+                    const hidePopup = this.props.popupHandler!;
+                    hidePopup();
                 },
             },
         });
@@ -44,5 +49,25 @@ class UserInChatPopupFill extends Block<userPopupFillProps> {
         return this.compile(template, { ...this.props });
     }
 }
-
+const withSelectedChat = connect((state) => {
+    const selectedChatId = state.selectedChat;
+  
+    if (!selectedChatId) {
+      return {
+        messages: [],
+        chats: [...(state.chats || [])],
+        selectedChat: null,
+        userId: state.user?.id || undefined,
+      };
+    }
+  
+    return {
+      messages: (state.messages || {})[selectedChatId] || [],
+      chats: [...(state.chats || [])],
+      selectedChat: state.selectedChat,
+      userId: state.user?.id || undefined,
+    };
+});
+  
+const UserInChatPopupFill = withSelectedChat(UserInChatPopupFillBase as any);
 export default UserInChatPopupFill;
