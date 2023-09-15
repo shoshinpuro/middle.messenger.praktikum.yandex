@@ -21,5 +21,8 @@ class UserAPI {
     getUserByLogin(data: any) {
         return this.http.post(url +"/user/search", {data});
     }
+    getUserById(data: any) {
+        return this.http.get(url +"/user/"+ data.id);
+    }
 }
 export default UserAPI;

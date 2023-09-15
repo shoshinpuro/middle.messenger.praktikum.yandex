@@ -1,6 +1,5 @@
 import ConversationMessages from '../../components/ConversationMessages';
 import ChatList from '../../components/ChatList';
-import Image from '../../components/Image';
 import imgAvatar from '../../assets/img/avatar.png';
 import Block from '../../core/Block';
 import template from './myChats.hbs';
@@ -14,7 +13,9 @@ import { TIndexed } from '../../utils/utilFunctions';
 
 export default class Chats extends Block {
     constructor(props: any) {
-        super(props);
+        super({
+            ...props
+        });
     }
 
     protected init():void {
@@ -22,6 +23,7 @@ export default class Chats extends Block {
         this.children.createChatPopup = new Popup({
             header: 'Create a new chat'
         });
+        
         this.children.createChatLink = new Link({
             href: '',
             class: 'create-new-chat',

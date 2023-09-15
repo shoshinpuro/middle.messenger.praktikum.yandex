@@ -90,7 +90,7 @@ class EditProfile extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.back();
+                    router.go('/settings');
                 },
             },
         });

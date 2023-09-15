@@ -20,6 +20,12 @@ export class Store extends EventBus {
 
         this.emit(StoreEvents.Updated);
     };
+
+    public resetState() {
+        for(let key in this.state) {
+            set(this.state, key, '');
+        }
+    }
 }
 
 const store = new Store();

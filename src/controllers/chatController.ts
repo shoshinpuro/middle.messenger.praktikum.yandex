@@ -10,7 +10,7 @@ import { IUserData } from "../utils/interfaces";
 import { loginsToIds } from "../utils/utilFunctions";
 
 export interface IUserWithId extends IUser {
-    id: number;
+    id?: number;
 }
 
 class ChatController {

@@ -5,14 +5,10 @@ import FormButton from '../FormButton';
 import { validationPassword, validationPassword2 } from '../../utils/validation';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
+import { PopupFillProps } from '../../utils/interfaces';
 
-interface PasswordPopupFillProps {
-    error?: string;
-    events?: {};
-}
-
-class PasswordPopupFill extends Block<PasswordPopupFillProps> {
-    constructor(props: PasswordPopupFillProps) {
+class PasswordPopupFill extends Block<PopupFillProps> {
+    constructor(props: PopupFillProps) {
         super(props);
     }
     init() {
@@ -52,6 +48,8 @@ class PasswordPopupFill extends Block<PasswordPopupFillProps> {
                         data.newPassword = newPassword;
                         UserController.changePassword(data);
                         AuthController.getUser();
+                        const hidePopup = this.props.popupHandler!;
+                        hidePopup();
                     }
                 },
             },

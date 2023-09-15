@@ -43,5 +43,17 @@ class UserController {
             console.log(error);
         }
     }
+    async getChatUser(data: TUser) {
+        try {
+            const oldChatData = store.getState()['selectedChatUsers'] ?? [];
+            console.log(oldChatData)
+            await this.UserAPI.getUserById(data)
+                .then((res) => store.set('selectedChatUsers', oldChatData.concat([res])));
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+    }
 }
 export default new UserController();

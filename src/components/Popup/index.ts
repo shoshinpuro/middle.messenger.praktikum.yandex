@@ -7,7 +7,6 @@ import AddChatPopupFill from '../ChatPopupFill/AddChatPopupFill';
 import UserInChatPopupFill from '../UserInChatPopupFill';
 import DeleteChatPopupFill from '../ChatPopupFill/DeleteChatPopupFill';
 import ChatController from '../../controllers/chatController';
-import { connect } from '../../utils/store';
 
 interface PopupProps {
     header: string;
@@ -32,23 +31,24 @@ class Popup extends Block<PopupProps> {
                 },
             }
         });
+        const popupHide = () => this.hide();
         const fillProps: {[x: string]: Block} = {
-            'Set a new avatar': new AvatarPopupFill({}), 
-            'Create a new chat': new AddChatPopupFill({popupHandler: () => this.hide()}), 
-            'Change password': new PasswordPopupFill({}), 
+            'Set a new avatar': new AvatarPopupFill({popupHandler: popupHide}), 
+            'Create a new chat': new AddChatPopupFill({popupHandler: popupHide}), 
+            'Change password': new PasswordPopupFill({popupHandler: popupHide}), 
             'Add user to chat': new UserInChatPopupFill({
                 userHandler: (userLoginsArr: string[], chatId: number) => {
                     ChatController.addUsersToChat({logins: userLoginsArr, chatId: chatId});
                 },
-                popupHandler: () => this.hide()
+                popupHandler: popupHide
             }), 
             'Delete user from chat': new UserInChatPopupFill({
                 userHandler: (userLoginsArr: string[], chatId: number) => {
                     ChatController.deleteUsersFromChat({logins: userLoginsArr, chatId: chatId});
                 },
-                popupHandler: () => this.hide()
+                popupHandler: popupHide
             }), 
-            'Delete chat': new DeleteChatPopupFill({popupHandler: () => this.hide()})
+            'Delete chat': new DeleteChatPopupFill({popupHandler: popupHide})
         };
         for (const key in fillProps){
             this.props.header === key?

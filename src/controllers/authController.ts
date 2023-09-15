@@ -2,6 +2,7 @@ import AuthAPI from '../API/authAPI';
 import { TUser } from '../API/baseAPI';
 import store from '../utils/store';
 import router from '../index';
+import MessageController from './messageController';
 
 class AuthController {
     AuthAPI:AuthAPI;
@@ -29,7 +30,6 @@ class AuthController {
     }
     async signUp(data: TUser) {
         try {
-            console.log(data);
             await this.AuthAPI.signUp(data);
         }
         catch (error) {
@@ -50,6 +50,8 @@ class AuthController {
 
     async logout() {
         try {
+            MessageController.closeAll();
+            store.resetState();
             await this.AuthAPI.logout()
                 .then(() => router.go("/"));
         }

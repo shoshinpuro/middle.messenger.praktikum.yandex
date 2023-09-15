@@ -13,9 +13,11 @@
 .messages-header{
     display: flex;
     background: #fff0ef;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
+    min-height: 40px;
 }
 
 .messages-header__chat-options{
@@ -28,7 +30,7 @@
 
 .chat-options-menu{
     position: absolute;
-    top: 40px;
+    top: 45px;
     margin-right: 20px;
     min-height: 65px;
     border-radius: 5px;
@@ -37,6 +39,7 @@
     align-self: flex-end;
     display: none;
     flex-direction: column;
+    opacity: 0.9;
 }
 
 .chat-options-menu__li{
@@ -67,7 +70,7 @@
 }
 
 .conversation-message__time{
-    color: #999999;
+    color:  var(--gray-text-color);
     font-size: 10px;
     line-height: 10px;
     text-align: right;
@@ -132,7 +135,7 @@
     padding: 6px 26px;
     background: rgb(217 217 217 / 20%);
     border-radius: 10px;
-    color: #999999;
+    color:  var(--gray-text-color);
 }
 
 .message-bar__attach{
@@ -143,4 +146,18 @@
 }
 .message-bar__button:disabled {
     cursor: default;
+}
+.chat-avatar{
+    margin-left: 50px;
+    height: 35px;
+    width: 35px;
+}
+.no-chat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.messages-wrap__start{
+    color:  var(--gray-text-color);
 }

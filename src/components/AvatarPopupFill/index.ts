@@ -4,14 +4,13 @@ import FormInput from '../FormInput';
 import FormButton from '../FormButton';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
+import { PopupFillProps } from '../../utils/interfaces';
+import router from '../..';
 
-interface AvatarPopupFillProps {
-    error?: string;
-    events?: {};
-}
 
-class AvatarPopupFill extends Block<AvatarPopupFillProps> {
-    constructor(props: AvatarPopupFillProps) {
+
+class AvatarPopupFill extends Block<PopupFillProps> {
+    constructor(props: PopupFillProps) {
         super(props);
     }
     init() {
@@ -33,11 +32,14 @@ class AvatarPopupFill extends Block<AvatarPopupFillProps> {
                     const input = document.querySelector(".set-avatar__input") as HTMLInputElement;
                     const formData = new FormData();
                     const data = input.files![0];
-                    if(data) {
+                    if(data) { 
                         formData.append("avatar", data);
                         UserController.setAvatar(formData);
                         AuthController.getUser();
                     }
+                    const hidePopup = this.props.popupHandler!;
+                    hidePopup();
+                    router.go('/settings');
                 },
             },
         });

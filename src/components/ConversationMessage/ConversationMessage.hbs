@@ -1,6 +1,6 @@
 <li class="conversation-message">
     <div class="conversation-message__wrap{{#if isMine}} my-message{{/if}}">
-        <div class="conversation-message__sender"><p>{{#if isMine}}{{else}}{{/if}}</p></div>
+        <div class="conversation-message__sender">{{#if isMine}}{{else}}{{{header}}}{{/if}}</div>
         <div class="conversation-message__message-content">
             <p class="conversation-message__message-content-p">{{content}}</p>
         </div>

@@ -1,7 +1,10 @@
 <div class="messages-wrap">
     {{#if selectedChat}}
     <div class="messages-header">
-        <h1 class="messages-header__chat-name">{{title}}</h1>
+        <div class="chat-avatar circle">
+            {{{image}}}
+        </div>
+        <h4 class="messages-header__chat-name">{{title}}</h4>
         {{{chatOptions}}}
     </div>
     {{{chatOptionsMenu}}}
@@ -49,6 +52,8 @@
     </ul>
     {{{messageBar}}}
     {{else}}
-        <h4 class="messages-wrap__start">Select chat to start</h4>
+        <div class="no-chat">
+            <h4 class="messages-wrap__start">Select chat to start</h4>
+        </div>
     {{/if}}
 </div>
