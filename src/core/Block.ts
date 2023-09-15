@@ -1,7 +1,5 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
-import { TIndexed } from '../utils/utilFunctions';
-import { ChatLiProps } from '../components/ChatLi';
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": [
     "_getChildrenAndProps",

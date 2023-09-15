@@ -33,9 +33,6 @@ export default class Router {
 
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
-        /*console.log(pathname);
-        console.log(route);
-        console.log(this.routes);*/
         if (!route) {
             console.log("ERROR")
             return;

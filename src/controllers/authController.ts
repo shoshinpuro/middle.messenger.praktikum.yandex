@@ -1,7 +1,7 @@
 import AuthAPI from '../API/authAPI';
 import { TUser } from '../API/baseAPI';
 import store from '../utils/store';
-import router from '../index';
+import router, { Routes } from '../index';
 import MessageController from './messageController';
 
 class AuthController {
@@ -13,7 +13,7 @@ class AuthController {
         try {
             await this.AuthAPI.signIn(data)
                 .then(() => this.getUser())
-                .then(() => router.go("/messenger"))
+                .then(() => router.go(Routes.Chats))
                 .catch(function (err) {
                     throw err;
                     console.log(err); 
@@ -24,7 +24,7 @@ class AuthController {
             if ((error as any)?.reason === 'User already in system') {
                 console.log('catch user in system error')
                 await this.getUser()
-                .then(() => router.go("/messenger"))
+                .then(() => router.go(Routes.Chats))
             }
         }
     }
@@ -53,7 +53,7 @@ class AuthController {
             MessageController.closeAll();
             store.resetState();
             await this.AuthAPI.logout()
-                .then(() => router.go("/"));
+                .then(() => router.go(Routes.Login));
         }
         catch (error) {
             console.log(error);

@@ -5,7 +5,7 @@ import Block from '../../core/Block';
 import template from './login.hbs';
 import { validationLogin, validationPassword } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
-import router from '../../index';
+import router, { Routes } from '../../index';
 import AuthController from '../../controllers/authController';
 import ChatController from '../../controllers/chatController';
 import { TUser } from '../../API/baseAPI';
@@ -39,7 +39,7 @@ class Login extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go('sign-up');
+                    router.go(Routes.SignUp);
                 },
             },
         });

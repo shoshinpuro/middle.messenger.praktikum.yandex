@@ -1,6 +1,6 @@
 import UserAPI from '../API/userAPI';
 import { TUser } from '../API/baseAPI';
-import router from '../index';
+import router, { Routes } from '../index';
 import AuthController from './authController';
 import store from '../utils/store';
 
@@ -13,7 +13,8 @@ class UserController {
         try {
             await this.UserAPI.updateProfile(data)
                 .then(() => AuthController.getUser())
-                .then(() => router.go("/settings"));
+                .then(() => router.go(Routes.ProfilePreferences));
+                
         }
         catch (error) {
             console.log(error);
@@ -26,7 +27,7 @@ class UserController {
       }) {
         try {
             await this.UserAPI.changePassword(data)
-                .then(() => router.go("/settings"));
+                .then(() => router.go(Routes.ProfilePreferences));
         }
         catch (error) {
             console.log(error);

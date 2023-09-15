@@ -9,12 +9,11 @@ import {
     validationEmail, validationLogin, validationName, validationPhone,
 } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
-import router from '../../index';
+import router, { Routes } from '../../index';
 import { connect } from '../../utils/store';
 import url from '../../API/baseAPI';
 import { TUser } from '../../API/baseAPI';
 import UserController from '../../controllers/userController';
-import AuthController from '../../controllers/authController';
 
 class EditProfile extends Block {
     constructor(props: any) {
@@ -90,7 +89,7 @@ class EditProfile extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go('/settings');
+                    router.go(Routes.ProfilePreferences);
                 },
             },
         });
@@ -133,7 +132,7 @@ class EditProfile extends Block {
                             .then(res => {
                                 console.log(res);
                             });
-                        router.go("/settings");
+                        router.go(Routes.ProfilePreferences);
                     }
                 },
             },

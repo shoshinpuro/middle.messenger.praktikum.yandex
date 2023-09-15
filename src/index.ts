@@ -11,7 +11,7 @@ import AuthController from './controllers/authController';
 import ChatController from './controllers/chatController';
 
 
-enum Routes {
+/*enum Routes {
   Login = '/',
   Chats = 'messenger',
   SignUp = 'sign-up',
@@ -19,7 +19,16 @@ enum Routes {
   EditProfile = 'edit-settings',
   Error404 = '404',
   Error500 = '500',
-}
+}*/
+export class Routes {
+    public static readonly Login = '/';
+    public static readonly Chats = 'messenger';
+    public static readonly SignUp = 'sign-up';
+    public static readonly ProfilePreferences = 'settings';
+    public static readonly EditProfile = 'edit-settings';
+    public static readonly Error404 = '404';
+    public static readonly Error500 = '500';
+  }
 
 const router = new Router('#app');
 
@@ -30,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         .use(Routes.Login, Login)
         .use(Routes.Chats, Chats as typeof Block)
         .use(Routes.SignUp, SignUp)
-        .use(Routes.ProfilePreferences,ProfilePage as typeof Block )
+        .use(Routes.ProfilePreferences, ProfilePage as typeof Block )
         .use(Routes.EditProfile, EditProfile as typeof Block)
         .use(Routes.Error404, Error404)
         .use(Routes.Error500, Error500);

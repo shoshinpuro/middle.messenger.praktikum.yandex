@@ -3,11 +3,9 @@ import UserAPI from "../API/userAPI";
 import { ICreateChat } from "../API/chatAPI";
 import store from "../utils/store";
 import MessageController from "./messageController";
-import router from "..";
-import { TUser } from "../API/baseAPI";
+import router, { Routes } from "..";
 import { IUser } from "../utils/interfaces";
 import { IUserData } from "../utils/interfaces";
-import { loginsToIds } from "../utils/utilFunctions";
 
 export interface IUserWithId extends IUser {
     id?: number;
@@ -45,7 +43,7 @@ class ChatController {
             await this.ChatAPI.createChat(data)
                 .then((res) => console.log(res))
                 .then(() => this.getChats())
-                .then(() => router.go('/messenger'));
+                .then(() => router.go(Routes.Chats));
         }
         catch (error) {
             console.log(error);
@@ -65,7 +63,18 @@ class ChatController {
     async addUsersToChat(data: IUserData) {
         try {
             const { logins, chatId } = data;
-            const dataUsers =  await logins.map(async (login) =>  await  this.UserAPI.getUserByLogin({login: login}));
+            const dataUser: Array<IUserWithId> = await this.UserAPI.getUserByLogin({login: logins[0]})  as Array<IUserWithId>;
+
+            const requestDataUser = {
+                "users": [
+                    dataUser.slice(-1)[0].id!
+                ],
+                chatId
+            };
+            console.log(requestDataUser);
+            await this.ChatAPI.deleteUsers(requestDataUser)
+                .then((res) => console.log(res));
+            this.getChats();
             /*let userDataArr: Array<IUserWithId> = [];
 
             dataUsers.forEach( async (dataUser, i) =>{
@@ -99,7 +108,7 @@ class ChatController {
             console.log(dataUser);
             const requestDataUser = {
                 "users": [
-                    dataUser.slice(-1)[0].id
+                    dataUser.slice(-1)[0].id!
                 ],
                 chatId
             };

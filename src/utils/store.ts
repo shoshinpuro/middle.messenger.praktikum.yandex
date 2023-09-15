@@ -4,9 +4,6 @@ import { TIndexed, set } from "./utilFunctions";
 import isEqual from "./isEqual";
 import Block from "../core/Block";
 
-export enum StoreEvents {
-    Updated = 'updated',
-}
 
 export class Store extends EventBus {
     private state: TIndexed = {};
@@ -18,7 +15,7 @@ export class Store extends EventBus {
     public set(path: string, value: unknown) {
         set(this.state, path, value);
 
-        this.emit(StoreEvents.Updated);
+        this.emit('updated');
     };
 
     public resetState() {
@@ -39,10 +36,8 @@ export  function connect(mapStateToProps: (state: TIndexed) => any) {
                 console.log(store);
                 console.log(state);
                 super({ ...props, ...state });
-                store.on(StoreEvents.Updated, () => {
+                store.on('updated', () => {
                     const newState = mapStateToProps(store.getState());
-                    //console.log(state);
-                    //console.log(newState);
                     if (!isEqual(state, newState)) {
                         this.setProps({...newState});
                     }

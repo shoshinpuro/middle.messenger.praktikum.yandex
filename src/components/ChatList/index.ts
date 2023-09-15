@@ -7,7 +7,6 @@ import ChatController from '../../controllers/chatController';
 
 interface ChatListProps {
   chats?: Block[];
-  isLoaded?: boolean;
 }
 
 export class ChatsListBase extends Block<ChatListProps> {
@@ -33,7 +32,7 @@ export class ChatsListBase extends Block<ChatListProps> {
     });
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars
     this.children.chats = this.createChats(newProps);
     return true;
   }

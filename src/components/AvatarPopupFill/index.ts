@@ -5,8 +5,7 @@ import FormButton from '../FormButton';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
 import { PopupFillProps } from '../../utils/interfaces';
-import router from '../..';
-
+import router, { Routes } from '../..';
 
 
 class AvatarPopupFill extends Block<PopupFillProps> {
@@ -39,7 +38,7 @@ class AvatarPopupFill extends Block<PopupFillProps> {
                     }
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();
-                    router.go('/settings');
+                    router.go(Routes.ProfilePreferences);
                 },
             },
         });

@@ -6,9 +6,8 @@ import {
     validationEmail, validationLogin, validationName,
     validationPassword, validationPassword2, validationPhone,
 } from '../../utils/validation';
-import formDataOutput from '../../utils/formDataOutput';
 import Link from '../../components/Link';
-import router from '../../index';
+import router, { Routes } from '../../index';
 import AuthController from '../../controllers/authController';
 import { TUser } from '../../API/baseAPI';
 
@@ -82,7 +81,7 @@ class SignUp extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go('/');
+                    router.go(Routes.Login);
                 },
             },
         });
@@ -114,7 +113,7 @@ class SignUp extends Block {
                             .then(res => {
                                 console.log(res);   
                             });
-                        router.go("/settings");
+                        router.go(Routes.ProfilePreferences);
                     }
                 },
             },

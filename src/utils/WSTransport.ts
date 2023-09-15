@@ -1,10 +1,16 @@
 import EventBus from "../core/EventBus";
 
-export enum WSTransportEvents {
+/*export enum WSTransportEvents {
   Connected = 'connected',
   Error = 'error',
   Message = 'message',
   Close = 'close',
+}*/
+export class WSTransportEvents {
+  public static readonly Connected = 'connected';
+  public static readonly Error = 'error';
+  public static readonly Message = 'message';
+  public static readonly Close = 'close';
 }
 
 export default class WSTransport extends EventBus {

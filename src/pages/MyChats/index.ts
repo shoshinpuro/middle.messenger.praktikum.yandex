@@ -4,12 +4,9 @@ import imgAvatar from '../../assets/img/avatar.png';
 import Block from '../../core/Block';
 import template from './myChats.hbs';
 import Link from '../../components/Link';
-import router from '../..';
-import ChatController from '../../controllers/chatController';
+import router, { Routes } from '../..';
 import AuthController from '../../controllers/authController';
 import Popup from '../../components/Popup';
-
-import { TIndexed } from '../../utils/utilFunctions';
 
 export default class Chats extends Block {
     constructor(props: any) {
@@ -42,7 +39,7 @@ export default class Chats extends Block {
 
         });
         this.children.profileLink = new Link({
-            href: '/settings',
+            href: Routes.ProfilePreferences,
             class: 'preferences',
             src: imgAvatar,
             alt: 'user photo',
@@ -50,14 +47,13 @@ export default class Chats extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go('/settings');
+                    router.go(Routes.ProfilePreferences);
                 }
             }
         });
         
         console.log(this.props);
         this.children.chatList = new ChatList({
-            isLoaded: false
             /*link: '#',
             title: (this.props as TIndexed)?.[6]?.title,
             lastMessage: (this.props as TIndexed)?.[6]?.last_message,
@@ -81,10 +77,6 @@ export default class Chats extends Block {
             time: '12:00',
         });*/
         console.log(this.props);
-    }
-
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-        return true;
     }
 
     protected render(): DocumentFragment {
