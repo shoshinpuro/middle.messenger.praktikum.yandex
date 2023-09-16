@@ -29,7 +29,8 @@
     "preview": "vite preview",
     "start": "vite build && node server.ts",
     "stylelint": "stylelint **/*pcss",
-    "stylelint:fix": "stylelint **/*pcss --fix"
+    "stylelint:fix": "stylelint **/*pcss --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC"

@@ -6,7 +6,7 @@ const PORT = 3000;
 
 app.use(express.static('./dist/'));
 
-app.use("*", (_req, res) => {
+app.use("*", (_req: any, res: any) => {
     res.sendFile(path.join(__dirname, "dist/index.html"));
   });
 // eslint-disable-next-line max-len
