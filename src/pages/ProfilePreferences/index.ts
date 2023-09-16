@@ -43,7 +43,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.back();
+                    router.go(Routes.Chats);
                 },
             },
         });
@@ -53,7 +53,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -63,7 +63,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -73,7 +73,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -83,7 +83,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -93,7 +93,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -103,7 +103,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -116,7 +116,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -142,7 +142,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -163,7 +163,7 @@ class ProfilePreferences extends Block {
     }
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars
-        /*(this.children.avatar as Avatar).setProps({
+        console.log(oldProps);        /*(this.children.avatar as Avatar).setProps({
           photo:
             newProps.avatar === null
               ? '../../static/images/default-ava.svg'
@@ -176,7 +176,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -186,7 +186,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -196,7 +196,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -206,7 +206,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -216,7 +216,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });
@@ -226,7 +226,7 @@ class ProfilePreferences extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    router.go(Routes.ProfilePreferences);
+                    router.go(Routes.EditProfile);
                 },
             },
         });

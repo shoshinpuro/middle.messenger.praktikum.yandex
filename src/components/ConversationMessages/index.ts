@@ -56,6 +56,7 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
         this.children.messageBar = new MessageBar({chatId: this.props.selectedChat});
     }
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars
+        console.log(oldProps);
         this.children.messages = this.createMessages(newProps.messages, newProps.userId);
         this.children.messageBar = new MessageBar({chatId: newProps.selectedChat});
         return true;
