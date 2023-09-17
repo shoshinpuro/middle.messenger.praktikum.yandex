@@ -13,9 +13,6 @@ class ChatOption extends Block<ChatOptionProps> {
         super(props);
     }
 
-    protected init(): void {
-    }
-
     render() {
         return this.compile(template, { ...this.props });
     }

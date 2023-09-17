@@ -13,20 +13,8 @@ class SendButton extends Block<SendButtonProps> {
         super(props);
     }
 
-    init() {
-        /*this.children.addUserOption = new ChatOption({
-            text: 'Add user',
-            events: {
-                click: (evt: PointerEvent) => {
-                    evt.preventDefault();
-                    (this.children.addUserPopup as Block).show();
-                },
-            }
-        });*/
-    }
-
     render() {
-        return this.compile(template, this.props); 
+        return this.compile(template, this.props);
     }
 }
 

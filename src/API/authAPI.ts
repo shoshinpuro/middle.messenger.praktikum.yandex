@@ -1,23 +1,27 @@
 import HTTPTransport from '../core/Fetch';
-import url, { TUser } from './baseAPI';
+import url, { TUser } from './baseConstants';
 
 class AuthAPI {
     http: HTTPTransport;
+
     constructor() {
         this.http = new HTTPTransport();
     }
 
     signIn(data: TUser) {
-        return this.http.post(url + '/auth/signin', { data });
+        return this.http.post(`${url}/auth/signin`, { data });
     }
+
     signUp(data: TUser) {
-        return this.http.post(url + '/auth/signup', { data });
+        return this.http.post(`${url}/auth/signup`, { data });
     }
+
     getUser() {
-        return this.http.get(url +'/auth/user');
+        return this.http.get(`${url}/auth/user`);
     }
+
     logout() {
-        return this.http.post(url + "/auth/logout");
+        return this.http.post(`${url}/auth/logout`);
     }
 }
 

@@ -8,7 +8,7 @@ import formDataOutput from '../../utils/formDataOutput';
 import router, { Routes } from '../../index';
 import AuthController from '../../controllers/authController';
 import ChatController from '../../controllers/chatController';
-import { TUser } from '../../API/baseAPI';
+import { TUser } from '../../API/baseConstants';
 
 class Login extends Block {
     constructor() {
@@ -56,10 +56,10 @@ class Login extends Block {
                     const login = this.children.inputLogin as Block;
                     const password = this.children.inputPassword as Block;
 
-                    let validationsResults: TUser = {};
+                    const validationsResults: TUser = {};
                     validationsResults.login = validationLogin(login, 0);
                     validationsResults.password = validationPassword(password, 0);
-                    
+
                     if (!Object.values(validationsResults).includes(undefined!)) {
                         AuthController.signIn(validationsResults)
                             .then(() => ChatController.getChats());

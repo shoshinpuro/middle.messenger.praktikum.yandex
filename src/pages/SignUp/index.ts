@@ -9,7 +9,7 @@ import {
 import Link from '../../components/Link';
 import router, { Routes } from '../../index';
 import AuthController from '../../controllers/authController';
-import { TUser } from '../../API/baseAPI';
+import { TUser } from '../../API/baseConstants';
 
 class SignUp extends Block {
     constructor() {
@@ -97,22 +97,20 @@ class SignUp extends Block {
                     const email = this.children.inputEmail as Block;
                     const login = this.children.inputLogin as Block;
                     const password = this.children.inputPassword as Block;
-                    const first_name = this.children.inputFirstname as Block;
-                    const second_name = this.children.inputLastname as Block;
+                    const firstName = this.children.inputFirstname as Block;
+                    const secondName = this.children.inputLastname as Block;
                     const password2 = this.children.inputPassword2 as Block;
-                    let validationsResults: TUser = {};
+                    const validationsResults: TUser = {};
                     validationsResults.phone = validationPhone(phone, 0);
                     validationsResults.email = validationEmail(email, 0);
                     validationsResults.login = validationLogin(login, 0);
-                    validationsResults.first_name = validationName(first_name, 0);
-                    validationsResults.second_name = validationName(second_name, 0);
+                    validationsResults.first_name = validationName(firstName, 0);
+                    validationsResults.second_name = validationName(secondName, 0);
                     validationsResults.password = validationPassword2(password, 0, password2);
-            
-                    if(!Object.values(validationsResults).includes(undefined!)) {
-                        AuthController.signUp(validationsResults)
-                            .then(res => {
-                                console.log(res);   
-                            });
+
+                    if (!Object.values(validationsResults).includes(undefined!)) {
+                        AuthController.signUp(validationsResults);
+                        // .then((res) => console.log(res));
                         router.go(Routes.ProfilePreferences);
                     }
                 },

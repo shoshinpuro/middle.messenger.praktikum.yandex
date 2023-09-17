@@ -1,8 +1,8 @@
 import Block from '../../core/Block';
 import template from './chatLi.hbs';
-//import Image from '../Image';
-import { TUser } from '../../API/baseAPI';
-import { connect } from '../../utils/store';
+// import Image from '../Image';
+import { TUser } from '../../API/baseConstants';
+import { connect } from '../../utils/storeHOC';
 import { remakeDate } from '../../utils/utilFunctions';
 
 type TlastMessage = {
@@ -10,7 +10,7 @@ type TlastMessage = {
     id: number,
     time: string,
     user: TUser
-}
+};
 export interface ChatLiProps {
     link: string;
     title: string;
@@ -28,27 +28,23 @@ class Chat extends Block<ChatLiProps> {
         super(props);
     }
 
-    init() {
-        
-    }
-
     render() {
-        const lastMessage = {...this.props.last_message}
-        const lastMessageUser = {...lastMessage?.user}
-        let time = lastMessage?remakeDate(lastMessage.time as string): undefined;
-        //console.log({...this.props, ...this.props.last_message, ...this.props.last_message});
-        const newProps = { 
+        const lastMessage = { ...this.props.last_message };
+        const lastMessageUser = { ...lastMessage?.user };
+        const time = lastMessage ? remakeDate(lastMessage.time as string) : undefined;
+        // console.log({...this.props, ...this.props.last_message, ...this.props.last_message});
+        const newProps = {
             ...this.props,
             ...lastMessage,
-            ...lastMessageUser
-        }
+            ...lastMessageUser,
+        };
         newProps.time = time;
-        return this.compile(template, newProps); 
+        return this.compile(template, newProps);
     }
 }
 const withSelectedChat = connect((state) => ({
-    selectedChat: (state.chats || []).find(({ id }: {id:number}) => id === state.selectedChat),
+    selectedChat: (state.chats || []).find(({ id }: { id:number }) => id === state.selectedChat),
 }));
-  
+
 const ChatLi = withSelectedChat(Chat as any);
 export default ChatLi;

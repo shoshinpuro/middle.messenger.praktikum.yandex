@@ -32,11 +32,13 @@ class FormInput extends Block<InputProps> {
             accept: this.props?.accept as string,
             events: {
                 focus: () => {
-                    //console.log('focus'); // eslint-disable-line no-console
+                    // console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
                     const validationFunc = this.props.validationHandler as ValidationHandler;
-                    this.props.validationHandler? validationFunc(this, 0) : false;
+                    if (this.props.validationHandler) {
+                        validationFunc(this, 0);
+                    }
                 },
             },
 

@@ -3,8 +3,8 @@ import template from './close.hbs';
 
 interface CloseProps {
     events: {
-      click: (evt: PointerEvent) => void;
-  }
+        click: (evt: PointerEvent) => void;
+    }
 }
 
 export default class Close extends Block<CloseProps> {

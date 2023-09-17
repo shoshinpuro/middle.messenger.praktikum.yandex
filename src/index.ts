@@ -10,8 +10,7 @@ import Router from './utils/router';
 import AuthController from './controllers/authController';
 import ChatController from './controllers/chatController';
 
-
-/*enum Routes {
+/* enum Routes {
   Login = '/',
   Chats = 'messenger',
   SignUp = 'sign-up',
@@ -19,51 +18,64 @@ import ChatController from './controllers/chatController';
   EditProfile = 'edit-settings',
   Error404 = '404',
   Error500 = '500',
-}*/
+} */
 export class Routes {
     public static readonly Login = '/';
+
     public static readonly Chats = 'messenger';
+
     public static readonly SignUp = 'sign-up';
+
     public static readonly ProfilePreferences = 'settings';
+
     public static readonly EditProfile = 'edit-settings';
+
     public static readonly Error404 = '404';
+
     public static readonly Error500 = '500';
-  }
+}
 
 const router = new Router('#app');
-
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     router
         .use(Routes.Login, Login)
         .use(Routes.Chats, Chats as typeof Block)
         .use(Routes.SignUp, SignUp)
-        .use(Routes.ProfilePreferences, ProfilePage as typeof Block )
+        .use(Routes.ProfilePreferences, ProfilePage as typeof Block)
         .use(Routes.EditProfile, EditProfile as typeof Block)
         .use(Routes.Error404, Error404)
         .use(Routes.Error500, Error500);
-    
+
     let isProtectedRoute = true;
 
     switch (window.location.pathname) {
         case Routes.Login:
         case Routes.SignUp:
-        isProtectedRoute = false;
-        break;
+            isProtectedRoute = false;
+            break;
+        case Routes.Chats:
+        case Routes.ProfilePreferences:
+        case Routes.EditProfile:
+        case Routes.Error404:
+        case Routes.Error500:
+            isProtectedRoute = true;
+            break;
+        default:
+            console.log('another link'); // eslint-disable-line no-console
     }
-    
+
     try {
         await AuthController.getUser();
         await ChatController.getChats();
         router.start();
-    
+
         if (!isProtectedRoute) {
             router.go(Routes.Chats);
         }
     } catch (e) {
         router.start();
-    
+
         if (isProtectedRoute) {
             router.go(Routes.Login);
         }

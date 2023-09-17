@@ -1,15 +1,19 @@
+/* eslint-disable no-underscore-dangle */
 import Route from './route';
-import Block from './../core/Block';
+import Block from '../core/Block';
 
 export default class Router {
     private static __instance: Router;
+
     private routes: Route[] = [];
+
     private _history = window.history;
+
     private _currentRoute: Route | null = null;
 
     constructor(private readonly _rootQuery: string) {
         if (Router.__instance) {
-            return Router.__instance;
+            return Router.__instance; // eslint-disable-line no-constructor-return
         }
 
         Router.__instance = this;
@@ -17,14 +21,12 @@ export default class Router {
 
     public use(pathname: string, block: typeof Block) {
         const route = new Route(pathname, block, this._rootQuery);
-        console.log(this._rootQuery);
         this.routes.push(route);
         return this;
     }
 
     start() {
         window.onpopstate = (event: PopStateEvent) => {
-            console.log(event.state);
             const target = event.currentTarget as Window;
             this._onRoute(target.location.pathname);
         };
@@ -34,7 +36,7 @@ export default class Router {
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
         if (!route) {
-            console.log("ERROR")
+            console.log('ERROR'); // eslint-disable-line no-console
             return;
         }
 
@@ -60,6 +62,6 @@ export default class Router {
     }
 
     getRoute(pathname: string) {
-        return this.routes.find(route => route.match(pathname) || route.match(pathname.slice(1)));
+        return this.routes.find((route) => route.match(pathname) || route.match(pathname.slice(1)));
     }
 }

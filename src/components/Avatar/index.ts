@@ -16,7 +16,11 @@ class Avatar extends Block<AvatarProps> {
     }
 
     init() {
-        this.children.image = new Image({ src: this.props?.srcImg as string || img, alt: 'user photo', class: 'user-info__avatar-img' });
+        this.children.image = new Image({
+            src: this.props?.srcImg as string || img,
+            alt: 'user photo',
+            class: 'user-info__avatar-img',
+        });
     }
 
     render() {

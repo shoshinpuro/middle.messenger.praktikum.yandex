@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars'
+import Handlebars from 'handlebars';
 
 export default function handlebars() {
     const fileRegexp = /\.hbs$|\.handlebars$/;
@@ -7,7 +7,7 @@ export default function handlebars() {
         name: 'vite-plugin-handlebars-precompile',
         transform(src, id) {
             if (!fileRegexp.test(id)) {
-                return
+                return;
             }
 
             const code = `
@@ -15,9 +15,9 @@ export default function handlebars() {
             export default Handlebars.template(${Handlebars.precompile(src)});
         `;
 
-            return {
-                code
-            }
+            return { // eslint-disable-line consistent-return
+                code,
+            };
         },
-    }
+    };
 }

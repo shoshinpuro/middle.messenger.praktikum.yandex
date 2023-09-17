@@ -10,18 +10,18 @@ import {
 } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
 import router, { Routes } from '../../index';
-import { connect } from '../../utils/store';
-import url from '../../API/baseAPI';
-import { TUser } from '../../API/baseAPI';
+import { connect } from '../../utils/storeHOC';
+import url, { TUser } from '../../API/baseConstants';
+
 import UserController from '../../controllers/userController';
 
 class EditProfile extends Block {
     constructor(props: any) {
-        super({...props});
+        super({ ...props });
     }
 
     protected init():void {
-        const avaSrc = this.props.avatar?`${url}/resources${this.props.avatar}`:'';
+        const avaSrc = this.props.avatar ? `${url}/resources${this.props.avatar}` : '';
         this.children.changeAvatar = new Avatar({
             first_name: this.props.first_name as string,
             second_name: this.props.second_name as string,
@@ -35,9 +35,8 @@ class EditProfile extends Block {
         });
 
         this.children.popupAvatar = new Popup({
-            header: 'Set a new avatar'
+            header: 'Set a new avatar',
         });
-        console.log(this.props);
         const isEdit = true;
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
@@ -93,7 +92,7 @@ class EditProfile extends Block {
                 },
             },
         });
-        
+
         this.children.formButton = new FormButton({
             class: 'profile-data-form__submit submit',
             label: 'Save changes',
@@ -115,23 +114,21 @@ class EditProfile extends Block {
                     const phone = this.children.dataUnitLi1 as Block;
                     const email = this.children.dataUnitLi2 as Block;
                     const login = this.children.dataUnitLi3 as Block;
-                    const first_name = this.children.dataUnitLi4 as Block;
-                    const second_name = this.children.dataUnitLi5 as Block;
+                    const firstName = this.children.dataUnitLi4 as Block;
+                    const secondName = this.children.dataUnitLi5 as Block;
                     const displayName = this.children.dataUnitLi6 as Block;
-                    let validationsResults: TUser = {};
-                    
+                    const validationsResults: TUser = {};
+
                     validationsResults.phone = validationPhone(phone, 1);
                     validationsResults.email = validationEmail(email, 1);
                     validationsResults.login = validationLogin(login, 1);
-                    validationsResults.first_name = validationName(first_name, 1);
-                    validationsResults.second_name = validationName(second_name, 1);
+                    validationsResults.first_name = validationName(firstName, 1);
+                    validationsResults.second_name = validationName(secondName, 1);
                     validationsResults.display_name = validationName(displayName, 1);
-                    
-                    if(!Object.values(validationsResults).includes(undefined!)) {
-                        UserController.updateProfile(validationsResults)
-                            .then(res => {
-                                console.log(res);
-                            });
+
+                    if (!Object.values(validationsResults).includes(undefined!)) {
+                        UserController.updateProfile(validationsResults);
+                        // .then((res) => console.log(res));
                         router.go(Routes.ProfilePreferences);
                     }
                 },
@@ -145,12 +142,9 @@ class EditProfile extends Block {
     }
 }
 
-
 function mapStateToProps(state: any) {
     return state.user ?? [];
 }
-
-
 
 const withUser = connect(mapStateToProps);
 const EditProfilePage = withUser(EditProfile as typeof Block);

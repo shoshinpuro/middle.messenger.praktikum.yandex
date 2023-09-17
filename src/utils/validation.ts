@@ -23,7 +23,6 @@ export function validationLogin(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
-    console.log(result);
     return result;
 }
 export function validationPassword(elem: Block, childNum: number) {
@@ -40,20 +39,19 @@ export function validationPassword(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
-    console.log(result);
     return result;
 }
 export function validationPassword2(elem: Block, childNum: number, elem2: Block) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
     const inputValue2 = (elem2.element?.children[childNum] as HTMLInputElement).value;
-    let result = inputValue === inputValue2;
+    const result = inputValue === inputValue2;
     if (result && validationPassword(elem, childNum)) {
         elem2.setProps({
             error: '',
             value: inputValue2,
         });
         return inputValue2;
-    } else if(validationPassword(elem, childNum)){
+    } if (validationPassword(elem, childNum)) {
         elem2.setProps({
             error: 'Пароли не совпадают',
             value: inputValue2,
@@ -64,7 +62,7 @@ export function validationPassword2(elem: Block, childNum: number, elem2: Block)
             value: inputValue,
         });
     }
-    console.log(result);
+    return undefined;
 }
 export function validationEmail(elem: Block, childNum: number) {
     const inputValue = (elem.element?.children[childNum] as HTMLInputElement).value;
@@ -80,7 +78,6 @@ export function validationEmail(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
-    console.log(result);
     return result;
 }
 export function validationName(elem: Block, childNum: number) {
@@ -97,7 +94,6 @@ export function validationName(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
-    console.log(result);
     return result;
 }
 export function validationPhone(elem: Block, childNum: number) {
@@ -114,11 +110,9 @@ export function validationPhone(elem: Block, childNum: number) {
             value: inputValue,
         });
     }
-    console.log(result);
     return result;
 }
 export function validationMessage(value: string) {
-    console.log(value.match(regexObj.message));
     const result = value.match(regexObj.message)?.[0];
     if (result) {
         console.log('ok'); // eslint-disable-line no-console
@@ -128,13 +122,13 @@ export function validationMessage(value: string) {
     return result;
 }
 
-/*export function validationForm(elems: Array<Block>, childNum: number, className: string) {
+/* export function validationForm(elems: Array<Block>, childNum: number, className: string) {
     const resultObject = {};
     //const inputs = document.querySelectorAll("."+className);
     elems.forEach(input => {
         const inputValue = (input.element?.children[childNum] as HTMLInputElement).value;
         const inputName = (input.element?.children[childNum] as HTMLInputElement).name;
-        
+
         switch (inputName) {
             case "first_name":
             case "second_name":
@@ -144,7 +138,7 @@ export function validationMessage(value: string) {
                 currentValidation = validationObj.name;
                 break;
             case "password2":
-            
+
                 break;
             default:
                 currentValidation = (validationObj as any)[key];
@@ -176,7 +170,7 @@ export function validationMessage(value: string) {
                 currentValidation = validationObj.name;
                 break;
             case "password2":
-            
+
                 break;
             default:
                 currentValidation = (validationObj as any)[key];
@@ -196,4 +190,4 @@ export function validationMessage(value: string) {
             });
         }
     }
-}*/
+} */

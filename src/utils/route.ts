@@ -1,14 +1,15 @@
-import Block from './../core/Block';
+/* eslint-disable no-underscore-dangle */
+import Block from '../core/Block';
 import isEqual from './isEqualPath';
 import renderDOM from './renderDOM';
 
 class Route {
-    private _block: Block | null  = null;
+    private _block: Block | null = null;
 
     constructor(
         private _pathname: string,
         private _blockClass: typeof Block,
-        private rootQuery: string
+        private rootQuery: string,
     ) {
     }
 
@@ -20,9 +21,9 @@ class Route {
     }
 
     leave() {
-        /*if (this._block) {
+        /* if (this._block) {
             this._block.hide();
-        }*/
+        } */
         this._block = null;
     }
 

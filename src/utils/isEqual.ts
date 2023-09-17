@@ -22,11 +22,11 @@ function isEqual(lhs: TPlainObject, rhs: TPlainObject) {
         return false;
     }
 
-    for (const [key, value] of Object.entries(lhs)) {
+    for (const [key, value] of Object.entries(lhs)) { // eslint-disable-line no-restricted-syntax
         const rightValue = rhs[key];
         if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
             if (isEqual(value, rightValue)) {
-                continue;
+                continue; // eslint-disable-line no-continue
             }
             return false;
         }

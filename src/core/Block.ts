@@ -10,8 +10,6 @@ import EventBus from './EventBus';
     "render"
 ] }] */
 
-
-
 class Block<P extends Record<string, any> = any> {
     static EVENTS = {
         INIT: 'init',
@@ -29,8 +27,6 @@ class Block<P extends Record<string, any> = any> {
 
     public children: Record<string, Block> | Record<string, Block[]>;
 
-    
-
     private eventBus: () => EventBus;
 
     /** JSDoc
@@ -43,8 +39,6 @@ class Block<P extends Record<string, any> = any> {
         const eventBus = new EventBus();
 
         const { props, children } = this._getChildrenAndProps(propsWithChildren);
-
-        
 
         this.children = children;
         this.props = this._makePropsProxy(props);
@@ -59,7 +53,7 @@ class Block<P extends Record<string, any> = any> {
     _getChildrenAndProps(childrenAndProps: P): {
         props: P;
         children: Record<string, Block> | Record<string, Block[]>;
-      } {
+    } {
         const props: Record<string, unknown> = {};
         const children: Record<string, Block> | Record<string, Block[]> = {};
 
@@ -132,7 +126,6 @@ class Block<P extends Record<string, any> = any> {
 
     // eslint-disable-next-line max-len
     protected componentDidUpdate(oldProps: P, newProps: P) { // eslint-disable-line @typescript-eslint/no-unused-vars
-        console.log(oldProps, newProps);
         return true;
     }
 
@@ -159,44 +152,44 @@ class Block<P extends Record<string, any> = any> {
 
     protected compile(template: (context: any) => string, context: any) {
         const contextAndStubs = { ...context };
-    
+
         Object.entries(this.children).forEach(([name, component]) => {
-          contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
-          if (Array.isArray(component)) {
-            contextAndStubs[name] = component.map(
-              (child) => `<div data-id='${child.id}'></div>`
-            );
-          } else {
             contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
-          }
+            if (Array.isArray(component)) {
+                contextAndStubs[name] = component.map(
+                    (child) => `<div data-id='${child.id}'></div>`,
+                );
+            } else {
+                contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
+            }
         });
-    
+
         const html = template(contextAndStubs);
-    
+
         const temp = document.createElement('template');
-    
+
         temp.innerHTML = html;
-    
+
         const replaceStub = (component: Block) => {
-          const stub = temp.content.querySelector(`[data-id='${component.id}']`);
-    
-          if (!stub) {
-            return;
-          }
-    
-          component.getContent()?.append(...Array.from(stub.childNodes));
-    
-          stub.replaceWith(component.getContent()!);
+            const stub = temp.content.querySelector(`[data-id='${component.id}']`);
+
+            if (!stub) {
+                return;
+            }
+
+            component.getContent()?.append(...Array.from(stub.childNodes));
+
+            stub.replaceWith(component.getContent()!);
         };
-    
-        Object.entries(this.children).forEach(([_, component]) => {
-          if (Array.isArray(component)) {
-            component.forEach(replaceStub);
-          } else {
-            replaceStub(component);
-          }
+
+        Object.entries(this.children).forEach(([_, component]) => { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+            if (Array.isArray(component)) {
+                component.forEach(replaceStub);
+            } else {
+                replaceStub(component);
+            }
         });
-    
+
         return temp.content;
     }
 

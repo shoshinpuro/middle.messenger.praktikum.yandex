@@ -1,4 +1,4 @@
-import queryStringify from "../utils/queryStringify";
+import queryStringify from '../utils/queryStringify';
 
 const METHODS = {
     GET: 'GET',
@@ -19,27 +19,25 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
         data: {},
         timeout: 5000,
         method: METHODS.GET,
-    }) => {
-        return this.request(url + queryStringify(options.data), { ...options , method: METHODS.GET});
-    };
+    }) => this.request(url + queryStringify(options.data), { ...options, method: METHODS.GET });
 
     post: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.POST,
-    }) => this.request(url, {...options, method: METHODS.POST});
+    }) => this.request(url, { ...options, method: METHODS.POST });
 
     put: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.PUT,
-    }) => this.request(url, {...options, method: METHODS.PUT});
+    }) => this.request(url, { ...options, method: METHODS.PUT });
 
     delete: HTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.DELETE,
-    }) => this.request(url, {...options, method: METHODS.DELETE});
+    }) => this.request(url, { ...options, method: METHODS.DELETE });
 
     request = ( // eslint-disable-line class-methods-use-this
         url: string,
@@ -62,7 +60,7 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
                     ? `${url}${queryStringify(data)}`
                     : url,
             );
-            
+
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status < 400) {
@@ -91,12 +89,12 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
 
             if (isGet || !data) {
                 xhr.send();
-            } else if (data instanceof FormData){
+            } else if (data instanceof FormData) {
                 xhr.send(data);
             } else {
-                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify(data));
-                //console.log(req);
+                // console.log(req);
             }
         });
     };

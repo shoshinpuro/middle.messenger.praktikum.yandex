@@ -11,21 +11,22 @@ class PasswordPopupFill extends Block<PopupFillProps> {
     constructor(props: PopupFillProps) {
         super(props);
     }
+
     init() {
-        this.children.oldPasswordInput = new FormInput({ 
+        this.children.oldPasswordInput = new FormInput({
             type: 'password',
             name: 'old-password',
             label: 'Old password',
             classInput: 'password-form__password-input change-password__input form-input',
         });
-        this.children.newPasswordInput = new FormInput({ 
+        this.children.newPasswordInput = new FormInput({
             type: 'password',
             name: 'password',
             label: 'New password',
             classInput: 'sign-up-form__password-input change-password__input form-input',
             validationHandler: validationPassword,
         });
-        this.children.newPassword2Input = new FormInput({ 
+        this.children.newPassword2Input = new FormInput({
             type: 'password',
             name: 'password2',
             label: 'New password (again)',
@@ -37,13 +38,12 @@ class PasswordPopupFill extends Block<PopupFillProps> {
             class: 'popup__confirm',
             type: 'submit',
             events: {
-                click : (evt: PointerEvent) => {
+                click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const data = {oldPassword: '', newPassword: ''};
-                    const oldPassword = validationPassword( this.children.oldPasswordInput as Block, 0);
-                    const newPassword = validationPassword2( this.children.newPasswordInput as Block, 0,  this.children.newPassword2Input as Block);
-                    if(newPassword && oldPassword) {
-                        console.log(newPassword);
+                    const data = { oldPassword: '', newPassword: '' };
+                    const oldPassword = validationPassword(this.children.oldPasswordInput as Block, 0); // eslint-disable-line max-len
+                    const newPassword = validationPassword2(this.children.newPasswordInput as Block, 0, this.children.newPassword2Input as Block); // eslint-disable-line max-len
+                    if (newPassword && oldPassword) {
                         data.oldPassword = oldPassword;
                         data.newPassword = newPassword;
                         UserController.changePassword(data);

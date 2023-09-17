@@ -13,7 +13,7 @@ interface PopupProps {
     error?: string;
     eventHandler?: (evt: PointerEvent) => void;
     events?: {
-      click?: (evt: PointerEvent) => void;
+        click?: (evt: PointerEvent) => void;
     }
 }
 
@@ -24,37 +24,37 @@ class Popup extends Block<PopupProps> {
 
     init() {
         this.children.close = new Close({
-            events:{
+            events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    this.hide();           
+                    this.hide();
                 },
-            }
+            },
         });
         const popupHide = () => this.hide();
-        const fillProps: {[x: string]: Block} = {
-            'Set a new avatar': new AvatarPopupFill({popupHandler: popupHide}), 
-            'Create a new chat': new AddChatPopupFill({popupHandler: popupHide}), 
-            'Change password': new PasswordPopupFill({popupHandler: popupHide}), 
+        const fillProps: { [x: string]: Block } = {
+            'Set a new avatar': new AvatarPopupFill({ popupHandler: popupHide }),
+            'Create a new chat': new AddChatPopupFill({ popupHandler: popupHide }),
+            'Change password': new PasswordPopupFill({ popupHandler: popupHide }),
             'Add user to chat': new UserInChatPopupFill({
                 userHandler: (userLoginsArr: string[], chatId: number) => {
-                    ChatController.addUsersToChat({logins: userLoginsArr, chatId: chatId});
+                    ChatController.addUsersToChat({ logins: userLoginsArr, chatId });
                 },
-                popupHandler: popupHide
-            }), 
+                popupHandler: popupHide,
+            }),
             'Delete user from chat': new UserInChatPopupFill({
                 userHandler: (userLoginsArr: string[], chatId: number) => {
-                    ChatController.deleteUsersFromChat({logins: userLoginsArr, chatId: chatId});
+                    ChatController.deleteUsersFromChat({ logins: userLoginsArr, chatId });
                 },
-                popupHandler: popupHide
-            }), 
-            'Delete chat': new DeleteChatPopupFill({popupHandler: popupHide})
+                popupHandler: popupHide,
+            }),
+            'Delete chat': new DeleteChatPopupFill({ popupHandler: popupHide }),
         };
-        for (const key in fillProps){
-            this.props.header === key?
-                this.children.fillPopup = fillProps[key]:
-                false;
-        }
+        Object.keys(fillProps).forEach((key) => {
+            if (this.props.header === key) {
+                this.children.fillPopup = fillProps[key];
+            }
+        });
     }
 
     render() {

@@ -1,9 +1,9 @@
 export type Listener<T extends unknown[] = any[]> = (...args: T) => void;
 
 class EventBus<
-  E extends string = string,
-  M extends { [K in E]: unknown[] } = Record<E, any[]>,
-  > {
+    E extends string = string,
+    M extends { [K in E]: unknown[] } = Record<E, any[]>,
+> {
     public listeners: { [key in E]?: Listener<M[E]>[] } = {};
 
     on(event: E, callback: Listener<M[E]>) {
@@ -11,7 +11,7 @@ class EventBus<
             this.listeners[event] = [];
         }
 
-    this.listeners[event]!.push(callback);
+        this.listeners[event]!.push(callback);
     }
 
     off(event: E, callback: Listener<M[E]>) {
@@ -30,11 +30,10 @@ class EventBus<
             throw new Error(`Нет события: ${event}`);
         }
 
-    this.listeners[event]!.forEach(function (listener) {
-        listener(...args);
-    });
+        this.listeners[event]!.forEach((listener) => {
+            listener(...args);
+        });
     }
 }
-
 
 export default EventBus;

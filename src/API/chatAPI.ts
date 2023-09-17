@@ -1,6 +1,6 @@
 import HTTPTransport from '../core/Fetch';
-import url from './baseAPI';
-//import { TIndexed } from '../utils/utilFunctions';
+import url from './baseConstants';
+// import { TIndexed } from '../utils/utilFunctions';
 
 export interface ICreateChat {
     title?: string,
@@ -19,23 +19,27 @@ class ChatAPI {
     }
 
     async getChats() {
-        return await this.http.get(url + '/chats');
+        return this.http.get(`${url}/chats`);
     }
-    async createChat(data:ICreateChat){
-        return this.http.post(url + '/chats', {data});
+
+    async createChat(data:ICreateChat) {
+        return this.http.post(`${url}/chats`, { data });
     }
-    async deleteChat(data:ICreateChat){
-        return this.http.delete(url + '/chats', {data});
+
+    async deleteChat(data:ICreateChat) {
+        return this.http.delete(`${url}/chats`, { data });
     }
+
     addUsers(data: IAddUsersInChat) {
-        return this.http.put(url + '/chats/users',{data});
+        return this.http.put(`${url}/chats/users`, { data });
     }
-    async deleteUsers(data: IAddUsersInChat){
-        console.log(data);
-        return this.http.delete(url + '/chats/users', {data});
+
+    async deleteUsers(data: IAddUsersInChat) {
+        return this.http.delete(`${url}/chats/users`, { data });
     }
+
     async getChatToken(data: number) {
-        return (await this.http.post(url + `/chats/token/${data}`) as any).token;
+        return (await this.http.post(`${url}/chats/token/${data}`) as any).token;
     }
 }
 export default ChatAPI;

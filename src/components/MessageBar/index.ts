@@ -17,38 +17,38 @@ class MessageBar extends Block<MessageBarProps> {
 
     init() {
         this.children.sendInput = new Input({
-            name: "message",
-            value: "",
-            placeholder: "Write a message",
-            type: "text",
-            class: "message-bar__message-input",
+            name: 'message',
+            value: '',
+            placeholder: 'Write a message',
+            type: 'text',
+            class: 'message-bar__message-input',
             events: {
                 input: (evt) => {
                     const input = (evt.target! as HTMLInputElement);
                     const inputVal = input.value;
                     const eventsButton = {
-                        click: (evt: PointerEvent) => {
-                            evt.preventDefault();
+                        click: (e: PointerEvent) => {
+                            e.preventDefault();
                             messageController.sendMessage(this.props.chatId!, inputVal);
                             input.value = '';
                         },
-                    }
-                    console.log(inputVal);
+                    };
                     if (validationMessage(inputVal)) {
-                        (this.children.sendButton as Block).setProps({events: eventsButton, disabled: false})
+                        (this.children.sendButton as Block)
+                            .setProps({ events: eventsButton, disabled: false });
                     } else {
-                        (this.children.sendButton as Block).setProps({disabled: true})
+                        (this.children.sendButton as Block).setProps({ disabled: true });
                     }
                 },
-            }
+            },
         });
         this.children.sendButton = new SendButton({
-            disabled: true
+            disabled: true,
         });
     }
 
     render() {
-        return this.compile(template, this.props); 
+        return this.compile(template, this.props);
     }
 }
 
