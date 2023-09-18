@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import template from './conversationMessage.hbs';
+import template from './ConversationMessage.hbs';
 import { TIndexed } from '../../utils/utilFunctions';
 import { IMessage } from '../../utils/interfaces';
 import MessageHeader from '../MessageHeader';
