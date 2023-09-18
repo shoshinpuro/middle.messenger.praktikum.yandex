@@ -3,7 +3,7 @@
       "dist/*"
     ],
     "extends": "stylelint-config-standard",
-    "cusomSyntax": "postcss-scss",
+    "customSyntax": "postcss-scss",
     "plugins": ["stylelint-scss"],
     "rules": {
       "at-rule-no-unknown": null,
