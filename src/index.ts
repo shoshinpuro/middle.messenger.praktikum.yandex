@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (e) {
         router.start();
 
-        if (isProtectedRoute ) {
+        if (isProtectedRoute) {
             router.go(Routes.Login);
         }
     }
