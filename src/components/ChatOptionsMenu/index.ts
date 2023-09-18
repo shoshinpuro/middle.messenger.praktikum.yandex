@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import template from './ChatOptionsMenu.hbs';
+import template from './chatOptionsMenu.hbs';
 import ChatOption from '../ChatOption';
 
 interface ChatOptionsMenuProps {
