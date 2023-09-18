@@ -124,8 +124,8 @@ class Block<P extends Record<string, any> = any> {
         }
     }
 
-    // @ts-ignore
     protected componentDidUpdate(oldProps: P, newProps: P) { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+        console.log(oldProps, newProps); // eslint-disable-line no-console
         return true;
     }
 

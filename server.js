@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static('./dist/'));
-// @ts-ignore
+
 app.use('*', (_req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
