@@ -28,7 +28,7 @@
     "dev": "vite --open --force -d",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "vite build && node server.ts",
+    "start": "vite build && node server.js",
     "stylelint": "stylelint **/*pcss",
     "stylelint:fix": "stylelint **/*pcss --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
