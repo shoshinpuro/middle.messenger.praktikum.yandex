@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import template from './MessageBar.hbs';
+import template from './messageBar.hbs';
 import SendButton from '../SendButton';
 import messageController from '../../controllers/messageController';
 import { validationMessage } from '../../utils/validation';

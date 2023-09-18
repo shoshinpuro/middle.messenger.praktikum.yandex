@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import template from './chatPopupFill.hbs';
+import template from './userInChatPopupFill.hbs';
 import FormInput from '../FormInput';
 import FormButton from '../FormButton';
 // import ChatController from '../../controllers/chatController';
