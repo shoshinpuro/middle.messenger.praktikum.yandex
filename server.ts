@@ -5,9 +5,9 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static('./dist/'));
-
+// @ts-ignore
 app.use('*', (_req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
-// eslint-disable-next-line max-len
-app.listen(PORT, () => console.log(`App listening on port ${PORT}!`)); // eslint-disable-line no-console,
+
+app.listen(PORT, () => console.log(`App listening on port ${PORT}!`)); // eslint-disable-line no-console, max-len

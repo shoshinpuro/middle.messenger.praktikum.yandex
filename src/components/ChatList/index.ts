@@ -30,6 +30,7 @@ export class ChatsListBase extends Block<ChatListProps> {
         }));
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         this.children.chats = this.createChats(newProps);
         return true;

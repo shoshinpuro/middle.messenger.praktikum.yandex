@@ -160,6 +160,7 @@ class ProfilePreferences extends Block {
         });
     }
 
+    // @ts-ignore
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
