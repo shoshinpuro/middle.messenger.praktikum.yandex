@@ -9,6 +9,7 @@ import Error500 from './pages/500/index';
 import Router from './utils/router';
 import AuthController from './controllers/authController';
 import ChatController from './controllers/chatController';
+import store from './utils/storeHOC';
 
 /* enum Routes {
   Login = '/',
@@ -70,13 +71,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         await ChatController.getChats();
         router.start();
 
-        if (!isProtectedRoute) {
+        if (!isProtectedRoute && store.getState().user) {
             router.go(Routes.Chats);
         }
     } catch (e) {
         router.start();
 
-        if (isProtectedRoute) {
+        if (isProtectedRoute ) {
             router.go(Routes.Login);
         }
     }

@@ -27,7 +27,7 @@ export default class Link extends Block<LinkProps> {
     }
 
     init() {
-        const avatarSubpath = store.getState()?.user.avatar;
+        const avatarSubpath = store.getState()?.user?.avatar;
         const avaSrc = avatarSubpath ? `${url}/resources${avatarSubpath}` : '';
         this.children.image = new Image({
             src: avaSrc || this.props.src as string,
