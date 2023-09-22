@@ -4,7 +4,6 @@ import ChatLi, { ChatLiProps } from '../ChatLi';
 
 import { connect } from '../../utils/storeHOC';
 import ChatController from '../../controllers/chatController';
-import chatController from '../../controllers/chatController';
 
 interface ChatListProps {
     chats?: Block[];

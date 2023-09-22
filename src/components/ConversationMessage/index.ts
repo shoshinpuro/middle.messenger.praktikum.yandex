@@ -21,7 +21,7 @@ class ConversationMessage extends Block<ConversationMessageProps> {
     }
 
     protected init(): void {
-        if(this.props.senderId && !this.props.isMine){
+        if (this.props.senderId && !this.props.isMine) {
             UserController.getChatUser({ id: this.props.senderId });
             const senderData = store.getState().selectedChatUsers
                 ?.find((sender: IUserWithId) => sender.id === this.props.senderId);
@@ -30,7 +30,6 @@ class ConversationMessage extends Block<ConversationMessageProps> {
                 name: `${senderData.first_name} ${senderData.second_name}`,
             });
         }
-
     }
 
     render() {

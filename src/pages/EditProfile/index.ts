@@ -137,7 +137,7 @@ class EditProfile extends Block {
     }
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-        console.error(newProps);
+        console.log(oldProps, newProps); // eslint-disable-line no-console
         return true;
     }
 

@@ -85,9 +85,11 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
     private createMessages(messages: Array<IMessage>, userId: number) {
         return messages.map((message) => {
             const connected = message.type === 'user connected';
-            const messageUserId = message?.user_id
+            const messageUserId = message?.user_id;
             const isMine = messageUserId === userId;
-            const messageTime = message?.time? remakeDate(message?.time)! : (new Date(Date.now())).toString();
+            const messageTime = message?.time
+                ? remakeDate(message?.time)!
+                : (new Date(Date.now())).toString();
             return new ConversationMessage({
                 ...message, isMine, messageTime, senderId: messageUserId, connected,
             }) as Block;
@@ -114,7 +116,7 @@ const withSelectedChat = connect((state) => {
         .find(({ id }: { id:number }) => id === state.selectedChat);
     return {
         messages: (state.messages || {})[selectedChatId],
-           // .filter((message: any) => (message.type === 'message' || message.type === ) || [],
+        // .filter((message: any) => (message.type === 'message' || message.type === ) || [],
         chats: [...(state.chats || [])],
         selectedChat: state.selectedChat,
         userId: state.user.id,

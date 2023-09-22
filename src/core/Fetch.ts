@@ -56,9 +56,7 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
 
             xhr.open(
                 method,
-                isGet && !!data
-                    ? `${url}${queryStringify(data)}`
-                    : url,
+                url,
             );
 
             xhr.onreadystatechange = () => {

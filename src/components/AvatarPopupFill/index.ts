@@ -5,9 +5,10 @@ import FormButton from '../FormButton';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
 import { PopupFillProps } from '../../utils/interfaces';
-//import router, { Routes } from '../..';
+// import router, { Routes } from '../..';
 import store from '../../utils/storeHOC';
-interface AvatarPopupFillProps extends PopupFillProps{
+
+interface AvatarPopupFillProps extends PopupFillProps {
     avatarHandler?:(data: File, chatId: number)=>void;
 }
 class AvatarPopupFill extends Block<AvatarPopupFillProps> {
@@ -34,7 +35,7 @@ class AvatarPopupFill extends Block<AvatarPopupFillProps> {
                     const input = document.querySelector('.set-avatar__input') as HTMLInputElement;
                     const data = input.files![0];
                     if (data) {
-                        if(this.props.avatarHandler){
+                        if (this.props.avatarHandler) {
                             this.props.avatarHandler(data, store.getState().selectedChat);
                         } else {
                             const formData = new FormData();
@@ -45,7 +46,7 @@ class AvatarPopupFill extends Block<AvatarPopupFillProps> {
                     }
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();
-                    //router.go(Routes.ProfilePreferences);
+                    // router.go(Routes.ProfilePreferences);
                 },
             },
         });

@@ -43,7 +43,7 @@ class ChatAPI {
     }
 
     async uploadAvatar(data: FormData) {
-        return await this.http.put(`${url}/chats/avatar`, { data });
+        return this.http.put(`${url}/chats/avatar`, { data });
     }
 }
 export default ChatAPI;

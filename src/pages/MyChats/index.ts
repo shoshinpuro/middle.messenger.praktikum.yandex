@@ -53,33 +53,15 @@ export default class Chats extends Block {
         });
 
         this.children.chatList = new ChatList({
-            /* link: '#',
-            title: (this.props as TIndexed)?.[6]?.title,
-            lastMessage: (this.props as TIndexed)?.[6]?.last_message,
-            messagesCount: (this.props as TIndexed)?.[6]?.unread_count */
+
         });
-        /* this.children.chatLi2 = new ChatLi({
-            link: '#',
-            first_name: 'Marina',
-            second_name: 'Terekh',
-            sender: '',
-            lastMessage: 'Image',
-            time: '16:08',
-            messagesCount: '2',
-        });
-        this.children.chatLi3 = new ChatLi({
-            link: '#',
-            first_name: 'Andrew',
-            second_name: 'Kirski',
-            sender: 'You:',
-            lastMessage: 'Sticker',
-            time: '12:00',
-        }); */
     }
+
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         this.children.chatList = new ChatList({});
         return true;
     }
+
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }

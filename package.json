@@ -31,6 +31,7 @@
     "start": "vite build && node server.js",
     "stylelint": "stylelint **/*pcss",
     "stylelint:fix": "stylelint **/*pcss --fix",
+    "eslint": "node_modules/.bin/eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
