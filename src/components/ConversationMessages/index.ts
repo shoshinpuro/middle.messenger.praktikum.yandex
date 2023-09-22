@@ -9,12 +9,15 @@ import MessageBar from '../MessageBar';
 import { connect } from '../../utils/storeHOC';
 import { IChat, IMessage } from '../../utils/interfaces';
 import { remakeDate } from '../../utils/utilFunctions';
+import Image from '../Image';
+import url from '../../API/baseConstants';
 
 interface ConversationMessagesProps {
     title: string;
     messages: Array<IMessage> | []
     chats: Array<IChat> | [];
     userId: number;
+    avatar?: any;
     date?: string;
     selectedChat?: number;
 }
@@ -34,11 +37,15 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
         this.children.deleteChatPopup = new Popup({
             header: 'Delete chat',
         });
+        this.children.setChatAvatar = new Popup({
+            header: 'Set a new chat avatar',
+        });
         this.children.chatOptionsMenu = new ChatOptionsMenu({
             popups: [
                 this.children.addUserPopup,
                 this.children.deleteUserPopup,
                 this.children.deleteChatPopup,
+                this.children.setChatAvatar,
             ],
         });
         this.children.chatOptions = new ChatOptions({
@@ -53,21 +60,36 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
         });
         this.children.messages = this.createMessages(this.props.messages, this.props.userId);
         this.children.messageBar = new MessageBar({ chatId: this.props.selectedChat });
+
+        this.children.avatar = new Image({
+            src: this.props.avatar as string ? `${url}/resources${this.props.avatar}` : '',
+            alt: 'chat photo',
+            class: 'chat__avatar-img',
+        });
     }
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         this.children.messages = this.createMessages(newProps.messages, newProps.userId);
         this.children.messageBar = new MessageBar({ chatId: newProps.selectedChat });
+        if (newProps.avatar) {
+            this.children.avatar = new Image({
+                src: `${url}/resources${newProps.avatar}`,
+                alt: 'chat photo',
+                class: 'chat__avatar-img',
+            });
+        }
         return true;
     }
 
     private createMessages(messages: Array<IMessage>, userId: number) {
         return messages.map((message) => {
-            const isMine = message.user_id === userId;
-            const messageTime = remakeDate(message.time)!;
+            const connected = message.type === 'user connected';
+            const messageUserId = message?.user_id
+            const isMine = messageUserId === userId;
+            const messageTime = message?.time? remakeDate(message?.time)! : (new Date(Date.now())).toString();
             return new ConversationMessage({
-                ...message, isMine, messageTime, senderId: message.user_id,
+                ...message, isMine, messageTime, senderId: messageUserId, connected,
             }) as Block;
         });
     }
@@ -91,12 +113,13 @@ const withSelectedChat = connect((state) => {
     const selectedChatData = state.chats
         .find(({ id }: { id:number }) => id === state.selectedChat);
     return {
-        messages: (state.messages || {})[selectedChatId]
-            .filter((message: any) => message.type === 'message') || [],
+        messages: (state.messages || {})[selectedChatId],
+           // .filter((message: any) => (message.type === 'message' || message.type === ) || [],
         chats: [...(state.chats || [])],
         selectedChat: state.selectedChat,
         userId: state.user.id,
         title: selectedChatData.title,
+        avatar: selectedChatData.avatar,
         date: remakeDate((state.messages || {})[selectedChatId]
             .slice(-1)[0]?.time),
     };

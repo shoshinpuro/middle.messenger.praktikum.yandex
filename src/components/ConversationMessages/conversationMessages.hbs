@@ -2,7 +2,10 @@
     {{#if selectedChat}}
     <div class="messages-header">
         <div class="chat-avatar circle">
-            {{{image}}}
+            {{#if avatar}}
+            {{{avatar}}}
+            {{/if}}
+            <!--{{{image}}}-->
         </div>
         <h4 class="messages-header__chat-name">{{title}}</h4>
         {{{chatOptions}}}
@@ -12,6 +15,7 @@
     {{{addUserPopup}}}
     {{{deleteUserPopup}}}
     {{{deleteChatPopup}}}
+    {{{setChatAvatar}}}
     {{#if date}}
     <div class="date">
         <p>{{date}}</p>

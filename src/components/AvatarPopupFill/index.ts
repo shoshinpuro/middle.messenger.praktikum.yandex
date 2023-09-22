@@ -5,10 +5,13 @@ import FormButton from '../FormButton';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
 import { PopupFillProps } from '../../utils/interfaces';
-import router, { Routes } from '../..';
-
-class AvatarPopupFill extends Block<PopupFillProps> {
-    constructor(props: PopupFillProps) {
+//import router, { Routes } from '../..';
+import store from '../../utils/storeHOC';
+interface AvatarPopupFillProps extends PopupFillProps{
+    avatarHandler?:(data: File, chatId: number)=>void;
+}
+class AvatarPopupFill extends Block<AvatarPopupFillProps> {
+    constructor(props: AvatarPopupFillProps) {
         super(props);
     }
 
@@ -29,16 +32,20 @@ class AvatarPopupFill extends Block<PopupFillProps> {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
                     const input = document.querySelector('.set-avatar__input') as HTMLInputElement;
-                    const formData = new FormData();
                     const data = input.files![0];
                     if (data) {
-                        formData.append('avatar', data);
-                        UserController.setAvatar(formData);
-                        AuthController.getUser();
+                        if(this.props.avatarHandler){
+                            this.props.avatarHandler(data, store.getState().selectedChat);
+                        } else {
+                            const formData = new FormData();
+                            formData.append('avatar', data);
+                            UserController.setAvatar(formData);
+                            AuthController.getUser();
+                        }
                     }
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();
-                    router.go(Routes.ProfilePreferences);
+                    //router.go(Routes.ProfilePreferences);
                 },
             },
         });

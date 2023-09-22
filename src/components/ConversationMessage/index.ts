@@ -10,6 +10,7 @@ import { IUserWithId } from '../../controllers/chatController';
 interface ConversationMessageProps extends IMessage {
     isMine: boolean;
     messageTime: string;
+    connected?: boolean;
     senderId?: number;
     events?: TIndexed
 }
@@ -20,13 +21,16 @@ class ConversationMessage extends Block<ConversationMessageProps> {
     }
 
     protected init(): void {
-        UserController.getChatUser({ id: this.props.senderId });
-        const senderData = store.getState().selectedChatUsers
-            .find((sender: IUserWithId) => sender.id === this.props.senderId);
+        if(this.props.senderId && !this.props.isMine){
+            UserController.getChatUser({ id: this.props.senderId });
+            const senderData = store.getState().selectedChatUsers
+                ?.find((sender: IUserWithId) => sender.id === this.props.senderId);
 
-        this.children.header = new MessageHeader({
-            name: `${senderData.first_name} ${senderData.second_name}`,
-        });
+            this.children.header = new MessageHeader({
+                name: `${senderData.first_name} ${senderData.second_name}`,
+            });
+        }
+
     }
 
     render() {

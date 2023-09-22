@@ -4,6 +4,7 @@ import ChatLi, { ChatLiProps } from '../ChatLi';
 
 import { connect } from '../../utils/storeHOC';
 import ChatController from '../../controllers/chatController';
+import chatController from '../../controllers/chatController';
 
 interface ChatListProps {
     chats?: Block[];
@@ -30,7 +31,7 @@ export class ChatsListBase extends Block<ChatListProps> {
         }));
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         this.children.chats = this.createChats(newProps);
         return true;

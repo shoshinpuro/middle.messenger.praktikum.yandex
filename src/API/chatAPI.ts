@@ -41,5 +41,9 @@ class ChatAPI {
     async getChatToken(data: number) {
         return (await this.http.post(`${url}/chats/token/${data}`) as any).token;
     }
+
+    async uploadAvatar(data: FormData) {
+        return await this.http.put(`${url}/chats/avatar`, { data });
+    }
 }
 export default ChatAPI;

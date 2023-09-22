@@ -23,17 +23,17 @@ import store from './utils/storeHOC';
 export class Routes {
     public static readonly Login = '/';
 
-    public static readonly Chats = 'messenger';
+    public static readonly Chats = '/messenger';
 
-    public static readonly SignUp = 'sign-up';
+    public static readonly SignUp = '/sign-up';
 
-    public static readonly ProfilePreferences = 'settings';
+    public static readonly ProfilePreferences = '/settings';
 
-    public static readonly EditProfile = 'edit-settings';
+    public static readonly EditProfile = '/edit-settings';
 
-    public static readonly Error404 = '404';
+    public static readonly Error404 = '/404';
 
-    public static readonly Error500 = '500';
+    public static readonly Error500 = '/500';
 }
 
 const router = new Router('#app');
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             isProtectedRoute = true;
             break;
         default:
-            console.log('another link'); // eslint-disable-line no-console
+            console.log(window.location.pathname); // eslint-disable-line no-console
     }
 
     try {

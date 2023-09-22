@@ -1,7 +1,7 @@
 import Block from '../../core/Block';
 import template from './chatLi.hbs';
-// import Image from '../Image';
-import { TUser } from '../../API/baseConstants';
+import Image from '../Image';
+import url, { TUser } from '../../API/baseConstants';
 import { connect } from '../../utils/storeHOC';
 import { remakeDate } from '../../utils/utilFunctions';
 
@@ -26,6 +26,14 @@ export interface ChatLiProps {
 class Chat extends Block<ChatLiProps> {
     constructor(props: ChatLiProps) {
         super(props);
+    }
+
+    protected init(): void {
+        this.children.avatar = new Image({
+            src: this.props.avatar as string ? `${url}/resources${this.props.avatar}` : '',
+            alt: 'chat photo',
+            class: 'chat__avatar-img',
+        });
     }
 
     render() {

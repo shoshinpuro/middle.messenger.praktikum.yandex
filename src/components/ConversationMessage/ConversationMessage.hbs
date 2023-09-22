@@ -1,4 +1,9 @@
 <li class="conversation-message">
+    {{#if connected}}
+        <p class="conversation-message__connected-message">
+            User {{content}} is connected to the chat
+        </p>
+    {{else}}
     <div class="conversation-message__wrap{{#if isMine}} my-message{{/if}}">
         <div class="conversation-message__sender">{{#if isMine}}{{else}}{{{header}}}{{/if}}</div>
         <div class="conversation-message__message-content">
@@ -16,4 +21,5 @@
             <p>{{messageTime}}</p>   
         </div>
     </div>
+    {{/if}}
 </li>

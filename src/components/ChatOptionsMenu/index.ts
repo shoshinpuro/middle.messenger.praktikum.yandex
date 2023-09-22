@@ -43,6 +43,16 @@ class ChatOptionsMenu extends Block<ChatOptionsMenuProps> {
                 },
             },
         });
+        this.children.setChatAvatar = new ChatOption({
+            text: 'Set avatar',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    this.hide();
+                    this.props.popups[3].show();
+                },
+            },
+        });
     }
 
     render() {

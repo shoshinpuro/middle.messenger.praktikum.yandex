@@ -162,6 +162,19 @@ class ProfilePreferences extends Block {
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
+        const avaSrc = newProps.avatar ? `${url}/resources${newProps.avatar}` : '';
+        console.error(newProps);
+        this.children.avatar = new Avatar({
+            first_name: this.props.first_name as string,
+            second_name: this.props.second_name as string,
+            srcImg: avaSrc,
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go(Routes.EditProfile);
+                },
+            },
+        });
         this.children.dataUnitLi1 = new DataUnitLi({
             header: 'Phone number',
             textValue: newProps.phone as string,

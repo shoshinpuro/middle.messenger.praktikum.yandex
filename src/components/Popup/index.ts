@@ -49,6 +49,15 @@ class Popup extends Block<PopupProps> {
                 popupHandler: popupHide,
             }),
             'Delete chat': new DeleteChatPopupFill({ popupHandler: popupHide }),
+            'Set a new chat avatar': new AvatarPopupFill({
+                avatarHandler: (data: File, selectedChatId: number) => {
+                    const formData = new FormData();
+                    formData.append('chatId', selectedChatId.toString());
+                    formData.append('avatar', data);
+                    ChatController.uploadAvatarChat(formData);
+                },
+                popupHandler: popupHide,
+            }),
         };
         Object.keys(fillProps).forEach((key) => {
             if (this.props.header === key) {

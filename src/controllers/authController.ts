@@ -42,6 +42,7 @@ class AuthController {
             store.on('updated', () => { console.log('update user'); }); // eslint-disable-line no-console, max-len
             await this.AuthAPI.getUser()
                 .then((res) => store.set('user', res));
+            store.on('updated', () => { console.log('update user'); }); // eslint-disable-line no-console, max-len
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
         }

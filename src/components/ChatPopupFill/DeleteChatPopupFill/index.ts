@@ -16,11 +16,11 @@ class DeleteChatPopupFillBase extends Block<PopupFillProps> {
             class: 'popup__confirm',
             type: 'submit',
             events: {
-                click: (evt: PointerEvent) => {
+                click: async (evt: PointerEvent) => {
                     evt.preventDefault();
                     const chatId = this.props.selectedChat;
                     if (chatId) {
-                        ChatController.deleteChat(chatId);
+                        await ChatController.deleteChat(chatId);
                     }
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();

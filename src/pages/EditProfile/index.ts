@@ -75,7 +75,7 @@ class EditProfile extends Block {
         });
         this.children.dataUnitLi6 = new DataUnitLi({
             header: 'Name in chats',
-            textValue: 'Ivan',
+            textValue: this.props.display_name as string,
             name: this.props.display_name as string || '',
             isEdit,
             validationHandler: validationName,
@@ -129,11 +129,16 @@ class EditProfile extends Block {
                     if (!Object.values(validationsResults).includes(undefined!)) {
                         UserController.updateProfile(validationsResults);
                         // .then((res) => console.log(res));
-                        router.go(Routes.ProfilePreferences);
+                        router.go('/settings');
                     }
                 },
             },
         });
+    }
+
+    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+        console.error(newProps);
+        return true;
     }
 
     protected render(): DocumentFragment {

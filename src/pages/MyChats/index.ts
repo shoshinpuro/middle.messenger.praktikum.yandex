@@ -76,7 +76,10 @@ export default class Chats extends Block {
             time: '12:00',
         }); */
     }
-
+    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+        this.children.chatList = new ChatList({});
+        return true;
+    }
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }

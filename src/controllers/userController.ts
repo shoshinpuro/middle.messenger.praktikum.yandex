@@ -38,6 +38,7 @@ class UserController {
             await this.UserAPI.setAvatar(data)
                 .then(() => AuthController.getUser());
             store.on('updated', () => { console.log('update avatar'); }); // eslint-disable-line no-console, max-len
+            router.go('/settings');
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
         }

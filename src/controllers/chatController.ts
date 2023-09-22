@@ -20,19 +20,22 @@ class ChatController {
         this.UserAPI = new UserAPI();
     }
 
-    async getChats() {
+    async getChats(again: boolean = false) {
         try {
             const chats = await this.ChatAPI.getChats() as Array<any>;
-            // console.log(chats);
             // await chats.sort();
-            chats.map(async (chat) => {
-                const token = await this.getToken(chat.id);
-                await messageController.connect(chat.id, token);
-            });
-            store.set('chats', chats);
-            store.on('updated', () => {
-                console.log('updated chats'); // eslint-disable-line no-console
-            });
+            if(chats){
+                if( !again ){
+                    chats.map(async (chat) => {
+                        const token = await this.getToken(chat.id);
+                        await messageController.connect(chat.id, token);
+                    });
+                }
+                store.set('chats', chats);
+                store.on('updated', () => {
+                    console.log('updated chats'); // eslint-disable-line no-console
+                });
+            }
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
         }
@@ -42,8 +45,7 @@ class ChatController {
         try {
             await this.ChatAPI.createChat(data)
                 // .then((res) => console.log(res))
-                .then(() => this.getChats())
-                .then(() => router.go(Routes.Chats));
+                .then(() => this.getChats());
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
         }
@@ -52,8 +54,10 @@ class ChatController {
     async deleteChat(id: number) {
         try {
             const data = { chatId: id };
+            store.set('selectedChat', '');
             await this.ChatAPI.deleteChat(data)
-                .then(() => this.getChats());
+                .then(() => this.getChats(true));
+
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
         }
@@ -71,7 +75,9 @@ class ChatController {
                 ],
                 chatId,
             };
-            await this.ChatAPI.deleteUsers(requestDataUser);
+            /*const addedUser = */await this.ChatAPI.addUsers(requestDataUser)
+                /*.then((resp) => console.error(resp));
+                console.error(addedUser);*/
             // .then((res) => console.log(res));
             this.getChats();
             /* let userDataArr: Array<IUserWithId> = [];
@@ -96,6 +102,7 @@ class ChatController {
             this.getChats(); */
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
+            alert(`User wasn't added: ${error}`);
         }
     }
 
@@ -110,7 +117,8 @@ class ChatController {
                 ],
                 chatId,
             };
-            await this.ChatAPI.addUsers(requestDataUser);
+            await this.ChatAPI.deleteUsers(requestDataUser)
+                /*.then((resp) => console.error(resp));*/
             // .then((res) => console.log(res));
             this.getChats();
             /* let userIdArr: Array<number> = [];
@@ -153,7 +161,13 @@ class ChatController {
             const userIds = (dataUser as Array<any>).map((user) => (user[0] as TUser).id!); */
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
+            alert(`User wasn't deleted: ${error}`);
         }
+    }
+    
+    async uploadAvatarChat(data: FormData) {
+        await this.ChatAPI.uploadAvatar(data);
+        this.getChats(true);
     }
 
     selectChat(id: number | string) {
