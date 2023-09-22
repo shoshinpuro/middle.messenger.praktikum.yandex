@@ -60,7 +60,3 @@ export function set(object: TIndexed | unknown, path: string, value: unknown): T
 export function remakeDate(date: string) {
     return date ? new Date(date).toString().substring(4, 10) : undefined;
 }
-/* export const loginsToIds: (logins: string[]) => number[] = (logins) => {
-    const users = store.getState().contactedUsers;
-    return logins.map((login) => users.find((user: IUserWithId) => user.login === login).id);
-}; */

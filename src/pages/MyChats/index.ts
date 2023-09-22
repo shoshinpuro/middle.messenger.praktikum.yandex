@@ -58,6 +58,7 @@ export default class Chats extends Block {
     }
 
     protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+        console.log(oldProps, newProps); // eslint-disable-line no-console
         this.children.chatList = new ChatList({});
         return true;
     }

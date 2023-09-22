@@ -1,12 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import EventBus from '../core/EventBus';
 
-/* export enum WSTransportEvents {
-  Connected = 'connected',
-  Error = 'error',
-  Message = 'message',
-  Close = 'close',
-} */
 export class WSTransportEvents {
     public static readonly Connected = 'connected';
 
