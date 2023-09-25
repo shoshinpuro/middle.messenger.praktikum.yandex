@@ -3,13 +3,17 @@ import FormButton from '../../components/FormButton/index';
 import Block from '../../core/Block';
 import template from './signUp.hbs';
 import {
-    validationEmail, validationLogin, validationName, validationPassword, validationPhone,
+    validationEmail, validationLogin, validationName,
+    validationPassword, validationPassword2, validationPhone,
 } from '../../utils/validation';
-import formDataOutput from '../../utils/formDataOutput';
+import Link from '../../components/Link';
+import router, { Routes } from '../../index';
+import AuthController from '../../controllers/authController';
+import { TUser } from '../../API/baseConstants';
 
 class SignUp extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {
@@ -42,7 +46,7 @@ class SignUp extends Block {
             name: 'first_name',
             label: 'Firstname',
             classInput: 'sign-up-form__firstname-input  form-input',
-            value: this.props.firstname as string,
+            value: this.props.first_name as string,
             validationHandler: validationName,
         });
         this.children.inputLastname = new FormInput({
@@ -50,7 +54,7 @@ class SignUp extends Block {
             name: 'second_name',
             label: 'Lastname',
             classInput: 'sign-up-form__lastname-input  form-input',
-            value: this.props.lastname as string,
+            value: this.props.second_name as string,
             validationHandler: validationName,
 
         });
@@ -70,6 +74,17 @@ class SignUp extends Block {
             value: this.props.password2 as string,
             validationHandler: validationPassword,
         });
+        this.children.loginLink = new Link({
+            title: 'Sign in',
+            href: '/',
+            class: 'sign-up-form__sign-in',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go(Routes.Login);
+                },
+            },
+        });
         this.children.formButton = new FormButton({
             class: 'sign-up-form__submit submit',
             label: 'Register',
@@ -77,33 +92,27 @@ class SignUp extends Block {
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
-                    const names = [
-                        'phone',
-                        'email',
-                        'login',
-                        'first_name',
-                        'second_name',
-                        'password',
-                        'password2',
-                    ];
-                    const formElem = document.querySelector('form') as HTMLFormElement;
-                    formDataOutput(formElem, names);
 
-                    const phone = this.children.inputPhone;
-                    const email = this.children.inputEmail;
-                    const login = this.children.inputLogin;
-                    const password = this.children.inputPassword;
-                    const firstname = this.children.inputFirstname;
-                    const lastname = this.children.inputLastname;
-                    const password2 = this.children.inputPassword2;
-                    // const validationsResults = [];
-                    validationPhone(phone, 0);
-                    validationEmail(email, 0);
-                    validationLogin(login, 0);
-                    validationName(firstname, 0);
-                    validationName(lastname, 0);
-                    validationPassword(password, 0);
-                    validationPassword(password2, 0);
+                    const phone = this.children.inputPhone as Block;
+                    const email = this.children.inputEmail as Block;
+                    const login = this.children.inputLogin as Block;
+                    const password = this.children.inputPassword as Block;
+                    const firstName = this.children.inputFirstname as Block;
+                    const secondName = this.children.inputLastname as Block;
+                    const password2 = this.children.inputPassword2 as Block;
+                    const validationsResults: TUser = {};
+                    validationsResults.phone = validationPhone(phone, 0);
+                    validationsResults.email = validationEmail(email, 0);
+                    validationsResults.login = validationLogin(login, 0);
+                    validationsResults.first_name = validationName(firstName, 0);
+                    validationsResults.second_name = validationName(secondName, 0);
+                    validationsResults.password = validationPassword2(password, 0, password2);
+
+                    if (!Object.values(validationsResults).includes(undefined!)) {
+                        AuthController.signUp(validationsResults);
+                        // .then((res) => console.log(res));
+                        router.go(Routes.ProfilePreferences);
+                    }
                 },
             },
         });

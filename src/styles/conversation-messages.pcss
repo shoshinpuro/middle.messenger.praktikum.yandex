@@ -1,6 +1,6 @@
 @import url('./variables.pcss');
 
-.mesagges-wrap{
+.messages-wrap{
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
@@ -8,6 +8,43 @@
     overflow-x: hidden;
     width: 100%;
     display: flex;
+}
+
+.messages-header{
+    display: flex;
+    background: #fff0ef;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    min-height: 40px;
+}
+
+.messages-header__chat-options{
+    padding: 7px 20px;
+}
+
+.messages-header__chat-name{
+    padding-right: 40px;
+}
+
+.chat-options-menu{
+    position: absolute;
+    top: 45px;
+    margin-right: 20px;
+    min-height: 65px;
+    border-radius: 5px;
+    width: 100px;
+    background: #ffffff;
+    align-self: flex-end;
+    display: none;
+    flex-direction: column;
+    opacity: 0.9;
+}
+
+.chat-options-menu__li{
+    padding: 8px 10px;
+    cursor: pointer;
 }
 
 .conversation-messages{
@@ -33,7 +70,7 @@
 }
 
 .conversation-message__time{
-    color: #999999;
+    color:  var(--gray-text-color);
     font-size: 10px;
     line-height: 10px;
     text-align: right;
@@ -93,14 +130,39 @@
 .date{
     margin: auto;
     position: sticky;
-    top: 31px;
+    top: 55px;
     height: 25px;
     padding: 6px 26px;
     background: rgb(217 217 217 / 20%);
     border-radius: 10px;
-    color: #999999;
+    color:  var(--gray-text-color);
 }
 
 .message-bar__attach{
     cursor: pointer;
+}
+
+.message-bar__button {
+    cursor: pointer;
+}
+
+.message-bar__button:disabled {
+    cursor: default;
+}
+
+.chat-avatar{
+    margin-left: 50px;
+    height: 35px;
+    width: 35px;
+}
+
+.no-chat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.messages-wrap__start{
+    color:  var(--gray-text-color);
 }

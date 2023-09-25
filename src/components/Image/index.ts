@@ -5,10 +5,12 @@ interface ImageProps {
     class: string;
     src: string;
     alt: string;
-    events?: object;
+    events?: {
+        click?: (e: PointerEvent) => void
+    }
 }
 
-class Image extends Block {
+class Image extends Block<ImageProps> {
     constructor(props: ImageProps) {
         super(props);
     }

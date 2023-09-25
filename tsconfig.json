@@ -10,6 +10,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "sourceMap": true,
+        "noEmit": true,
         "strictNullChecks": true,
         "lib": [
             "ESNext",

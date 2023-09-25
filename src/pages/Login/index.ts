@@ -1,13 +1,18 @@
 import FormInput from '../../components/FormInput/index';
 import FormButton from '../../components/FormButton/index';
+import Link from '../../components/Link';
 import Block from '../../core/Block';
 import template from './login.hbs';
 import { validationLogin, validationPassword } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';
+import router, { Routes } from '../../index';
+import AuthController from '../../controllers/authController';
+import ChatController from '../../controllers/chatController';
+import { TUser } from '../../API/baseConstants';
 
 class Login extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {
@@ -27,6 +32,17 @@ class Login extends Block {
             value: this.props.password as string,
             validationHandler: validationPassword,
         });
+        this.children.registerLink = new Link({
+            title: 'Create account',
+            href: '/sign-up',
+            class: 'sign-in-form__sign-up',
+            events: {
+                click: (evt: PointerEvent) => {
+                    evt.preventDefault();
+                    router.go(Routes.SignUp);
+                },
+            },
+        });
         this.children.formButton = new FormButton({
             class: 'sign-in-form__submit submit',
             label: 'Sign in',
@@ -37,11 +53,17 @@ class Login extends Block {
                     const names = ['login', 'password'];
                     const formElem = document.querySelector('form') as HTMLFormElement;
                     formDataOutput(formElem, names);
-                    const login = this.children.inputLogin;
-                    const password = this.children.inputPassword;
-                    // const validationsResults = [];
-                    validationLogin(login, 0);
-                    validationPassword(password, 0);
+                    const login = this.children.inputLogin as Block;
+                    const password = this.children.inputPassword as Block;
+
+                    const validationsResults: TUser = {};
+                    validationsResults.login = validationLogin(login, 0);
+                    validationsResults.password = validationPassword(password, 0);
+
+                    if (!Object.values(validationsResults).includes(undefined!)) {
+                        AuthController.signIn(validationsResults)
+                            .then(() => ChatController.getChats());
+                    }
                 },
             },
         });

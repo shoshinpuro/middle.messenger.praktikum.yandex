@@ -5,8 +5,9 @@ import Input from '../Input';
 interface InputProps {
     name: string;
     label: string;
-    value: string;
+    value?: string;
     type: string;
+    accept?: string;
     classInput?: string;
     error?: string;
     events?: {
@@ -17,7 +18,7 @@ interface InputProps {
 
 type ValidationHandler = (elem: Block, childNum: number) => string;
 
-class FormInput extends Block {
+class FormInput extends Block<InputProps> {
     constructor(props: InputProps) {
         super(props);
     }
@@ -28,13 +29,16 @@ class FormInput extends Block {
             name: this.props.name as string,
             value: this.props.value as string,
             class: this.props.classInput as string,
+            accept: this.props?.accept as string,
             events: {
                 focus: () => {
-                    console.log('focus'); // eslint-disable-line no-console
+                    // console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
                     const validationFunc = this.props.validationHandler as ValidationHandler;
-                    validationFunc(this, 0);
+                    if (this.props.validationHandler) {
+                        validationFunc(this, 0);
+                    }
                 },
             },
 

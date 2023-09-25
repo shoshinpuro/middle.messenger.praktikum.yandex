@@ -5,14 +5,17 @@ interface InputProps {
     name: string;
     value: string;
     type: string;
+    accept?: string;
     class?: string;
+    placeholder?: string;
     events?: {
         focus?: () => void;
         blur?: () => void;
+        input?: (evt: Event) => void;
     }
 }
 
-class Input extends Block {
+class Input extends Block<InputProps> {
     constructor(props: InputProps) {
         super(props);
     }

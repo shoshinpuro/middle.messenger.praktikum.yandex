@@ -1,35 +1,38 @@
 {
-  "name": "sprint1",
+  "name": "messenger",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
     "handlebars": "^4.7.7",
-    "nanoid": "^4.0.2"
+    "nanoid": "^4.0.2",
+    "vite-plugin-handlebars": "^1.6.0"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.8",
-    "@typescript-eslint/parser": "^5.59.8",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.42.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "express": "^4.18.2",
-    "parcel": "^2.8.3",
     "postcss": "^8.4.23",
     "postcss-nested": "^6.0.1",
-    "stylelint": "^15.6.2",
+    "postcss-scss": "^4.0.8",
+    "stylelint": "^15.10.3",
     "stylelint-config-standard": "^33.0.0",
-    "stylelint-scss": "^5.0.0",
+    "stylelint-scss": "^5.2.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vite": "^4.4.5"
   },
   "scripts": {
-    "build": "parcel build ./src/index.html",
-    "dev": " parcel --no-cache ./src/index.html --port 3000",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel build ./src/index.html && node server.js",
+    "dev": "vite --open --force -d",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start": "vite build && node server.js",
     "stylelint": "stylelint **/*pcss",
-    "stylelint:fix": "stylelint **/*pcss --fix"
+    "stylelint:fix": "stylelint **/*pcss --fix",
+    "eslint": "node_modules/.bin/eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC"

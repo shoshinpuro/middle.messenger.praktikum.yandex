@@ -4,7 +4,7 @@ import template from './404.hbs';
 
 class Error404 extends Block {
     constructor() {
-        super();
+        super({});
     }
 
     protected init():void {

@@ -6,7 +6,7 @@ interface ErrorProps {
     message: string;
 }
 
-class ErrorPage extends Block {
+class ErrorPage extends Block<ErrorProps> {
     constructor(props: ErrorProps) {
         super(props);
     }

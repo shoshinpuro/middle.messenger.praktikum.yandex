@@ -1,6 +1,7 @@
 import Block from '../../core/Block';
 import template from './dataUnitLi.hbs';
 import Input from '../Input';
+import { TIndexed } from '../../utils/utilFunctions';
 
 interface DataUnitLiProps {
     header: string;
@@ -9,18 +10,19 @@ interface DataUnitLiProps {
     name?: string;
     type?: string;
     error?: string;
-    events?: object;
+    events?: TIndexed;
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }
 
 type ValidationHandler = (elem: Block, childNum: number) => string;
 
-class DataUnitLi extends Block {
+class DataUnitLi extends Block<DataUnitLiProps> {
     constructor(props: DataUnitLiProps) {
         super(props);
     }
 
     init() {
+        // console.log(this.props);
         if (this.props.isEdit) {
             const dataUnitLiInputClass = 'profile-data-form__input  form-input';
             this.children.input = new Input({

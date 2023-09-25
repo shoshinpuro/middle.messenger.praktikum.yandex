@@ -1,0 +1,25 @@
+<li class="conversation-message">
+    {{#if connected}}
+        <p class="conversation-message__connected-message">
+            User {{content}} is connected to the chat
+        </p>
+    {{else}}
+    <div class="conversation-message__wrap{{#if isMine}} my-message{{/if}}">
+        <div class="conversation-message__sender">{{#if isMine}}{{else}}{{{header}}}{{/if}}</div>
+        <div class="conversation-message__message-content">
+            <p class="conversation-message__message-content-p">{{content}}</p>
+        </div>
+        <div class="conversation-message__time">
+            {{#if is_read}}
+            <svg width="11" height="5" viewBox="0 0 11 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line y1="-0.5" x2="3.765" y2="-0.5" transform="matrix(0.705933 0.708278 -0.705933 0.708278 0.700195 2.33313)" stroke="#3369F3"/>
+                <line y1="-0.5" x2="5.6475" y2="-0.5" transform="matrix(0.705933 -0.708278 0.705933 0.708278 3.35815 5)" stroke="#3369F3"/>
+        
+                <line y1="-0.5" x2="5.6475" y2="-0.5" transform="matrix(0.705933 -0.708278 0.705933 0.708278 6.01587 5)" stroke="#3369F3"/>
+            </svg>
+            {{/if}}
+            <p>{{messageTime}}</p>   
+        </div>
+    </div>
+    {{/if}}
+</li>
