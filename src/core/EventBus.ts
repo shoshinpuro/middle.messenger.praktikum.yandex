@@ -1,6 +1,6 @@
 type Listener<T extends unknown[] = any[]> = (...args: T) => void;
 
-export class EventBus<
+export class EventBus< // eslint-disable-line import/prefer-default-export
     E extends string = string,
     M extends { [K in E]: unknown[] } = Record<E, any[]>,
 > {

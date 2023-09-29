@@ -36,7 +36,6 @@ class Route {
         if (!this._block) {
             this._block = new this._blockClass({});
             renderDOM(this._block, this.rootQuery);
-            return;
         }
     }
 }

@@ -6,7 +6,7 @@ import ProfilePage from './pages/ProfilePreferences/index';
 import EditProfile from './pages/EditProfile/index';
 import Error404 from './pages/404/index';
 import Error500 from './pages/500/index';
-import Router from './utils/router';
+import Router from './utils/router'; // eslint-disable-line import/no-named-as-default
 import AuthController from './controllers/authController';
 import ChatController from './controllers/chatController';
 import store from './utils/storeHOC';
@@ -36,7 +36,7 @@ export class Routes {
     public static readonly Error500 = '/500';
 }
 
-//const router = new Router('#app');
+// const router = new Router('#app');
 
 document.addEventListener('DOMContentLoaded', async () => {
     Router

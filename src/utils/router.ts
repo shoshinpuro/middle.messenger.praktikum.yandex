@@ -1,9 +1,9 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, no-new */
 import Route from './route';
 import { Block } from '../core/Block';
 
 export interface BlockConstructable<P extends Record<string, any> = any> {
-  new(props: P): Block<P>;
+    new(props: P): Block<P>;
 }
 
 export class Router {
@@ -73,10 +73,9 @@ export class Router {
 
     public reset() {
         delete Router.__instance;
-    
+
         new Router(this._rootQuery);
-      }
+    }
 }
 
-const router = new Router('#app');
-export default router;
+export default new Router('#app');

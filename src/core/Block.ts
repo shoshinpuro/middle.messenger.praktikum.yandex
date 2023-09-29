@@ -10,7 +10,7 @@ import { EventBus } from './EventBus';
     "render"
 ] }] */
 
-export class Block<P extends Record<string, any> = any> {
+export class Block<P extends Record<string, any> = any> { // eslint-disable-line import/prefer-default-export, max-len
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -54,10 +54,10 @@ export class Block<P extends Record<string, any> = any> {
         children: Record<string, Block | Block[]>
     } {
         const props: Record<string, unknown> = {};
-        const children: Record<string, Block | Block[]>  = {};
+        const children: Record<string, Block | Block[]> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
-            if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+            if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) { // eslint-disable-line max-len
                 children[key as string] = value;
             } else if (value instanceof Block) {
                 children[key as string] = value;
@@ -115,13 +115,13 @@ export class Block<P extends Record<string, any> = any> {
 
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-    
-        Object.values(this.children).forEach(child => {
-          if (Array.isArray(child)) {
-            child.forEach(ch => ch.dispatchComponentDidMount());
-          } else {
-            child.dispatchComponentDidMount();
-          }
+
+        Object.values(this.children).forEach((child) => {
+            if (Array.isArray(child)) {
+                child.forEach((ch) => ch.dispatchComponentDidMount());
+            } else {
+                child.dispatchComponentDidMount();
+            }
         });
     }
 
@@ -162,7 +162,7 @@ export class Block<P extends Record<string, any> = any> {
     protected render(): DocumentFragment {
         return new DocumentFragment();
     }
-    
+
     protected compile(template: (context: any) => string, context: any) {
         const contextAndStubs = { ...context };
 
@@ -243,4 +243,3 @@ export class Block<P extends Record<string, any> = any> {
         this.getContent()!.style.display = 'none';
     }
 }
-

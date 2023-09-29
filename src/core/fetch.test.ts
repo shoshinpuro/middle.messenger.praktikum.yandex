@@ -1,34 +1,34 @@
 import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
-import HTTPTransport from './Fetch';
 import { expect } from 'chai';
+import HTTPTransport from './Fetch';
 
 describe('HTTPTransport', () => {
-  let xhr: SinonFakeXMLHttpRequestStatic;
-  let http: HTTPTransport;
-  let requests: SinonFakeXMLHttpRequest[] = [];
+    let xhr: SinonFakeXMLHttpRequestStatic;
+    let http: HTTPTransport;
+    let requests: SinonFakeXMLHttpRequest[] = [];
 
-  beforeEach(() => {
-    xhr = sinon.useFakeXMLHttpRequest();
+    beforeEach(() => {
+        xhr = sinon.useFakeXMLHttpRequest();
 
-    // @ts-ignore
-    global.XMLHttpRequest = xhr;
+        // @ts-ignore
+        global.XMLHttpRequest = xhr;
 
-    xhr.onCreate = ((request: SinonFakeXMLHttpRequest) => {
-      requests.push(request);
+        xhr.onCreate = ((request: SinonFakeXMLHttpRequest) => {
+            requests.push(request);
+        });
+
+        http = new HTTPTransport();
     });
 
-    http = new HTTPTransport();
-  });
+    afterEach(() => {
+        requests = [];
+    });
 
-  afterEach(() => {
-    requests = [];
-  })
+    it('.get() should send GET request', () => {
+        http.get('https://example.com/auth/user');
 
-  it('.get() should send GET request', () => {
-    http.get(`https://example.com/auth/user`);
+        const [request] = requests;
 
-    const [request] = requests;
-
-    expect(request.method).to.eq('GET');
-  });
+        expect(request.method).to.eq('GET');
+    });
 });
