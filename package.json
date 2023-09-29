@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "jsdom": "22.1.0",
     "handlebars": "4.7.8",
+    "jsdom": "22.1.0",
     "nanoid": "3.3.4",
     "vite-plugin-handlebars": "1.6.0"
   },
@@ -46,13 +46,9 @@
     "lint:es": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint": "npm-run-all --parallel lint:*",
-    "test": "mocha"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint",
-      "pre-push": "npm-run-all build"
-    }
+    "test": "mocha",
+    "check-all": "npm-run-all test lint",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC"
