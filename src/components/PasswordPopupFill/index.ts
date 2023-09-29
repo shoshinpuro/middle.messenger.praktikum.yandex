@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './passwordPopupFill.hbs';
 import FormInput from '../FormInput';
 import FormButton from '../FormButton';

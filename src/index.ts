@@ -1,4 +1,4 @@
-import Block from './core/Block';
+import { Block } from './core/Block';
 import Chats from './pages/MyChats/index';
 import Login from './pages/Login/index';
 import SignUp from './pages/SignUp/index';
@@ -36,10 +36,10 @@ export class Routes {
     public static readonly Error500 = '/500';
 }
 
-const router = new Router('#app');
+//const router = new Router('#app');
 
 document.addEventListener('DOMContentLoaded', async () => {
-    router
+    Router
         .use(Routes.Login, Login)
         .use(Routes.Chats, Chats as typeof Block)
         .use(Routes.SignUp, SignUp)
@@ -69,18 +69,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         await AuthController.getUser();
         await ChatController.getChats();
-        router.start();
+        Router.start();
 
         if (!isProtectedRoute && store.getState().user) {
-            router.go(Routes.Chats);
+            Router.go(Routes.Chats);
         }
     } catch (e) {
-        router.start();
+        Router.start();
 
         if (isProtectedRoute) {
-            router.go(Routes.Login);
+            Router.go(Routes.Login);
         }
     }
 });
 
-export default router;
+export default Router;

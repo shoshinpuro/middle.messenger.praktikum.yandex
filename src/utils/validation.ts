@@ -1,4 +1,4 @@
-import Block from '../core/Block';
+import { Block } from '../core/Block';
 
 const regexObj = {
     message: /(.|\s)*\S(.|\s)*$/,

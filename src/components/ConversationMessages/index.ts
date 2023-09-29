@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './conversationMessages.hbs';
 import ChatOptions from '../ChatOptions';
 import ChatOptionsMenu from '../ChatOptionsMenu';

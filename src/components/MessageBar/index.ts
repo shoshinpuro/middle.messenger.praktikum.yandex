@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './MessageBar.hbs';
 import SendButton from '../SendButton';
 import messageController from '../../controllers/messageController';

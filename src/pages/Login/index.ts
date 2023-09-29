@@ -1,7 +1,7 @@
 import FormInput from '../../components/FormInput/index';
 import FormButton from '../../components/FormButton/index';
 import Link from '../../components/Link';
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './login.hbs';
 import { validationLogin, validationPassword } from '../../utils/validation';
 import formDataOutput from '../../utils/formDataOutput';

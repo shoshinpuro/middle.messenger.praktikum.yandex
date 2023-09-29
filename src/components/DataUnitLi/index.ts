@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './dataUnitLi.hbs';
 import Input from '../Input';
 import { TIndexed } from '../../utils/utilFunctions';

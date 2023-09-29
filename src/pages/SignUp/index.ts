@@ -1,6 +1,6 @@
 import FormInput from '../../components/FormInput/index';
 import FormButton from '../../components/FormButton/index';
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './signUp.hbs';
 import {
     validationEmail, validationLogin, validationName,

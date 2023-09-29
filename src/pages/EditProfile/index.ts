@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './editProfile.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import FormButton from '../../components/FormButton';

@@ -1,6 +1,6 @@
-export type Listener<T extends unknown[] = any[]> = (...args: T) => void;
+type Listener<T extends unknown[] = any[]> = (...args: T) => void;
 
-class EventBus<
+export class EventBus<
     E extends string = string,
     M extends { [K in E]: unknown[] } = Record<E, any[]>,
 > {
@@ -35,5 +35,3 @@ class EventBus<
         });
     }
 }
-
-export default EventBus;

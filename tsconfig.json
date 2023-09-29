@@ -16,5 +16,8 @@
             "ESNext",
             "DOM"
         ]
+    },
+    "ts-node": {
+        "files": true
     }
 }

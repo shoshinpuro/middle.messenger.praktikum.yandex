@@ -1,14 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import Block from '../core/Block';
+import { Block } from '../core/Block';
 import isEqual from './isEqualPath';
 import renderDOM from './renderDOM';
+import { BlockConstructable } from './router';
 
 class Route {
     private _block: Block | null = null;
 
     constructor(
         private _pathname: string,
-        private _blockClass: typeof Block,
+        private _blockClass: BlockConstructable,
         private rootQuery: string,
     ) {
     }
@@ -37,7 +38,6 @@ class Route {
             renderDOM(this._block, this.rootQuery);
             return;
         }
-        this._block.show();
     }
 }
 export default Route;

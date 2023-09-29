@@ -1,7 +1,7 @@
 import ConversationMessages from '../../components/ConversationMessages';
 import ChatList from '../../components/ChatList';
 import imgAvatar from '../../assets/img/avatar.png';
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './myChats.hbs';
 import Link from '../../components/Link';
 import router, { Routes } from '../..';

@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './chatLi.hbs';
 import Image from '../Image';
 import url, { TUser } from '../../API/baseConstants';

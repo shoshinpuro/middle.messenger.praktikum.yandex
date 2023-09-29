@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './chatList.hbs';
 import ChatLi, { ChatLiProps } from '../ChatLi';
 

@@ -1,4 +1,4 @@
-import EventBus from '../core/EventBus';
+import { EventBus } from '../core/EventBus';
 import { TIndexed, set } from './utilFunctions';
 
 export default class Store extends EventBus {

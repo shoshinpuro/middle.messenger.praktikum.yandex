@@ -1,6 +1,6 @@
 import Store from './storeBase';
 import isEqual from './isEqual';
-import Block from '../core/Block';
+import { Block } from '../core/Block';
 import { TIndexed } from './utilFunctions';
 
 const store = new Store();

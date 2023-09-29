@@ -1,9 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import Route from './route';
-import Block from '../core/Block';
+import { Block } from '../core/Block';
 
-export default class Router {
-    private static __instance: Router;
+export interface BlockConstructable<P extends Record<string, any> = any> {
+  new(props: P): Block<P>;
+}
+
+export class Router {
+    private static __instance?: Router;
 
     private routes: Route[] = [];
 
@@ -16,16 +20,18 @@ export default class Router {
             return Router.__instance; // eslint-disable-line no-constructor-return
         }
 
+        this.routes = [];
+
         Router.__instance = this;
     }
 
-    public use(pathname: string, block: typeof Block) {
+    public use(pathname: string, block: BlockConstructable) {
         const route = new Route(pathname, block, this._rootQuery);
         this.routes.push(route);
         return this;
     }
 
-    start() {
+    public start() {
         window.onpopstate = (event: PopStateEvent) => {
             const target = event.currentTarget as Window;
             this._onRoute(target.location.pathname);
@@ -33,7 +39,7 @@ export default class Router {
         this._onRoute(window.location.pathname);
     }
 
-    _onRoute(pathname: string) {
+    private _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
         if (!route) {
             console.log('ERROR'); // eslint-disable-line no-console
@@ -47,21 +53,30 @@ export default class Router {
         route.render();
     }
 
-    go(pathname: string) {
+    public go(pathname: string) {
         this._history.pushState({}, '', pathname);
 
         this._onRoute(pathname);
     }
 
-    back() {
+    public back() {
         this._history.back();
     }
 
-    forward() {
+    public forward() {
         this._history.forward();
     }
 
-    getRoute(pathname: string) {
+    private getRoute(pathname: string) {
         return this.routes.find((route) => route.match(pathname) || route.match(pathname.slice(1)));
     }
+
+    public reset() {
+        delete Router.__instance;
+    
+        new Router(this._rootQuery);
+      }
 }
+
+const router = new Router('#app');
+export default router;

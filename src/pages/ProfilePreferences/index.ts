@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './profilePreferences.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import Link from '../../components/Link';

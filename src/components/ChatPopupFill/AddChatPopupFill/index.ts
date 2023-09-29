@@ -1,4 +1,4 @@
-import Block from '../../../core/Block';
+import { Block } from '../../../core/Block';
 import template from './addChatPopupFill.hbs';
 import FormInput from '../../FormInput';
 import FormButton from '../../FormButton';

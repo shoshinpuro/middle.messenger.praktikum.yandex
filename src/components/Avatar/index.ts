@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './avatar.hbs';
 import Image from '../Image';
 import img from '../../assets/img/AmandaSekar.png';

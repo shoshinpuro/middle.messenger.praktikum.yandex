@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './popup.hbs';
 import Close from '../Close';
 import AvatarPopupFill from '../AvatarPopupFill';
