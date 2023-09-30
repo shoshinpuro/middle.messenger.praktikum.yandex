@@ -57,10 +57,8 @@ export class Block<P extends Record<string, any> = any> { // eslint-disable-line
         const children: Record<string, Block | Block[]> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
-            if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) { // eslint-disable-line max-len
-                children[key as string] = value;
-            } else if (value instanceof Block) {
-                children[key as string] = value;
+            if (value instanceof Block) {
+                children[key] = value;
             } else {
                 props[key] = value;
             }
@@ -151,7 +149,7 @@ export class Block<P extends Record<string, any> = any> { // eslint-disable-line
     private _render() {
         const fragment = this.render();
         const newElement = fragment.firstElementChild as HTMLElement;
-        this._removeEvents();/* */
+        this._removeEvents();
         if (this._element && newElement) {
             this._element.replaceWith(newElement);
         }
