@@ -14,9 +14,10 @@ import { connect } from '../../utils/storeHOC';
 import url, { TUser } from '../../API/baseConstants';
 
 import UserController from '../../controllers/userController';
+import { TIndexed } from '../../utils/utilFunctions';
 
 class EditProfile extends Block {
-    constructor(props: any) {
+    constructor(props: TIndexed) {
         super({ ...props });
     }
 
@@ -136,7 +137,7 @@ class EditProfile extends Block {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         console.log(oldProps, newProps); // eslint-disable-line no-console
         return true;
     }
@@ -147,7 +148,7 @@ class EditProfile extends Block {
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: TIndexed) {
     return state.user ?? [];
 }
 

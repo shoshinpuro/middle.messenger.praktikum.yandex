@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { EventBus } from './EventBus';
+import { TIndexed } from '../utils/utilFunctions';
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": [
     "_getChildrenAndProps",
@@ -161,7 +162,7 @@ export class Block<P extends Record<string, any> = any> { // eslint-disable-line
         return new DocumentFragment();
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected compile(template: (context: unknown) => string, context: TIndexed) {
         const contextAndStubs = { ...context };
 
         Object.entries(this.children).forEach(([name, component]) => {

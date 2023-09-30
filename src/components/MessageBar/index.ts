@@ -4,10 +4,11 @@ import SendButton from '../SendButton';
 import messageController from '../../controllers/messageController';
 import { validationMessage } from '../../utils/validation';
 import Input from '../Input';
+import { TIndexed } from '../../utils/utilFunctions';
 
 interface MessageBarProps {
-    chatId?: number
-    events?: any
+    chatId?: number;
+    events?: TIndexed;
 }
 
 class MessageBar extends Block<MessageBarProps> {

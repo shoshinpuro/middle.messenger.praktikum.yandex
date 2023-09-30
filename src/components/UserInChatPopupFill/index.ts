@@ -70,5 +70,5 @@ const withSelectedChat = connect((state) => {
     };
 });
 
-const UserInChatPopupFill = withSelectedChat(UserInChatPopupFillBase as any);
+const UserInChatPopupFill = withSelectedChat(UserInChatPopupFillBase as typeof Block);
 export default UserInChatPopupFill;

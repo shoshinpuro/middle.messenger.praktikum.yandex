@@ -1,4 +1,4 @@
-type TStringIndexed = Record<string, any>;
+export type TStringIndexed = Record<string, any>;
 
 function queryStringify(data: TStringIndexed): string | never {
     if (typeof data !== 'object') {

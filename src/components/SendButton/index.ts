@@ -4,8 +4,8 @@ import template from './sendButton.hbs';
 interface SendButtonProps {
     disabled?: boolean;
     events?: {
-        click: (evt: PointerEvent) => void
-    }
+        click: (evt: PointerEvent) => void;
+    };
 }
 
 class SendButton extends Block<SendButtonProps> {

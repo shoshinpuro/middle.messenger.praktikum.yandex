@@ -14,10 +14,10 @@ import url from '../../API/baseConstants';
 
 interface ConversationMessagesProps {
     title: string;
-    messages: Array<IMessage> | []
+    messages: Array<IMessage> | [];
     chats: Array<IChat> | [];
     userId: number;
-    avatar?: any;
+    avatar?: unknown;
     date?: string;
     selectedChat?: number;
 }
@@ -68,7 +68,7 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    protected componentDidUpdate(oldProps: unknown, newProps: ConversationMessagesProps): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         this.children.messages = this.createMessages(newProps.messages, newProps.userId);
         this.children.messageBar = new MessageBar({ chatId: newProps.selectedChat });
@@ -116,7 +116,7 @@ const withSelectedChat = connect((state) => {
         .find(({ id }: { id:number }) => id === state.selectedChat);
     return {
         messages: (state.messages || {})[selectedChatId],
-        // .filter((message: any) => (message.type === 'message' || message.type === ) || [],
+        // .filter((message: TIndexed) => (message.type === 'message' || message.type === ) || [],
         chats: [...(state.chats || [])],
         selectedChat: state.selectedChat,
         userId: state.user.id,
@@ -127,5 +127,5 @@ const withSelectedChat = connect((state) => {
     };
 });
 
-const ConversationMessages = withSelectedChat(ConversationMessagesBase as any);
+const ConversationMessages = withSelectedChat(ConversationMessagesBase as typeof Block);
 export default ConversationMessages;

@@ -12,7 +12,7 @@ interface InputProps {
         focus?: () => void;
         blur?: () => void;
         input?: (evt: Event) => void;
-    }
+    };
 }
 
 class Input extends Block<InputProps> {

@@ -11,7 +11,8 @@ interface InputProps {
     classInput?: string;
     error?: string;
     events?: {
-
+        focus?: (evt: Event) => void;
+        blur?: (evt: Event) => void;
     };
     validationHandler?: (elem: Block, childNum: number) => (string | undefined);
 }

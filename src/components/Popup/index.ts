@@ -14,7 +14,7 @@ interface PopupProps {
     eventHandler?: (evt: PointerEvent) => void;
     events?: {
         click?: (evt: PointerEvent) => void;
-    }
+    };
 }
 
 class Popup extends Block<PopupProps> {

@@ -10,7 +10,7 @@ export function trim(string:string, symbols?:string) {
     return string.trim();
 }
 
-export function queryStringify(data: any) {
+export function queryStringify(data: TIndexed) {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
     }

@@ -4,6 +4,7 @@ import UserAPI from '../API/userAPI';
 import store from '../utils/storeHOC';
 import messageController from './messageController';
 import { IUser, IUserData } from '../utils/interfaces';
+import { TIndexed } from '../utils/utilFunctions';
 
 export interface IUserWithId extends IUser {
     id?: number;
@@ -21,7 +22,7 @@ class ChatController {
 
     async getChats(again: boolean = false) {
         try {
-            const chats = await this.ChatAPI.getChats() as Array<any>;
+            const chats = await this.ChatAPI.getChats() as Array<TIndexed>;
             // await chats.sort();
             if (chats) {
                 if (!again) {

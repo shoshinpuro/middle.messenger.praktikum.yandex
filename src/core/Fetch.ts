@@ -1,4 +1,4 @@
-import queryStringify from '../utils/queryStringify';
+import queryStringify, { TStringIndexed } from '../utils/queryStringify';
 
 const METHODS = {
     GET: 'GET',
@@ -7,7 +7,7 @@ const METHODS = {
     DELETE: 'DELETE',
 };
 interface Options {
-    data: any;
+    data: TStringIndexed;
     method?: string;
     headers?: { [key: string]: string };
     timeout?: number;

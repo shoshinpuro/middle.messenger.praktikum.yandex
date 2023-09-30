@@ -18,7 +18,7 @@ interface LinkProps {
     goBack?: boolean;
     events?: {
         click?: (evt: PointerEvent) => void;
-    }
+    };
 }
 
 export default class Link extends Block<LinkProps> {

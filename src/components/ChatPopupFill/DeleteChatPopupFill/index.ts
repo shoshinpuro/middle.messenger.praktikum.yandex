@@ -38,6 +38,6 @@ const withSelectedChat = connect((state) => ({
     selectedChat: state.selectedChat || undefined,
 }));
 
-const DeleteChatPopupFill = withSelectedChat(DeleteChatPopupFillBase as any);
+const DeleteChatPopupFill = withSelectedChat(DeleteChatPopupFillBase as typeof Block);
 
 export default DeleteChatPopupFill;

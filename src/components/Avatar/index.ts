@@ -2,12 +2,13 @@ import { Block } from '../../core/Block';
 import template from './avatar.hbs';
 import Image from '../Image';
 import img from '../../assets/img/AmandaSekar.png';
+import { TIndexed } from '../../utils/utilFunctions';
 
 interface AvatarProps {
     first_name: string;
     second_name: string;
     srcImg?: string;
-    events?: {};
+    events?: TIndexed;
 }
 
 class Avatar extends Block<AvatarProps> {

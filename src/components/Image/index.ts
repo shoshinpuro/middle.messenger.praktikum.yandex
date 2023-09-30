@@ -6,8 +6,8 @@ interface ImageProps {
     src: string;
     alt: string;
     events?: {
-        click?: (e: PointerEvent) => void
-    }
+        click?: (e: PointerEvent) => void;
+    };
 }
 
 class Image extends Block<ImageProps> {

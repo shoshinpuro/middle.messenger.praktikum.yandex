@@ -7,9 +7,10 @@ import Link from '../../components/Link';
 import router, { Routes } from '../..';
 import AuthController from '../../controllers/authController';
 import Popup from '../../components/Popup';
+import { TIndexed } from '../../utils/utilFunctions';
 
 export default class Chats extends Block {
-    constructor(props: any) {
+    constructor(props: TIndexed) {
         super({
             ...props,
         });
@@ -57,7 +58,7 @@ export default class Chats extends Block {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps, newProps); // eslint-disable-line no-console
         this.children.chatList = new ChatList({});
         return true;

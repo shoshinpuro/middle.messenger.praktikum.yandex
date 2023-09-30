@@ -3,6 +3,7 @@ import proxyquire from 'proxyquire';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import type { Block as BlockType } from './Block';
+import { TIndexed } from '../utils/utilFunctions';
 
 const eventBusMock = {
     on: sinon.fake(),
@@ -21,7 +22,7 @@ const { Block } = proxyquire('./Block', {
 
 describe('block', () => {
     class ComponentMock extends Block {
-        constructor(props: any) {
+        constructor(props: TIndexed) {
             super(props);
         }
     }

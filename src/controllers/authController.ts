@@ -3,6 +3,7 @@ import { TUser } from '../API/baseConstants';
 import store from '../utils/storeHOC';
 import router, { Routes } from '../index';
 import messageController from './messageController';
+import { TIndexed } from '../utils/utilFunctions';
 
 class AuthController {
     AuthAPI:AuthAPI;
@@ -22,7 +23,7 @@ class AuthController {
                 });
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
-            if ((error as any)?.reason === 'User already in system') {
+            if ((error as TIndexed)?.reason === 'User already in system') {
                 await this.getUser()
                     .then(() => router.go(Routes.Chats));
             }

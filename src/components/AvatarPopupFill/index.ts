@@ -9,7 +9,7 @@ import { PopupFillProps } from '../../utils/interfaces';
 import store from '../../utils/storeHOC';
 
 interface AvatarPopupFillProps extends PopupFillProps {
-    avatarHandler?:(data: File, chatId: number)=>void;
+    avatarHandler?: (data: File, chatId: number) => void;
 }
 class AvatarPopupFill extends Block<AvatarPopupFillProps> {
     constructor(props: AvatarPopupFillProps) {

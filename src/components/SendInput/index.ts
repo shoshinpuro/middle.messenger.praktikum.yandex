@@ -5,8 +5,8 @@ interface SendInputProps {
     events?: {
         focus?: () => void;
         blur?: () => void;
-        input?: () => void
-    }
+        input?: () => void;
+    };
 }
 
 class SendInput extends Block<SendInputProps> {

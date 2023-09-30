@@ -1,4 +1,4 @@
-type Listener<T extends unknown[] = any[]> = (...args: T) => void;
+type Listener<T extends unknown[] = unknown[]> = (...args: T) => void;
 
 export class EventBus< // eslint-disable-line import/prefer-default-export
     E extends string = string,

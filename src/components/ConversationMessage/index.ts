@@ -12,7 +12,7 @@ interface ConversationMessageProps extends IMessage {
     messageTime: string;
     connected?: boolean;
     senderId?: number;
-    events?: TIndexed
+    events?: TIndexed;
 }
 
 class ConversationMessage extends Block<ConversationMessageProps> {

@@ -1,10 +1,11 @@
 import { Block } from '../../core/Block';
 import template from './chatOptionsMenu.hbs';
 import ChatOption from '../ChatOption';
+import { TIndexed } from '../../utils/utilFunctions';
 
 interface ChatOptionsMenuProps {
     popups: Block[];
-    events?: any
+    events?: TIndexed;
 }
 
 class ChatOptionsMenu extends Block<ChatOptionsMenuProps> {

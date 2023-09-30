@@ -4,8 +4,8 @@ import template from './chatOption.hbs';
 interface ChatOptionProps {
     text: string;
     events?: {
-        click?: (e: PointerEvent) => void
-    }
+        click?: (e: PointerEvent) => void;
+    };
 }
 
 class ChatOption extends Block<ChatOptionProps> {

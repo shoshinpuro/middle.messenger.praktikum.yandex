@@ -30,7 +30,7 @@ export class ChatsListBase extends Block<ChatListProps> {
         }));
     }
 
-    componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    componentDidUpdate(oldProps: unknown, newProps: ChatListProps): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         this.children.chats = this.createChats(newProps);
         return true;
@@ -59,5 +59,5 @@ const withChats = connect((state) => {
     };
 });
 
-const ChatList = withChats(ChatsListBase as any);
+const ChatList = withChats(ChatsListBase as typeof Block);
 export default ChatList;

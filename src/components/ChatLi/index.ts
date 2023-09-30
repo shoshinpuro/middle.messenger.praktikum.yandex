@@ -3,24 +3,24 @@ import template from './chatLi.hbs';
 import Image from '../Image';
 import url, { TUser } from '../../API/baseConstants';
 import { connect } from '../../utils/storeHOC';
-import { remakeDate } from '../../utils/utilFunctions';
+import { remakeDate, TIndexed } from '../../utils/utilFunctions';
 
 type TlastMessage = {
-    content: string,
-    id: number,
-    time: string,
-    user: TUser
+    content: string;
+    id: number;
+    time: string;
+    user: TUser;
 };
 export interface ChatLiProps {
     link: string;
     title: string;
     last_message?: TlastMessage | null;
     unread_count?: number;
-    avatar?: any;
+    avatar?: unknown;
     created_by?: number;
     id?: number;
     time?: string;
-    events?: {};
+    events?: TIndexed;
 }
 
 class Chat extends Block<ChatLiProps> {
@@ -54,5 +54,5 @@ const withSelectedChat = connect((state) => ({
     selectedChat: (state.chats || []).find(({ id }: { id:number }) => id === state.selectedChat),
 }));
 
-const ChatLi = withSelectedChat(Chat as any);
+const ChatLi = withSelectedChat(Chat as typeof Block);
 export default ChatLi;
