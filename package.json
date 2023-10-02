@@ -50,7 +50,7 @@
     "eslint:fix": "eslint . --fix",
     "lint": "npm-run-all --parallel lint:*",
     "test": "mocha",
-    "check-all": "npm-run-all test lint",
+    "check-all": "npm-run-all build test lint",
     "prepare": "husky install"
   },
   "author": "",
