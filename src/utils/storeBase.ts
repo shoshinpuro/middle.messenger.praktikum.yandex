@@ -1,5 +1,6 @@
-import EventBus from '../core/EventBus';
-import { TIndexed, set } from './utilFunctions';
+import { EventBus } from '../core/EventBus';
+import { set } from './utilFunctions';
+import { TIndexed } from './types';
 
 export default class Store extends EventBus {
     private state: TIndexed = {};

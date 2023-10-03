@@ -1,21 +1,15 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './avatarPopupFill.hbs';
 import FormInput from '../FormInput';
 import FormButton from '../FormButton';
-import UserController from '../../controllers/userController';
-import AuthController from '../../controllers/authController';
-import { PopupFillProps } from '../../utils/interfaces';
+import { IPopupFillProps } from '../../utils/interfaces';
 // import router, { Routes } from '../..';
 import store from '../../utils/storeHOC';
 
-interface AvatarPopupFillProps extends PopupFillProps {
-    avatarHandler?:(data: File, chatId: number)=>void;
+interface IAvatarPopupFillProps extends IPopupFillProps {
+    avatarHandler: (data: File, chatId: number) => void;
 }
-class AvatarPopupFill extends Block<AvatarPopupFillProps> {
-    constructor(props: AvatarPopupFillProps) {
-        super(props);
-    }
-
+class AvatarPopupFill extends Block<IAvatarPopupFillProps> {
     init() {
         this.children.inputUploadAvatar = new FormInput({
             name: 'avatar',
@@ -35,18 +29,10 @@ class AvatarPopupFill extends Block<AvatarPopupFillProps> {
                     const input = document.querySelector('.set-avatar__input') as HTMLInputElement;
                     const data = input.files![0];
                     if (data) {
-                        if (this.props.avatarHandler) {
-                            this.props.avatarHandler(data, store.getState().selectedChat);
-                        } else {
-                            const formData = new FormData();
-                            formData.append('avatar', data);
-                            UserController.setAvatar(formData);
-                            AuthController.getUser();
-                        }
+                        this.props.avatarHandler(data, store.getState().selectedChat);
                     }
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();
-                    // router.go(Routes.ProfilePreferences);
                 },
             },
         });

@@ -1,7 +1,8 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
+import { TAnyEventHandler } from '../../utils/types';
 import template from './input.hbs';
 
-interface InputProps {
+interface IInputProps {
     name: string;
     value: string;
     type: string;
@@ -9,17 +10,13 @@ interface InputProps {
     class?: string;
     placeholder?: string;
     events?: {
-        focus?: () => void;
-        blur?: () => void;
-        input?: (evt: Event) => void;
-    }
+        focus?: TAnyEventHandler;
+        blur?: TAnyEventHandler;
+        input?: TAnyEventHandler;
+    };
 }
 
-class Input extends Block<InputProps> {
-    constructor(props: InputProps) {
-        super(props);
-    }
-
+class Input extends Block<IInputProps> {
     render() {
         return this.compile(template, this.props);
     }

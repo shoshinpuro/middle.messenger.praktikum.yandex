@@ -1,20 +1,17 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './MessageBar.hbs';
 import SendButton from '../SendButton';
 import messageController from '../../controllers/messageController';
 import { validationMessage } from '../../utils/validation';
 import Input from '../Input';
+import { TIndexed } from '../../utils/types';
 
-interface MessageBarProps {
-    chatId?: number
-    events?: any
+interface IMessageBarProps {
+    chatId?: number;
+    events?: TIndexed;
 }
 
-class MessageBar extends Block<MessageBarProps> {
-    constructor(props: MessageBarProps) {
-        super(props);
-    }
-
+class MessageBar extends Block<IMessageBarProps> {
     init() {
         this.children.sendInput = new Input({
             name: 'message',

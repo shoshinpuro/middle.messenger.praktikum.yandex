@@ -33,7 +33,7 @@ class UserController {
         }
     }
 
-    async setAvatar(data: any) {
+    async setAvatar(data: FormData) {
         try {
             await this.UserAPI.setAvatar(data)
                 .then(() => AuthController.getUser());

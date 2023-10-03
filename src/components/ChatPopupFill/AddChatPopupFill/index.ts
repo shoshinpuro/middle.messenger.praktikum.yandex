@@ -1,15 +1,11 @@
-import Block from '../../../core/Block';
+import { Block } from '../../../core/Block';
 import template from './addChatPopupFill.hbs';
 import FormInput from '../../FormInput';
 import FormButton from '../../FormButton';
 import ChatController from '../../../controllers/chatController';
-import { PopupFillProps } from '../../../utils/interfaces';
+import { IPopupFillProps } from '../../../utils/interfaces';
 
-class AddChatPopupFill extends Block<PopupFillProps> {
-    constructor(props: PopupFillProps) {
-        super(props);
-    }
-
+class AddChatPopupFill extends Block<IPopupFillProps> {
     init() {
         this.children.chatNameInput = new FormInput({
             type: 'text',

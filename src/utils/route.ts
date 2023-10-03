@@ -1,14 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import Block from '../core/Block';
+import { Block } from '../core/Block';
 import isEqual from './isEqualPath';
 import renderDOM from './renderDOM';
+import { IBlockConstructable } from './router';
 
 class Route {
     private _block: Block | null = null;
 
     constructor(
         private _pathname: string,
-        private _blockClass: typeof Block,
+        private _blockClass: IBlockConstructable,
         private rootQuery: string,
     ) {
     }
@@ -35,9 +36,7 @@ class Route {
         if (!this._block) {
             this._block = new this._blockClass({});
             renderDOM(this._block, this.rootQuery);
-            return;
         }
-        this._block.show();
     }
 }
 export default Route;

@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './editProfile.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import FormButton from '../../components/FormButton';
@@ -14,12 +14,9 @@ import { connect } from '../../utils/storeHOC';
 import url, { TUser } from '../../API/baseConstants';
 
 import UserController from '../../controllers/userController';
+import { TIndexed } from '../../utils/types';
 
 class EditProfile extends Block {
-    constructor(props: any) {
-        super({ ...props });
-    }
-
     protected init():void {
         const avaSrc = this.props.avatar ? `${url}/resources${this.props.avatar}` : '';
         this.children.changeAvatar = new Avatar({
@@ -136,7 +133,7 @@ class EditProfile extends Block {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean {
         console.log(oldProps, newProps); // eslint-disable-line no-console
         return true;
     }
@@ -147,7 +144,7 @@ class EditProfile extends Block {
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: TIndexed) {
     return state.user ?? [];
 }
 

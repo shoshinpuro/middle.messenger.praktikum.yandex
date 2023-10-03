@@ -1,6 +1,6 @@
 import FormInput from '../../components/FormInput/index';
 import FormButton from '../../components/FormButton/index';
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './signUp.hbs';
 import {
     validationEmail, validationLogin, validationName,
@@ -12,10 +12,6 @@ import AuthController from '../../controllers/authController';
 import { TUser } from '../../API/baseConstants';
 
 class SignUp extends Block {
-    constructor() {
-        super({});
-    }
-
     protected init():void {
         this.children.inputPhone = new FormInput({
             type: 'tel',

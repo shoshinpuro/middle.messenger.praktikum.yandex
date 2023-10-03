@@ -1,12 +1,12 @@
-export type Listener<T extends unknown[] = any[]> = (...args: T) => void;
+type TListener<T extends unknown[] = unknown[]> = (...args: T) => void;
 
-class EventBus<
+export class EventBus< // eslint-disable-line import/prefer-default-export
     E extends string = string,
     M extends { [K in E]: unknown[] } = Record<E, any[]>,
 > {
-    public listeners: { [key in E]?: Listener<M[E]>[] } = {};
+    public listeners: { [key in E]?: TListener<M[E]>[] } = {};
 
-    on(event: E, callback: Listener<M[E]>) {
+    on(event: E, callback: TListener<M[E]>) {
         if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
@@ -14,7 +14,7 @@ class EventBus<
         this.listeners[event]!.push(callback);
     }
 
-    off(event: E, callback: Listener<M[E]>) {
+    off(event: E, callback: TListener<M[E]>) {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`);
         }
@@ -35,5 +35,3 @@ class EventBus<
         });
     }
 }
-
-export default EventBus;

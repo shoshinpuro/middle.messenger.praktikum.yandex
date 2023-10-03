@@ -1,7 +1,7 @@
 import ConversationMessages from '../../components/ConversationMessages';
 import ChatList from '../../components/ChatList';
 import imgAvatar from '../../assets/img/avatar.png';
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './myChats.hbs';
 import Link from '../../components/Link';
 import router, { Routes } from '../..';
@@ -9,12 +9,6 @@ import AuthController from '../../controllers/authController';
 import Popup from '../../components/Popup';
 
 export default class Chats extends Block {
-    constructor(props: any) {
-        super({
-            ...props,
-        });
-    }
-
     protected init():void {
         AuthController.getUser();
         this.children.createChatPopup = new Popup({
@@ -57,7 +51,7 @@ export default class Chats extends Block {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    protected componentDidUpdate(oldProps: unknown, newProps: unknown): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps, newProps); // eslint-disable-line no-console
         this.children.chatList = new ChatList({});
         return true;

@@ -19,15 +19,15 @@ class UserAPI {
         return this.http.put(`${url}/user/password`, { data });
     }
 
-    setAvatar(data: any) {
+    setAvatar(data: FormData) {
         return this.http.put(`${url}/user/profile/avatar`, { data });
     }
 
-    getUserByLogin(data: any) {
+    getUserByLogin(data: { login: string }) {
         return this.http.post(`${url}/user/search`, { data });
     }
 
-    getUserById(data: any) {
+    getUserById(data: TUser) {
         return this.http.get(`${url}/user/${data.id}`);
     }
 }

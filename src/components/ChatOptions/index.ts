@@ -1,17 +1,14 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
+import { TClickHandler } from '../../utils/types';
 import template from './chatOptions.hbs';
 
-interface ChatOptionsProps {
+interface IChatOptionsProps {
     events?: {
-        click?: (e?:MouseEvent) => void;
-    }
+        click?: TClickHandler;
+    };
 }
 
-class ChatOptions extends Block<ChatOptionsProps> {
-    constructor(props: ChatOptionsProps) {
-        super(props);
-    }
-
+class ChatOptions extends Block<IChatOptionsProps> {
     render() {
         return this.compile(template, this.props);
     }

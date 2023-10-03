@@ -1,14 +1,14 @@
-// import Block from "../core/Block";
+import { TIndexed } from './types';
 
-export interface PopupFillProps {
+export interface IPopupFillProps {
     popupHandler?: () => void;
     error?: string;
     selectedChat?: number;
-    events?: {};
+    events?: TIndexed;
 }
 export interface IUserData {
-    logins: Array<string>,
-    chatId: number
+    logins: Array<string>;
+    chatId: number;
 }
 export interface IMessage {
     chat_id: number;
@@ -43,8 +43,8 @@ export interface IChat {
         content: string;
         id: number;
         time: string;
-        user: IUser
-    }
+        user: IUser;
+    };
     title: string;
     unread_count: number;
 }

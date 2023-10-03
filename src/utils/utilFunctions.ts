@@ -1,6 +1,4 @@
-export type TIndexed<T = any> = {
-    [key in string]: T;
-};
+import { TIndexed } from './types';
 
 export function trim(string:string, symbols?:string) {
     if (symbols) {
@@ -10,7 +8,7 @@ export function trim(string:string, symbols?:string) {
     return string.trim();
 }
 
-export function queryStringify(data: any) {
+export function queryStringify(data: TIndexed) {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
     }

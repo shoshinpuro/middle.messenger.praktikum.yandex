@@ -1,14 +1,14 @@
 import HTTPTransport from '../core/Fetch';
+import { TIndexed } from '../utils/types';
 import url from './baseConstants';
-// import { TIndexed } from '../utils/utilFunctions';
 
 export interface ICreateChat {
-    title?: string,
-    chatId?: string | number | ICreateChat
+    title?: string;
+    chatId?: string | number | ICreateChat;
 }
 export interface IAddUsersInChat {
-    users: Array<string | number>,
-    chatId: number
+    users: Array<string | number>;
+    chatId: number;
 }
 
 class ChatAPI {
@@ -39,7 +39,7 @@ class ChatAPI {
     }
 
     async getChatToken(data: number) {
-        return (await this.http.post(`${url}/chats/token/${data}`) as any).token;
+        return (await this.http.post(`${url}/chats/token/${data}`) as TIndexed).token;
     }
 
     async uploadAvatar(data: FormData) {

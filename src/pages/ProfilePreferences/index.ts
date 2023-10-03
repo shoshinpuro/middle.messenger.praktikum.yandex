@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './profilePreferences.hbs';
 import DataUnitLi from '../../components/DataUnitLi';
 import Link from '../../components/Link';
@@ -9,13 +9,9 @@ import AuthController from '../../controllers/authController';
 // import UserController from '../../controllers/userController';
 import { connect } from '../../utils/storeHOC';
 import url from '../../API/baseConstants';
+import { TIndexed } from '../../utils/types';
 
 class ProfilePreferences extends Block {
-    constructor(props: any) {
-        super({ ...props });
-        AuthController.getUser();
-    }
-
     init():void {
         AuthController.getUser();
         const avaSrc = this.props.avatar ? `${url}/resources${this.props.avatar}` : '';
@@ -160,7 +156,7 @@ class ProfilePreferences extends Block {
         });
     }
 
-    protected componentDidUpdate(oldProps: any, newProps: any): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    protected componentDidUpdate(oldProps: unknown, newProps: TIndexed): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         const avaSrc = newProps.avatar ? `${url}/resources${newProps.avatar}` : '';
         this.children.avatar = new Avatar({
@@ -243,7 +239,7 @@ class ProfilePreferences extends Block {
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: TIndexed) {
     return state.user ?? [];
 }
 

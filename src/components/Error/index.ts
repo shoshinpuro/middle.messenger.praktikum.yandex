@@ -1,16 +1,12 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './error.hbs';
 
-interface ErrorProps {
+interface IErrorProps {
     status: string;
     message: string;
 }
 
-class ErrorPage extends Block<ErrorProps> {
-    constructor(props: ErrorProps) {
-        super(props);
-    }
-
+class ErrorPage extends Block<IErrorProps> {
     render() {
         return this.compile(template, { ...this.props });
     }

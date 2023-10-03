@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
-import EventBus from './EventBus';
+import { EventBus } from './EventBus';
+import { TIndexed } from '../utils/types';
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": [
     "_getChildrenAndProps",
@@ -10,7 +11,7 @@ import EventBus from './EventBus';
     "render"
 ] }] */
 
-class Block<P extends Record<string, any> = any> {
+export class Block<P extends Record<string, any> = any> { // eslint-disable-line import/prefer-default-export, max-len
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -22,10 +23,9 @@ class Block<P extends Record<string, any> = any> {
 
     private _element: HTMLElement | null = null;
 
-    // eslint-disable-next-line max-len
     protected props: P;
 
-    public children: Record<string, Block> | Record<string, Block[]>;
+    public children: Record<string, Block | Block[]>;
 
     private eventBus: () => EventBus;
 
@@ -51,11 +51,11 @@ class Block<P extends Record<string, any> = any> {
     }
 
     _getChildrenAndProps(childrenAndProps: P): {
-        props: P;
-        children: Record<string, Block> | Record<string, Block[]>;
+        props: P,
+        children: Record<string, Block | Block[]>
     } {
         const props: Record<string, unknown> = {};
-        const children: Record<string, Block> | Record<string, Block[]> = {};
+        const children: Record<string, Block | Block[]> = {};
 
         Object.entries(childrenAndProps).forEach(([key, value]) => {
             if (value instanceof Block) {
@@ -68,15 +68,15 @@ class Block<P extends Record<string, any> = any> {
         return { props: props as P, children };
     }
 
-    _addEvents() {
-        const { events = {} } = this.props as P & { events: Record<string, () =>void> };
+    private _addEvents() {
+        const { events = {} } = this.props as P & { events: Record<string, () => void> };
 
         Object.keys(events).forEach((eventName) => {
             this._element?.addEventListener(eventName, events[eventName]);
         });
     }
 
-    _removeEvents() {
+    private _removeEvents() {
         const { events = {} } = this.props as P & { events: Record<string, () =>void> };
 
         Object.keys(events).forEach((eventName) => {
@@ -84,14 +84,14 @@ class Block<P extends Record<string, any> = any> {
         });
     }
 
-    _registerEvents(eventBus: EventBus) {
+    private _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    _createResources() {
+    private _createResources() {
         const tagName = 'div';
         this._element = this._createDocumentElement(tagName);
     }
@@ -115,7 +115,13 @@ class Block<P extends Record<string, any> = any> {
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-        Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+        Object.values(this.children).forEach((child) => {
+            if (Array.isArray(child)) {
+                child.forEach((ch) => ch.dispatchComponentDidMount());
+            } else {
+                child.dispatchComponentDidMount();
+            }
+        });
     }
 
     private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -129,7 +135,7 @@ class Block<P extends Record<string, any> = any> {
         return true;
     }
 
-    setProps = (nextProps: object) => {
+    public setProps = (nextProps: Partial<P>) => {
         if (!nextProps) {
             return;
         }
@@ -137,7 +143,7 @@ class Block<P extends Record<string, any> = any> {
         Object.assign(this.props, nextProps);
     };
 
-    get element() {
+    public get element() {
         return this._element;
     }
 
@@ -145,16 +151,21 @@ class Block<P extends Record<string, any> = any> {
         const fragment = this.render();
         const newElement = fragment.firstElementChild as HTMLElement;
         this._removeEvents();
-        this._element!.replaceWith(newElement);
+        if (this._element && newElement) {
+            this._element.replaceWith(newElement);
+        }
         this._element = newElement;
         this._addEvents();
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected render(): DocumentFragment {
+        return new DocumentFragment();
+    }
+
+    protected compile(template: (context: unknown) => string, context: TIndexed) {
         const contextAndStubs = { ...context };
 
         Object.entries(this.children).forEach(([name, component]) => {
-            contextAndStubs[name] = `<div data-id='${component.id}'></div>`;
             if (Array.isArray(component)) {
                 contextAndStubs[name] = component.map(
                     (child) => `<div data-id='${child.id}'></div>`,
@@ -193,11 +204,7 @@ class Block<P extends Record<string, any> = any> {
         return temp.content;
     }
 
-    protected render(): DocumentFragment {
-        return new DocumentFragment();
-    }
-
-    getContent() {
+    public getContent() {
         return this.element!;
     }
 
@@ -223,7 +230,7 @@ class Block<P extends Record<string, any> = any> {
         });
     }
 
-    _createDocumentElement(tagName: string) {
+    private _createDocumentElement(tagName: string) {
         return document.createElement(tagName);
     }
 
@@ -235,5 +242,3 @@ class Block<P extends Record<string, any> = any> {
         this.getContent()!.style.display = 'none';
     }
 }
-
-export default Block;

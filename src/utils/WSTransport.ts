@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import EventBus from '../core/EventBus';
+import { EventBus } from '../core/EventBus';
 
 export class WSTransportEvents {
     public static readonly Connected = 'connected';

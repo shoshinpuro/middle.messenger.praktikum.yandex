@@ -1,25 +1,21 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './ConversationMessage.hbs';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed } from '../../utils/types';
 import { IMessage } from '../../utils/interfaces';
 import MessageHeader from '../MessageHeader';
 import UserController from '../../controllers/userController';
 import store from '../../utils/storeHOC';
 import { IUserWithId } from '../../controllers/chatController';
 
-interface ConversationMessageProps extends IMessage {
+interface IConversationMessageProps extends IMessage {
     isMine: boolean;
     messageTime: string;
     connected?: boolean;
     senderId?: number;
-    events?: TIndexed
+    events?: TIndexed;
 }
 
-class ConversationMessage extends Block<ConversationMessageProps> {
-    constructor(props: ConversationMessageProps) {
-        super(props);
-    }
-
+class ConversationMessage extends Block<IConversationMessageProps> {
     protected init(): void {
         if (this.props.senderId && !this.props.isMine) {
             UserController.getChatUser({ id: this.props.senderId });

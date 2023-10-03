@@ -1,17 +1,14 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
+import { TClickHandler } from '../../utils/types';
 import template from './close.hbs';
 
-interface CloseProps {
+interface ICloseProps {
     events: {
-        click: (evt: PointerEvent) => void;
-    }
+        click: TClickHandler;
+    };
 }
 
-export default class Close extends Block<CloseProps> {
-    constructor(props: CloseProps) {
-        super(props);
-    }
-
+export default class Close extends Block<ICloseProps> {
     render() {
         return this.compile(template, this.props);
     }

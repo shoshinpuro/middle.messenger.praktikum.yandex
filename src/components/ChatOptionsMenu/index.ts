@@ -1,58 +1,29 @@
-import Block from '../../core/Block';
+import { Block } from '../../core/Block';
 import template from './chatOptionsMenu.hbs';
 import ChatOption from '../ChatOption';
+import { TIndexed } from '../../utils/types';
 
-interface ChatOptionsMenuProps {
-    popups: Block[];
-    events?: any
+interface IChatOptionsMenuProps {
+    popupsAndOptNames: Array<[Block, string]>;
+    events?: TIndexed;
 }
 
-class ChatOptionsMenu extends Block<ChatOptionsMenuProps> {
-    constructor(props: ChatOptionsMenuProps) {
-        super(props);
+class ChatOptionsMenu extends Block<IChatOptionsMenuProps> {
+    init() {
+        this.children.options = this.createChatOptions(this.props.popupsAndOptNames);
     }
 
-    init() {
-        this.children.addUserOption = new ChatOption({
-            text: 'Add user',
+    private createChatOptions(popups: Array<[Block, string]>) {
+        return popups.map((popup) => new ChatOption({
+            text: popup[1],
             events: {
                 click: (evt: PointerEvent) => {
                     evt.preventDefault();
                     this.hide();
-                    this.props.popups[0].show();
+                    popup[0].show();
                 },
             },
-        });
-        this.children.deleteUserOption = new ChatOption({
-            text: 'Delete user',
-            events: {
-                click: (evt: PointerEvent) => {
-                    evt.preventDefault();
-                    this.hide();
-                    this.props.popups[1].show();
-                },
-            },
-        });
-        this.children.deleteChatOption = new ChatOption({
-            text: 'Delete chat',
-            events: {
-                click: (evt: PointerEvent) => {
-                    evt.preventDefault();
-                    this.hide();
-                    this.props.popups[2].show();
-                },
-            },
-        });
-        this.children.setChatAvatar = new ChatOption({
-            text: 'Set avatar',
-            events: {
-                click: (evt: PointerEvent) => {
-                    evt.preventDefault();
-                    this.hide();
-                    this.props.popups[3].show();
-                },
-            },
-        });
+        }) as Block);
     }
 
     render() {

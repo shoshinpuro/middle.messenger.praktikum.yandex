@@ -1,15 +1,11 @@
-import Block from '../../../core/Block';
+import { Block } from '../../../core/Block';
 import template from './deleteChatPopupFill.hbs';
 import FormButton from '../../FormButton';
 import ChatController from '../../../controllers/chatController';
-import { PopupFillProps } from '../../../utils/interfaces';
+import { IPopupFillProps } from '../../../utils/interfaces';
 import { connect } from '../../../utils/storeHOC';
 
-class DeleteChatPopupFillBase extends Block<PopupFillProps> {
-    constructor(props: PopupFillProps) {
-        super(props);
-    }
-
+class DeleteChatPopupFillBase extends Block<IPopupFillProps> {
     init() {
         this.children.confirmButton = new FormButton({
             label: 'Confirm',
@@ -38,6 +34,6 @@ const withSelectedChat = connect((state) => ({
     selectedChat: state.selectedChat || undefined,
 }));
 
-const DeleteChatPopupFill = withSelectedChat(DeleteChatPopupFillBase as any);
+const DeleteChatPopupFill = withSelectedChat(DeleteChatPopupFillBase as typeof Block);
 
 export default DeleteChatPopupFill;
