@@ -3,8 +3,9 @@ import template from './link.hbs';
 import Image from '../Image';
 import url from '../../API/baseConstants';
 import store from '../../utils/storeHOC';
+import { TClickHandler } from '../../utils/types';
 
-interface LinkProps {
+interface ILinkProps {
     href: string;
     class?: string;
     title?: string;
@@ -17,15 +18,11 @@ interface LinkProps {
     fill?: string;
     goBack?: boolean;
     events?: {
-        click?: (evt: PointerEvent) => void;
+        click?: TClickHandler;
     };
 }
 
-export default class Link extends Block<LinkProps> {
-    constructor(props: LinkProps) {
-        super(props);
-    }
-
+export default class Link extends Block<ILinkProps> {
     init() {
         const avatarSubpath = store.getState()?.user?.avatar;
         const avaSrc = avatarSubpath ? `${url}/resources${avatarSubpath}` : '';

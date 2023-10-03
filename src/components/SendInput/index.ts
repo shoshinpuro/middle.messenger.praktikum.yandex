@@ -1,19 +1,16 @@
 import { Block } from '../../core/Block';
+import { TAnyEventHandler } from '../../utils/types';
 import template from './sendInput.hbs';
 
-interface SendInputProps {
+interface ISendInputProps {
     events?: {
-        focus?: () => void;
-        blur?: () => void;
-        input?: () => void;
+        focus?: TAnyEventHandler;
+        blur?: TAnyEventHandler;
+        input?: TAnyEventHandler;
     };
 }
 
-class SendInput extends Block<SendInputProps> {
-    constructor(props: SendInputProps) {
-        super(props);
-    }
-
+class SendInput extends Block<ISendInputProps> {
     render() {
         return this.compile(template, this.props);
     }

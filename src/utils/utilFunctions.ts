@@ -1,6 +1,4 @@
-export type TIndexed<T = any> = {
-    [key in string]: T;
-};
+import { TIndexed } from './types';
 
 export function trim(string:string, symbols?:string) {
     if (symbols) {

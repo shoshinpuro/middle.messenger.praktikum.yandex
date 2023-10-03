@@ -1,18 +1,15 @@
 import { Block } from '../../core/Block';
+import { TClickHandler } from '../../utils/types';
 import template from './sendButton.hbs';
 
-interface SendButtonProps {
+interface ISendButtonProps {
     disabled?: boolean;
     events?: {
-        click: (evt: PointerEvent) => void;
+        click: TClickHandler;
     };
 }
 
-class SendButton extends Block<SendButtonProps> {
-    constructor(props: SendButtonProps) {
-        super(props);
-    }
-
+class SendButton extends Block<ISendButtonProps> {
     render() {
         return this.compile(template, this.props);
     }

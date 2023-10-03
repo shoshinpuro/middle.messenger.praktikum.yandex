@@ -7,15 +7,8 @@ import Link from '../../components/Link';
 import router, { Routes } from '../..';
 import AuthController from '../../controllers/authController';
 import Popup from '../../components/Popup';
-import { TIndexed } from '../../utils/utilFunctions';
 
 export default class Chats extends Block {
-    constructor(props: TIndexed) {
-        super({
-            ...props,
-        });
-    }
-
     protected init():void {
         AuthController.getUser();
         this.children.createChatPopup = new Popup({

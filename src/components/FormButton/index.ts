@@ -1,20 +1,17 @@
 import { Block } from '../../core/Block';
+import { TClickHandler } from '../../utils/types';
 import template from './formButton.hbs';
 
-interface ButtonProps {
+interface IButtonProps {
     label: string;
     class: string;
     type: string;
     events: {
-        click: (e:PointerEvent) => void;
+        click: TClickHandler;
     };
 }
 
-class FormButton extends Block<ButtonProps> {
-    constructor(props: ButtonProps) {
-        super(props);
-    }
-
+class FormButton extends Block<IButtonProps> {
     render() {
         return this.compile(template, this.props);
     }

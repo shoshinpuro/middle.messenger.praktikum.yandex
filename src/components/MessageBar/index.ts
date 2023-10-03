@@ -4,18 +4,14 @@ import SendButton from '../SendButton';
 import messageController from '../../controllers/messageController';
 import { validationMessage } from '../../utils/validation';
 import Input from '../Input';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed } from '../../utils/types';
 
-interface MessageBarProps {
+interface IMessageBarProps {
     chatId?: number;
     events?: TIndexed;
 }
 
-class MessageBar extends Block<MessageBarProps> {
-    constructor(props: MessageBarProps) {
-        super(props);
-    }
-
+class MessageBar extends Block<IMessageBarProps> {
     init() {
         this.children.sendInput = new Input({
             name: 'message',

@@ -6,34 +6,34 @@ const METHODS = {
     PUT: 'PUT',
     DELETE: 'DELETE',
 };
-interface Options {
+interface IOptions {
     data: TStringIndexed;
     method?: string;
     headers?: { [key: string]: string };
     timeout?: number;
 }
-type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
+type THTTPMethod = (url: string, options?: IOptions) => Promise<unknown>;
 
 export default class HTTPTransport { // eslint-disable-line @typescript-eslint/no-unused-vars
-    get: HTTPMethod = (url, options = {
+    get: THTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.GET,
     }) => this.request(url + queryStringify(options.data), { ...options, method: METHODS.GET });
 
-    post: HTTPMethod = (url, options = {
+    post: THTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.POST,
     }) => this.request(url, { ...options, method: METHODS.POST });
 
-    put: HTTPMethod = (url, options = {
+    put: THTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.PUT,
     }) => this.request(url, { ...options, method: METHODS.PUT });
 
-    delete: HTTPMethod = (url, options = {
+    delete: THTTPMethod = (url, options = {
         data: {},
         timeout: 5000,
         method: METHODS.DELETE,
@@ -41,7 +41,7 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
 
     request = ( // eslint-disable-line class-methods-use-this
         url: string,
-        options: Options,
+        options: IOptions,
         timeout = 5000,
     ) => {
         const { headers = {}, method, data } = options;
@@ -92,7 +92,6 @@ export default class HTTPTransport { // eslint-disable-line @typescript-eslint/n
             } else {
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify(data));
-                // console.log(req);
             }
         });
     };

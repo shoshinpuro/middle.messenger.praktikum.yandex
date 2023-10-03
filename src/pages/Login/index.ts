@@ -11,10 +11,6 @@ import ChatController from '../../controllers/chatController';
 import { TUser } from '../../API/baseConstants';
 
 class Login extends Block {
-    constructor() {
-        super({});
-    }
-
     protected init():void {
         this.children.inputLogin = new FormInput({
             type: 'text',

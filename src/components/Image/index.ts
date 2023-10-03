@@ -1,20 +1,17 @@
 import { Block } from '../../core/Block';
+import { TClickHandler } from '../../utils/types';
 import template from './image.hbs';
 
-interface ImageProps {
+interface IImageProps {
     class: string;
     src: string;
     alt: string;
     events?: {
-        click?: (e: PointerEvent) => void;
+        click?: TClickHandler;
     };
 }
 
-class Image extends Block<ImageProps> {
-    constructor(props: ImageProps) {
-        super(props);
-    }
-
+class Image extends Block<IImageProps> {
     render() {
         return this.compile(template, { ...this.props });
     }

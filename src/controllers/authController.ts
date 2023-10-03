@@ -3,7 +3,7 @@ import { TUser } from '../API/baseConstants';
 import store from '../utils/storeHOC';
 import router, { Routes } from '../index';
 import messageController from './messageController';
-import { TIndexed } from '../utils/utilFunctions';
+import { TIndexed } from '../utils/types';
 
 class AuthController {
     AuthAPI:AuthAPI;

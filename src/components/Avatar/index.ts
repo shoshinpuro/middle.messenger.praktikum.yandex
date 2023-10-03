@@ -2,20 +2,16 @@ import { Block } from '../../core/Block';
 import template from './avatar.hbs';
 import Image from '../Image';
 import img from '../../assets/img/AmandaSekar.png';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed } from '../../utils/types';
 
-interface AvatarProps {
+interface IAvatarProps {
     first_name: string;
     second_name: string;
     srcImg?: string;
     events?: TIndexed;
 }
 
-class Avatar extends Block<AvatarProps> {
-    constructor(props: AvatarProps) {
-        super(props);
-    }
-
+class Avatar extends Block<IAvatarProps> {
     init() {
         this.children.image = new Image({
             src: this.props?.srcImg as string || img,

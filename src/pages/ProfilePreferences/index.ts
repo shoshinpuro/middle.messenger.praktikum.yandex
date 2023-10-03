@@ -9,14 +9,9 @@ import AuthController from '../../controllers/authController';
 // import UserController from '../../controllers/userController';
 import { connect } from '../../utils/storeHOC';
 import url from '../../API/baseConstants';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed } from '../../utils/types';
 
 class ProfilePreferences extends Block {
-    constructor(props: TIndexed) {
-        super({ ...props });
-        AuthController.getUser();
-    }
-
     init():void {
         AuthController.getUser();
         const avaSrc = this.props.avatar ? `${url}/resources${this.props.avatar}` : '';

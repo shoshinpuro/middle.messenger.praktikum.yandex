@@ -1,7 +1,6 @@
 import HTTPTransport from '../core/Fetch';
-import { TIndexed } from '../utils/utilFunctions';
+import { TIndexed } from '../utils/types';
 import url from './baseConstants';
-// import { TIndexed } from '../utils/utilFunctions';
 
 export interface ICreateChat {
     title?: string;

@@ -2,7 +2,7 @@
 import Route from './route';
 import { Block } from '../core/Block';
 
-export interface BlockConstructable<P extends Record<string, any> = any> {
+export interface IBlockConstructable<P extends Record<string, any> = any> {
     new(props: P): Block<P>;
 }
 
@@ -25,7 +25,7 @@ export class Router {
         Router.__instance = this;
     }
 
-    public use(pathname: string, block: BlockConstructable) {
+    public use(pathname: string, block: IBlockConstructable) {
         const route = new Route(pathname, block, this._rootQuery);
         this.routes.push(route);
         return this;

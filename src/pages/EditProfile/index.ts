@@ -14,13 +14,9 @@ import { connect } from '../../utils/storeHOC';
 import url, { TUser } from '../../API/baseConstants';
 
 import UserController from '../../controllers/userController';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed } from '../../utils/types';
 
 class EditProfile extends Block {
-    constructor(props: TIndexed) {
-        super({ ...props });
-    }
-
     protected init():void {
         const avaSrc = this.props.avatar ? `${url}/resources${this.props.avatar}` : '';
         this.children.changeAvatar = new Avatar({

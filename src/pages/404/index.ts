@@ -3,10 +3,6 @@ import { Block } from '../../core/Block';
 import template from './404.hbs';
 
 class Error404 extends Block {
-    constructor() {
-        super({});
-    }
-
     protected init():void {
         this.children.error = new ErrorPage({
             status: '404',

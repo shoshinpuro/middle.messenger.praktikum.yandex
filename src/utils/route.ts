@@ -2,14 +2,14 @@
 import { Block } from '../core/Block';
 import isEqual from './isEqualPath';
 import renderDOM from './renderDOM';
-import { BlockConstructable } from './router';
+import { IBlockConstructable } from './router';
 
 class Route {
     private _block: Block | null = null;
 
     constructor(
         private _pathname: string,
-        private _blockClass: BlockConstructable,
+        private _blockClass: IBlockConstructable,
         private rootQuery: string,
     ) {
     }

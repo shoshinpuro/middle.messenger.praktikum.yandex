@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { EventBus } from './EventBus';
-import { TIndexed } from '../utils/utilFunctions';
+import { TIndexed } from '../utils/types';
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": [
     "_getChildrenAndProps",

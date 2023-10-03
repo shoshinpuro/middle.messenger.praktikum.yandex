@@ -1,29 +1,24 @@
 import { Block } from '../../core/Block';
 import template from './formInput.hbs';
 import Input from '../Input';
+import { TAnyEventHandler, TValidationHandler } from '../../utils/types';
 
-interface InputProps {
-    name: string;
+interface IFormInputProps {
     label: string;
+    name: string;
     value?: string;
     type: string;
     accept?: string;
     classInput?: string;
     error?: string;
     events?: {
-        focus?: (evt: Event) => void;
-        blur?: (evt: Event) => void;
+        focus?: TAnyEventHandler;
+        blur?: TAnyEventHandler;
     };
-    validationHandler?: (elem: Block, childNum: number) => (string | undefined);
+    validationHandler?: TValidationHandler;
 }
 
-type ValidationHandler = (elem: Block, childNum: number) => string;
-
-class FormInput extends Block<InputProps> {
-    constructor(props: InputProps) {
-        super(props);
-    }
-
+class FormInput extends Block<IFormInputProps> {
     init() {
         this.children.input = new Input({
             type: this.props.type as string,
@@ -36,7 +31,7 @@ class FormInput extends Block<InputProps> {
                     // console.log('focus'); // eslint-disable-line no-console
                 },
                 blur: () => {
-                    const validationFunc = this.props.validationHandler as ValidationHandler;
+                    const validationFunc = this.props.validationHandler as TValidationHandler;
                     if (this.props.validationHandler) {
                         validationFunc(this, 0);
                     }

@@ -12,10 +12,6 @@ import AuthController from '../../controllers/authController';
 import { TUser } from '../../API/baseConstants';
 
 class SignUp extends Block {
-    constructor() {
-        super({});
-    }
-
     protected init():void {
         this.children.inputPhone = new FormInput({
             type: 'tel',

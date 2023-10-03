@@ -1,7 +1,7 @@
 import Store from './storeBase';
 import isEqual from './isEqual';
 import { Block } from '../core/Block';
-import { TIndexed } from './utilFunctions';
+import { TIndexed } from './types';
 
 const store = new Store();
 

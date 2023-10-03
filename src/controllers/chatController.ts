@@ -4,7 +4,7 @@ import UserAPI from '../API/userAPI';
 import store from '../utils/storeHOC';
 import messageController from './messageController';
 import { IUser, IUserData } from '../utils/interfaces';
-import { TIndexed } from '../utils/utilFunctions';
+import { TIndexed } from '../utils/types';
 
 export interface IUserWithId extends IUser {
     id?: number;
@@ -23,7 +23,6 @@ class ChatController {
     async getChats(again: boolean = false) {
         try {
             const chats = await this.ChatAPI.getChats() as Array<TIndexed>;
-            // await chats.sort();
             if (chats) {
                 if (!again) {
                     chats.map(async (chat) => {
@@ -44,7 +43,6 @@ class ChatController {
     async createChat(data: ICreateChat) {
         try {
             await this.ChatAPI.createChat(data)
-                // .then((res) => console.log(res))
                 .then(() => this.getChats());
         } catch (error) {
             console.log(error); // eslint-disable-line no-console
@@ -94,8 +92,6 @@ class ChatController {
                 chatId,
             };
             await this.ChatAPI.deleteUsers(requestDataUser);
-            /* .then((resp) => console.error(resp)); */
-            // .then((res) => console.log(res));
             this.getChats();
         } catch (error) {
             console.log(error); // eslint-disable-line no-console

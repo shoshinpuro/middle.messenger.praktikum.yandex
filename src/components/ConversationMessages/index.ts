@@ -12,7 +12,7 @@ import { remakeDate } from '../../utils/utilFunctions';
 import Image from '../Image';
 import url from '../../API/baseConstants';
 
-interface ConversationMessagesProps {
+interface IConversationMessagesProps {
     title: string;
     messages: Array<IMessage> | [];
     chats: Array<IChat> | [];
@@ -22,11 +22,7 @@ interface ConversationMessagesProps {
     selectedChat?: number;
 }
 
-class ConversationMessagesBase extends Block<ConversationMessagesProps> {
-    constructor(props: ConversationMessagesProps) {
-        super(props);
-    }
-
+class ConversationMessagesBase extends Block<IConversationMessagesProps> {
     protected init(): void {
         this.children.addUserPopup = new Popup({
             header: 'Add user to chat',
@@ -41,11 +37,11 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
             header: 'Set a new chat avatar',
         });
         this.children.chatOptionsMenu = new ChatOptionsMenu({
-            popups: [
-                this.children.addUserPopup,
-                this.children.deleteUserPopup,
-                this.children.deleteChatPopup,
-                this.children.setChatAvatar,
+            popupsAndOptNames: [
+                [this.children.addUserPopup, 'Add user'],
+                [this.children.deleteUserPopup, 'Delete user'],
+                [this.children.deleteChatPopup, 'Delete chat'],
+                [this.children.setChatAvatar, 'Set avatar'],
             ],
         });
         this.children.chatOptions = new ChatOptions({
@@ -68,7 +64,7 @@ class ConversationMessagesBase extends Block<ConversationMessagesProps> {
         });
     }
 
-    protected componentDidUpdate(oldProps: unknown, newProps: ConversationMessagesProps): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
+    protected componentDidUpdate(oldProps: unknown, newProps: IConversationMessagesProps): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars, max-len
         console.log(oldProps); // eslint-disable-line no-console
         this.children.messages = this.createMessages(newProps.messages, newProps.userId);
         this.children.messageBar = new MessageBar({ chatId: newProps.selectedChat });

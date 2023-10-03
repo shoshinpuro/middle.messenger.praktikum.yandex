@@ -1,9 +1,9 @@
 import { Block } from '../../core/Block';
 import template from './dataUnitLi.hbs';
 import Input from '../Input';
-import { TIndexed } from '../../utils/utilFunctions';
+import { TIndexed, TValidationHandler } from '../../utils/types';
 
-interface DataUnitLiProps {
+interface IDataUnitLiProps {
     header: string;
     textValue: string;
     isEdit?: boolean;
@@ -11,16 +11,10 @@ interface DataUnitLiProps {
     type?: string;
     error?: string;
     events?: TIndexed;
-    validationHandler?: (elem: Block, childNum: number) => (string | undefined);
+    validationHandler?: TValidationHandler;
 }
 
-type ValidationHandler = (elem: Block, childNum: number) => string;
-
-class DataUnitLi extends Block<DataUnitLiProps> {
-    constructor(props: DataUnitLiProps) {
-        super(props);
-    }
-
+class DataUnitLi extends Block<IDataUnitLiProps> {
     init() {
         // console.log(this.props);
         if (this.props.isEdit) {
@@ -35,7 +29,7 @@ class DataUnitLi extends Block<DataUnitLiProps> {
                         console.log('focus'); // eslint-disable-line no-console
                     },
                     blur: () => {
-                        const validationFunc = this.props.validationHandler as ValidationHandler;
+                        const validationFunc = this.props.validationHandler as TValidationHandler;
                         validationFunc(this, 1);
                     },
                 },

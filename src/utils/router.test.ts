@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import Router, { BlockConstructable } from './router'; // eslint-disable-line import/no-named-as-default, max-len
+import Router, { IBlockConstructable } from './router'; // eslint-disable-line import/no-named-as-default, max-len
 
 describe('Router', () => {
     global.window.history.back = () => {
@@ -22,7 +22,7 @@ describe('Router', () => {
 
     const BlockMock = class {
         getContent = getContentFake;
-    } as unknown as BlockConstructable;
+    } as unknown as IBlockConstructable;
 
     it('use() should return Router instance', () => {
         const result = Router.use('/', BlockMock);

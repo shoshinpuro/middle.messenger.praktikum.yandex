@@ -3,7 +3,7 @@ import proxyquire from 'proxyquire';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import type { Block as BlockType } from './Block';
-import { TIndexed } from '../utils/utilFunctions';
+import { TIndexed } from '../utils/types';
 
 const eventBusMock = {
     on: sinon.fake(),

@@ -1,6 +1,6 @@
-import { TIndexed } from './utilFunctions';
+import { TIndexed } from './types';
 
-export interface PopupFillProps {
+export interface IPopupFillProps {
     popupHandler?: () => void;
     error?: string;
     selectedChat?: number;

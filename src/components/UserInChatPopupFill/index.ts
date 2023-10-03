@@ -2,20 +2,15 @@ import { Block } from '../../core/Block';
 import template from './userInChatPopupFill.hbs';
 import FormInput from '../FormInput';
 import FormButton from '../FormButton';
-// import ChatController from '../../controllers/chatController';
-import { PopupFillProps } from '../../utils/interfaces';
+import { IPopupFillProps } from '../../utils/interfaces';
 import { connect } from '../../utils/storeHOC';
 
-interface UserPopupFillProps extends PopupFillProps {
+interface IUserPopupFillProps extends IPopupFillProps {
     selectedChat?: number;
     userHandler: (userLoginsArr: Array<string>, chatId: number) => void
 }
 
-class UserInChatPopupFillBase extends Block<UserPopupFillProps> {
-    constructor(props: UserPopupFillProps) {
-        super(props);
-    }
-
+class UserInChatPopupFillBase extends Block<IUserPopupFillProps> {
     init() {
         this.children.userLoginsInput = new FormInput({
             type: 'text',
@@ -34,11 +29,6 @@ class UserInChatPopupFillBase extends Block<UserPopupFillProps> {
                         .element?.children[0] as HTMLInputElement).value;
                     const userLoginsArr = userLogins.split(',');
                     this.props.userHandler(userLoginsArr, this.props.selectedChat!);
-                    /* const data = {title: chatName};
-                    if(chatName.trim()) {
-                        console.log(chatName);
-                        ChatController.createChat(data);
-                    } */
                     const hidePopup = this.props.popupHandler!;
                     hidePopup();
                 },

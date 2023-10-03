@@ -5,13 +5,9 @@ import FormButton from '../FormButton';
 import { validationPassword, validationPassword2 } from '../../utils/validation';
 import UserController from '../../controllers/userController';
 import AuthController from '../../controllers/authController';
-import { PopupFillProps } from '../../utils/interfaces';
+import { IPopupFillProps } from '../../utils/interfaces';
 
-class PasswordPopupFill extends Block<PopupFillProps> {
-    constructor(props: PopupFillProps) {
-        super(props);
-    }
-
+class PasswordPopupFill extends Block<IPopupFillProps> {
     init() {
         this.children.oldPasswordInput = new FormInput({
             type: 'password',
